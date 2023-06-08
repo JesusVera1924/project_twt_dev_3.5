@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "agentdevolucion-cxpg",
+  "private_key_id": "c4b33c22439944ec08135ae2cef81b9450576e14",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCpGqAfDimsVzEU\n5bGwsbazmWjqMXr6a+0jtS9KgQgLkJyPEerbNcpWuQeHGnSVpKmuet8VOt6x026K\n2vcLhp1Z+cX6MvR4mRtc+ZDotGPKsTCYHJ+CEmLkxOB0Ji2F60V8orA/szSkQcRc\n65hg6zURm8xvDTg9xT/gZNpDRJLmin05QdXDor63NdgrP2tOAhCjhvKOfYjiC1TR\nXJI93bId9wxbKwBr/AzUEAnWeLiI156Xzqamx3KkF8O4frQA+el3llxMKnexqanN\nNmxBhZXn6kbCmOVb7YT3EVsT142UbsnpqnKsxhCigial/z79g/+ZKCreJHaVCCFV\ns1BbG/f3AgMBAAECggEAG3dAH5soyJ2m0qqWCEltD9GweS1NOKRT8XNJuZOoj1xP\nGWvDFhSwBxLpdpek7PNAPh8l4ahcqExbjYEQFBaqswT/E2q4S2guyhSc5Tb7aF4M\nMwCfJby/xEF35VWYGkLC2AICl24PdEhcUO1RJBi/11rTQwxGIL5LaDJpQvi91WTQ\nRuPscioex5UmKkvTEow7LyWUpMwM/0gASMKDdkdk/SdolPgLJMjHvB9S/lz4Uq1h\n2Yd2E/2y13pEmi88daLgeCU0oyxD/mNr6ksupXkDr5gvaMUubJndGn/INFW/Tjxt\nJ5tcSWMli2ohkik/CxxOa0ir5xsqlL3191TBlys2fQKBgQDdahyvFRVA+07S+FNn\nbhdMvBTTN+jyrqAnf/0XB4FNbvYlXiv2AfK16ur4MtIfSwQOTgKuegAxV3pPMkKe\nmtRhhjZly9ukkjgB4fCC/TC4+31VaJZF9FqL8Hfad4w+XfpORq/0e+ChfUEUaUyS\nqmPLjDOpeb45Uh1eVXK1M7DP4wKBgQDDhLrLRAij8czWAIysEj8RHpYFpMxdEvy/\n/g6C/1yv/rUmti2WMmL8PqEIH3wobnl+7SMA9E1l2duibMUIYQckLtq7MmZ8YgQv\nZkAUnP/5ilc/5mAyS4l0wRLp70F4N+R2WEdlMnYJStojPtSsxehuQuvLe8Y34Fv1\nwF7KaftL3QKBgQCiqblG+zMxGS9wmJUVkHC3pBmcjx+pYpcwTbwO9imNTK6zBzs+\nsXGxKlPTYeqyqLbjF3aq3eBUX5Lwqdj9knvi5eoC4UCM6AsTfvzmDsKDs+cBHyP/\nYqQ+2LwEmP1EOGCSryXHdFaz7UQpja5+tYU5Xdf6cwFINUZ0LkxmSQJlxwKBgQCe\nUoOkB4Jrp2i0PhurVtck+LyI82rdT3vFyGdd4oTeqwVrxIfjoQeQtPJXDo/Oea7+\nfe4jXrCx8hktTKC8aT2MKjjK70QYIpK7AzSOvJd3LXP7dYSeFZbIKXQ0ZJ6CR9hD\nkLa3loYIfkln0wAKq/PMHXqs+pyHMLGmrdDUXb+1LQKBgQDUvV4zDH1Ms92cF1kE\n9fWWuEqrWthJasjueCtepSzEktwi/xgQaqHVqC6Y13+YCT2UBA8qTxZMxEDIR8Tg\nnUyJOKb/dVWYGKKAAXr+KtbMGMD3S02WfQkE4O6tXv3s0vdXmQX25klFIXuOX/MJ\nra3lOHHpbKhAhHsxcH/UQIYoOA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cuenta-servicio-chat@agentdevolucion-cxpg.iam.gserviceaccount.com",
+  "client_id": "115293006743539663935",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cuenta-servicio-chat%40agentdevolucion-cxpg.iam.gserviceaccount.com"
+}
