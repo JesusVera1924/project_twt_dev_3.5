@@ -30,16 +30,16 @@ class _CreditAdmViewState extends State<CreditAdmView> {
   Widget build(BuildContext context) {
     final listCliente = Provider.of<CreditsProvider>(context).listTemp;
     return Container(
-      color: Color(0xCC232d37),
+      color: const Color(0xCC232d37),
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: PaginatedDataTable(
           columnSpacing: 35,
           // initialFirstRowIndex: PaginatedDataTable.defaultRowsPerPage,
-          columns: [
+          columns: const [
             DataColumn(
                 label: Text(
-                  'Solicitud'.toUpperCase(),
+                  'SOLICITUD',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
@@ -48,7 +48,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                 tooltip: "Numero de solicitud"),
             DataColumn(
                 label: Text(
-                  'F.emision'.toUpperCase(),
+                  'F.EMISION',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
@@ -57,7 +57,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                 tooltip: "Fecha que se realizo la solicitud"),
             DataColumn(
                 label: Text(
-                  'Identificación'.toUpperCase(),
+                  'IDENTIFICACÍON',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
@@ -65,7 +65,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                 numeric: false),
             DataColumn(
                 label: Text(
-                  'Nombre'.toUpperCase(),
+                  'NOMBRE',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),

@@ -196,6 +196,7 @@ class _AlmacenViewState extends State<AlmacenView> {
                               Colors.blue);
                         } else {
                           focusNodeFactura.requestFocus();
+                          isNoSearch = false;
                         }
                       }
                     },
