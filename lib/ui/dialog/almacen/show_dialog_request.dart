@@ -71,9 +71,7 @@ Future<String> showDialogRequestA(
                             onSelectionChanged: (addedRows, removedRows) {
                               provider.onSelectedRow(
                                   addedRows, removedRows, dataGridController);
-                              dataGridController.notifyListeners();
                             },
-                            //allowFiltering: true,
                             source: RequestDTS(
                                 context, provider, dataGridController),
                             columns: _buildDataGridForSize(context))),

@@ -124,7 +124,7 @@ class AlmacenProvider extends ChangeNotifier {
         listaTemp.remove(detalle);
       }
     }
-
+    dataGridController.notifyDataSourceListeners();
     //selectedRows = dataGridController.selectedRows;
   }
 
