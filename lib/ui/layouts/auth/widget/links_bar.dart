@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/buttons/link_text.dart';
 
 class LinkBar extends StatelessWidget {
+  const LinkBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -14,12 +16,12 @@ class LinkBar extends StatelessWidget {
           children: [
             //Powered by TwT Copyrigh (c) 2021
             LinkText(
-              text: 'Powered by TwT 1.0.0',
+              text: 'Powered by TwT 1.5.1',
               onTap: () => {},
             ),
-            if (size.width > 700) SizedBox(width: 460),
+            if (size.width > 700) const SizedBox(width: 460),
             LinkText(
-              text: 'Copyrigh (c) 2021-2022',
+              text: 'Copyrigh (c) 2021-2023',
               onTap: () => {},
             ),
           ],
