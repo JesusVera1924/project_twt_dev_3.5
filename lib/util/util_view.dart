@@ -221,36 +221,65 @@ class UtilView {
   static Widget checkStatu(String statu) {
     switch (statu) {
       case "P":
-        return const Tooltip(
-          message: "Pendiente",
-          child: Icon(
-            Icons.access_time,
-            color: Colors.blueAccent,
-          ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Icon(Icons.access_time, color: Colors.black),
+            Text("Pendiente",
+                style: TextStyle(color: Colors.black, fontSize: 12))
+          ],
         );
       case "E":
-        return Tooltip(
-          message: "En proceso",
-          child: Icon(
-            Icons.handyman_rounded,
-            color: Colors.amberAccent[700],
-          ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.access_time, color: Colors.amberAccent[700]),
+            Text("Generado",
+                style: TextStyle(color: Colors.amberAccent[700], fontSize: 12))
+          ],
         );
+      case "G":
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.access_time, color: Colors.amberAccent[700]),
+            Text("Generado",
+                style: TextStyle(color: Colors.amberAccent[700], fontSize: 12))
+          ],
+        );
+
       case "C":
-        return const Tooltip(
-          message: "Terminado",
-          child: Icon(
-            Icons.check_circle_outline,
-            color: Colors.green,
-          ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Icon(Icons.check_circle_outline, color: Colors.green),
+            Text("Terminado",
+                style: TextStyle(color: Colors.green, fontSize: 12))
+          ],
         );
+
       case "R":
-        return const Tooltip(
-          message: "Rechazado",
-          child: Icon(
-            Icons.cancel_outlined,
-            color: Colors.red,
-          ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Icon(Icons.cancel_outlined, color: Colors.red),
+            Text("Rechazado", style: TextStyle(color: Colors.red, fontSize: 12))
+          ],
+        );
+
+      case "X":
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Icon(Icons.error_rounded, color: Colors.red),
+            Text("Anulado", style: TextStyle(color: Colors.red, fontSize: 12))
+          ],
         );
       default:
         return const Icon(

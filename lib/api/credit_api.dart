@@ -61,13 +61,8 @@ class CreditApi {
     try {
       final resquet = await http.post(
         url,
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded",
-        },
-        body: {
-          "image": base64,
-          "data": titulo,
-        },
+        headers: {"Content-type": "application/x-www-form-urlencoded"},
+        body: {"image": base64, "data": titulo},
       );
       if (resquet.statusCode != 200) {
         throw Exception('Error: ${resquet.statusCode}');
@@ -83,7 +78,7 @@ class CreditApi {
     final resquet = await http.post(url, body: data, headers: {
       "Content-type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Credentials": "true"
     });
 
     if (resquet.statusCode != 200) {

@@ -94,13 +94,15 @@ class Follow2DTS extends DataGridSource {
             onChanged: (value) async {
               switch (value!.uid) {
                 case "1":
-                  proceso1(row);
+                  if (row.getCells()[9].value.toString() != "E") proceso1(row);
                   break;
                 case "2":
-                  provider.showDetails(context, row.getCells()[10].value);
+                  if (row.getCells()[9].value.toString() != "E") {
+                    provider.showDetails(context, row.getCells()[10].value);
+                  }
                   break;
                 case "3":
-                  proceso2(row);
+                  if (row.getCells()[9].value.toString() != "E") proceso2(row);
                   break;
               }
             },
@@ -156,14 +158,19 @@ class Follow2DTS extends DataGridSource {
             child: Text(row.getCells()[8].value.toString())),
         UtilView.checkStatu(row.getCells()[9].value.toString()),
         InkWell(
-            onTap: () async => proceso1(row),
+            onTap: () async => row.getCells()[9].value.toString() == "E"
+                ? null
+                : proceso1(row),
             child: const Icon(Icons.assignment)),
         InkWell(
-            onTap: () =>
-                provider.showDetails(context, row.getCells()[10].value),
+            onTap: () => row.getCells()[9].value.toString() == "E"
+                ? null
+                : provider.showDetails(context, row.getCells()[10].value),
             child: const Icon(Icons.find_in_page_outlined)),
         InkWell(
-            onTap: () async => proceso2(row),
+            onTap: () async => row.getCells()[9].value.toString() == "E"
+                ? null
+                : proceso2(row),
             child: const Icon(Icons.move_up_rounded)),
       ];
     }

@@ -15,15 +15,9 @@ class LinkBar extends StatelessWidget {
           alignment: WrapAlignment.start,
           children: [
             //Powered by TwT Copyrigh (c) 2021
-            LinkText(
-              text: 'Powered by TwT 1.5.1',
-              onTap: () => {},
-            ),
+            LinkText(text: 'Powered by TwT 1.5.1', onTap: () => {}),
             if (size.width > 700) const SizedBox(width: 460),
-            LinkText(
-              text: 'Copyrigh (c) 2021-2023',
-              onTap: () => {},
-            ),
+            LinkText(text: 'Copyrigh (c) 2021-2023', onTap: () => {}),
           ],
         ));
   }
