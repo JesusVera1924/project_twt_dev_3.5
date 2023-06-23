@@ -3,7 +3,6 @@ import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
 import 'package:devolucion_modulo/ui/cards/other_details2.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
-import 'package:devolucion_modulo/util/create_file_pdf.dart';
 import 'package:devolucion_modulo/util/util_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

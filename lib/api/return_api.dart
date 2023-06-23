@@ -634,7 +634,6 @@ class ReturnApi {
       "cod_emp": "01",
       "num_sdv": code,
       "cod_cop": codCop,
-      "nom_cop": nomCop,
       "ngr_cop": nrgCop,
       "frg_cop": frgCop,
       "blt_cop": bltCop,

@@ -4,7 +4,6 @@ import 'package:devolucion_modulo/provider/items_provider.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/ig0062Response.dart';
-
 import 'package:devolucion_modulo/ui/dialog/show_dialog_transport2.dart';
 import 'package:devolucion_modulo/util/constants.dart';
 import 'package:devolucion_modulo/util/screen_size.dart';

@@ -1,16 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:devolucion_modulo/provider/transport_provider.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
-
 import 'package:devolucion_modulo/ui/dialog/show_dialog_transport2.dart';
-
 import 'package:devolucion_modulo/util/constants.dart';
-
 import 'package:devolucion_modulo/util/screen_size.dart';
-import 'package:provider/provider.dart';
 
 class OtherDetails2 extends StatefulWidget {
   final Ig0063Response data;

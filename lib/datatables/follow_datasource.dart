@@ -1,7 +1,5 @@
 import 'package:devolucion_modulo/provider/items_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:devolucion_modulo/ui/cards/other_details.dart';
-import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
 
 import 'package:devolucion_modulo/api/return_api.dart';
 
