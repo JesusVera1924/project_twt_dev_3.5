@@ -261,6 +261,17 @@ class UtilView {
                 style: TextStyle(color: Colors.green, fontSize: 12))
           ],
         );
+      case "A":
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.playlist_add_check_circle_rounded,
+                color: Colors.amber[900]),
+            Text("Autorizado",
+                style: TextStyle(color: Colors.amber[900], fontSize: 12))
+          ],
+        );
 
       case "R":
         return Row(

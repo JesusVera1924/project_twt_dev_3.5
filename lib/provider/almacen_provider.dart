@@ -301,7 +301,7 @@ class AlmacenProvider extends ChangeNotifier {
             bodMov: "01",
             auxilia: element.ucrSdv,
             secMov: "${element.secMov}",
-            uduMov: "A",
+            uduMov: "",
             fytMov: DateTime.now().toIso8601String()));
       }
     } catch (e) {

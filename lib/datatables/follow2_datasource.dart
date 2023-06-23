@@ -94,15 +94,17 @@ class Follow2DTS extends DataGridSource {
             onChanged: (value) async {
               switch (value!.uid) {
                 case "1":
-                  if (row.getCells()[9].value.toString() != "E") proceso1(row);
+                  if (verificar(row.getCells()[9].value.toString())) {
+                    proceso1(row);
+                  }
                   break;
                 case "2":
-                  if (row.getCells()[9].value.toString() != "E") {
+                  if (verificar(row.getCells()[9].value.toString())) {
                     provider.showDetails(context, row.getCells()[10].value);
                   }
                   break;
                 case "3":
-                  if (row.getCells()[9].value.toString() != "E") proceso2(row);
+                  proceso2(row);
                   break;
               }
             },
@@ -158,19 +160,21 @@ class Follow2DTS extends DataGridSource {
             child: Text(row.getCells()[8].value.toString())),
         UtilView.checkStatu(row.getCells()[9].value.toString()),
         InkWell(
-            onTap: () async => row.getCells()[9].value.toString() == "E"
-                ? null
-                : proceso1(row),
+            onTap: () async {
+              if (verificar(row.getCells()[9].value.toString())) {
+                proceso1(row);
+              }
+            },
             child: const Icon(Icons.assignment)),
         InkWell(
-            onTap: () => row.getCells()[9].value.toString() == "E"
-                ? null
-                : provider.showDetails(context, row.getCells()[10].value),
+            onTap: () async {
+              if (verificar(row.getCells()[9].value.toString())) {
+                provider.showDetails(context, row.getCells()[10].value);
+              }
+            },
             child: const Icon(Icons.find_in_page_outlined)),
         InkWell(
-            onTap: () async => row.getCells()[9].value.toString() == "E"
-                ? null
-                : proceso2(row),
+            onTap: () async => proceso2(row),
             child: const Icon(Icons.move_up_rounded)),
       ];
     }
@@ -228,7 +232,21 @@ class Follow2DTS extends DataGridSource {
   void proceso2(DataGridRow row) async {
     Ig0063Response x = row.getCells()[10].value;
     var lista = await provider.getListKardex(x.numSdv, x.codPro, x.numMov);
-    await showDialogKardex(
-        context, 'kardex :: ${x.numSdv} :: ${x.codPro} ', lista);
+    await showDialogKardex(context, 'kardex :: ${x.numSdv}', lista);
+  }
+
+  bool verificar(String estado) {
+    bool x = true;
+    if (estado == "A") {
+      x = false;
+      UtilView.messageDanger("DOCUMENTO EN PROCESO DE NC");
+    } else if (estado == "E") {
+      x = false;
+      UtilView.messageDanger("DOCUMENTO EN PROCESO\nDE AUTORIZACION");
+    } else if (estado == "C") {
+      x = false;
+      UtilView.messageDanger("DOCUMENTO FINALIZADO");
+    }
+    return x;
   }
 }

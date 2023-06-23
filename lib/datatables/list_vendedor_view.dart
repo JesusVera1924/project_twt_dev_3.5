@@ -20,10 +20,10 @@ class ListVendedorViewGridSource extends DataGridSource {
         vendedorProvider.listVendedor.map<DataGridRow>((DetailVendedor e) {
       return DataGridRow(cells: <DataGridCell>[
         DataGridCell<String>(
-            columnName: 'Cliente', value: e.codClie + "-" + e.nombCli),
+            columnName: 'Cliente', value: "${e.codClie}-${e.nombCli}"),
         DataGridCell<String>(
             columnName: 'vendedor',
-            value: e.codVen.toUpperCase() + "-" + e.nombVen),
+            value: "${e.codVen.toUpperCase()}-${e.nombVen}"),
         DataGridCell<String>(columnName: 'items', value: "${e.cantidad}"),
         DataGridCell<String>(columnName: 'Acciones', value: e.codigo),
       ]);

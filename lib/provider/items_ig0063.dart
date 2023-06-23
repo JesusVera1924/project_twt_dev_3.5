@@ -138,7 +138,7 @@ class ItemsIg0063 extends ChangeNotifier {
     bool resp = false;
     for (DetailBodega e in listBodega) {
       if (e.item.canB93 != 0) {
-        if (e.item.canB94 == 0 && e.item.canB94 == 0 && e.item.canB94 == 0) {
+        if (e.item.canB94 == 0 && e.item.canB95 == 0 && e.item.canB96 == 0) {
           resp = false;
           UtilView.messageWarning(
               "ERROR :: ITEM EN SOLO REVISION TECNICA [${e.item.codPro}]");
@@ -146,6 +146,8 @@ class ItemsIg0063 extends ChangeNotifier {
         } else {
           resp = true;
         }
+      } else {
+        resp = true;
       }
     }
 

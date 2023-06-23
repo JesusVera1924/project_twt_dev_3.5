@@ -48,21 +48,24 @@ class _StoreViewState extends State<StoreView> {
                 msj: "Atras",
                 icon: Icons.exit_to_app_outlined)
           ], titulo: "SEGUIMIENTO DE SOLICITUDES "),
-          Card(
-            color: Colors.white,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: SfDataGridTheme(
-                data: SfDataGridThemeData(
-                    headerColor: Colors.blueGrey,
-                    filterIconColor: Colors.black,
-                    filterIconHoverColor: Colors.white),
-                child: SfDataGrid(
-                    columnWidthMode: ColumnWidthMode.none,
-                    headerRowHeight: 35,
-                    rowHeight: 35,
-                    allowFiltering: true,
-                    source: Follow2DTS(context, provider),
-                    columns: _buildDataGridForSize(context))),
+          SizedBox(
+            height: MediaQuery.of(context).size.height - 220,
+            child: Card(
+              color: Colors.white,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: SfDataGridTheme(
+                  data: SfDataGridThemeData(
+                      headerColor: Colors.blueGrey,
+                      filterIconColor: Colors.black,
+                      filterIconHoverColor: Colors.white),
+                  child: SfDataGrid(
+                      columnWidthMode: ColumnWidthMode.none,
+                      headerRowHeight: 35,
+                      rowHeight: 35,
+                      allowFiltering: true,
+                      source: Follow2DTS(context, provider),
+                      columns: _buildDataGridForSize(context))),
+            ),
           ),
         ],
       ),
@@ -275,7 +278,11 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
       GridColumn(
         columnName: '10-estado',
         columnWidthMode: ColumnWidthMode.fitByColumnName,
-        allowFiltering: false,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            filterMode: FilterMode.checkboxFilter,
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
         label: Container(
           padding: const EdgeInsets.all(8.0),
           //width: Responsive.isDesktop(context) ? 100 : 80,
