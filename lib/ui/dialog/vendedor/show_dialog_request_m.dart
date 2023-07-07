@@ -516,7 +516,7 @@ Future<String> showDialogRequestVM(BuildContext context, List<Detail> lista,
                           vendedorProvider.listTemp.add(ig0063);
                         });
 
-                        vdialogProvider.listaDetailTemp.forEach((element) {
+                        /*    vdialogProvider.listaDetailTemp.forEach((element) {
                           if (element.tipo == "Garantía") {
                             vendedorProvider.listArchivo.add(new Archivo(
                                 name: element.item.codPro,
@@ -528,7 +528,7 @@ Future<String> showDialogRequestVM(BuildContext context, List<Detail> lista,
                                     "InfTec-$ticket-${element.item.codPro}"));
                           }
                         });
-
+ */
                         do {
                           final response = await showDialogViewDetail(
                               context,

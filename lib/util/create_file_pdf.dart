@@ -165,9 +165,10 @@ class CreateFilePdf {
 
     final bytes = await doc.save();
 
+//VENDEDOR Y CLIENTE
     var email = Email(
-        to: "jesusvera19_24@hotmail.com",
-        cc: "desarrollodark@gmail.com",
+        to: "desarrollodark@gmail.com",
+        cc: correo,
         subject: "Solicitud de devolución",
         body: "Generacion de solicitud de solicitud",
         attachment: ["${UtilView.firmaDocumento()}.pdf", base64.encode(bytes)]);

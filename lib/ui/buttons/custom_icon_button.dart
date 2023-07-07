@@ -20,7 +20,7 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all(StadiumBorder()),
+          shape: MaterialStateProperty.all(const StadiumBorder()),
           backgroundColor: MaterialStateProperty.all(color.withOpacity(0.5)),
           overlayColor: MaterialStateProperty.all(color.withOpacity(0.9)),
         ),
@@ -32,8 +32,8 @@ class CustomIconButton extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 text,
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w500),
               ),
             ),
           ],

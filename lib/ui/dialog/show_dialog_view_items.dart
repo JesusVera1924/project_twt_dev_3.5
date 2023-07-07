@@ -1,12 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:devolucion_modulo/provider/items_ig0063.dart';
-import 'package:devolucion_modulo/ui/dialog/devolucion/dialog_alterno.dart';
+import 'package:devolucion_modulo/datatables/ig0063_response_datasource.dart';
+import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
+import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 
 import 'package:devolucion_modulo/ui/buttons/custom_form_button.dart';
-import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 Future<String> showDialogViewItems(
     BuildContext context, String title, List<Detail> listDetail) async {
@@ -19,119 +21,24 @@ Future<String> showDialogViewItems(
           title: Text(title.toUpperCase()),
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          content: Card(
-            elevation: 10,
-            child: SingleChildScrollView(
-              child: DataTable(
-                  dividerThickness: 2,
-                  columnSpacing: 30,
-                  columns: [
-                    DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Codigo'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        numeric: false,
-                        tooltip: "Codigo producto"),
-                    DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Marca'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        numeric: false,
-                        tooltip: "producto"),
-                    DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Devolver'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        numeric: false,
-                        tooltip: "Cantidad a devolver"),
-                    DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Motivo'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        numeric: false,
-                        tooltip: "Motivo a devolver"),
-                    DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Solicitud'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        numeric: false,
-                        tooltip: "Tipo de solicitud"),
-                  ],
-                  rows: listDetail
-                      .map((e) => DataRow(cells: [
-                            DataCell(
-                              InkWell(
-                                onTap: () async {
-                                  var list = await Provider.of<ItemsIg0063>(
-                                          context,
-                                          listen: false)
-                                      .getAlternos(e.item.codPro);
-                                  dialogAlternos(context, list);
-                                },
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    e.item.codPro,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(e.item.mrcPro)),
-                            ),
-                            DataCell(
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Text(e.cantidad)),
-                            ),
-                            DataCell(
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Text(e.motivo)),
-                            ),
-                            DataCell(
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Text(e.tipo == "Devolución"
-                                      ? "Devolución"
-                                      : "Garantia")),
-                            ),
-                          ]))
-                      .toList()),
+          content: SizedBox(
+            width: Responsive.isDesktop(context) ? 800 : 400,
+            height: 310,
+            child: Card(
+              elevation: 10,
+              child: SfDataGridTheme(
+                  data: SfDataGridThemeData(
+                      headerColor: Colors.blueGrey,
+                      selectionColor:
+                          Theme.of(context).primaryColor.withOpacity(0.3),
+                      filterIconColor: Colors.black,
+                      filterIconHoverColor: Colors.white),
+                  child: SfDataGrid(
+                      columnWidthMode: ColumnWidthMode.none,
+                      headerRowHeight: 40,
+                      rowHeight: 40,
+                      source: Ig0063DTS(context, listDetail),
+                      columns: _buildDataGridForSize(context))),
             ),
           ),
           actions: [
@@ -153,4 +60,67 @@ Future<String> showDialogViewItems(
       });
 
   return resp;
+}
+
+List<GridColumn> _buildDataGridForSize(BuildContext context) {
+  List<GridColumn> list = [
+    GridColumn(
+      columnName: '1-codigo',
+      columnWidthMode: ColumnWidthMode.fitByColumnName,
+      label: Container(
+        padding: const EdgeInsets.all(8.0),
+        //width: Responsive.isDesktop(context) ? 100 : 80,
+        alignment: Alignment.center,
+        child: Text('CODIGO',
+            style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+      ),
+    ),
+    GridColumn(
+      columnName: '2-marca',
+      allowFiltering: false,
+      width: 100,
+      label: Container(
+        padding: const EdgeInsets.all(8.0),
+        //width: Responsive.isDesktop(context) ? 100 : 80,
+        alignment: Alignment.center,
+        child: Text('MARCA',
+            style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+      ),
+    ),
+    GridColumn(
+      columnName: '3-devolver',
+      columnWidthMode: ColumnWidthMode.fitByColumnName,
+      label: Container(
+        padding: const EdgeInsets.all(8.0),
+        //width: Responsive.isDesktop(context) ? 100 : 80,
+        alignment: Alignment.centerLeft,
+        child: Text('DEVOLVER',
+            style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+      ),
+    ),
+    GridColumn(
+      columnName: '4-motivo',
+      columnWidthMode: ColumnWidthMode.fill,
+      label: Container(
+        padding: const EdgeInsets.all(8.0),
+        //width: Responsive.isDesktop(context) ? 100 : 80,
+        alignment: Alignment.center,
+        child: Text('Motivo',
+            style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+      ),
+    ),
+    GridColumn(
+      columnName: '5-solicitud',
+      columnWidthMode: ColumnWidthMode.fitByColumnName,
+      label: Container(
+        padding: const EdgeInsets.all(8.0),
+        //width: Responsive.isDesktop(context) ? 100 : 80,
+        alignment: Alignment.center,
+        child: Text('SOLICITUD',
+            style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+      ),
+    ),
+  ];
+
+  return list;
 }

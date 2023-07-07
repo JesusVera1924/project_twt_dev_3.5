@@ -249,14 +249,14 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                       controllerFgr.text = formatFecha(controllerFgr.text);
                       if (val == "C") {
                         if (returnProvider.listTemp.length >= 1) {
-                          returnProvider.listTemp.forEach((element) {
+                          for (var element in returnProvider.listTemp) {
                             element.codCop = controllerCod.text;
                             element.nomCop = controllerNom.text;
                             element.ngrCop = controllerNgr.text;
                             element.fgrCop = controllerFgr.text;
                             element.bltCop = double.parse(controllerBlt.text);
                             element.destino = destino;
-                          });
+                          }
                           resp = "1";
                           Navigator.of(context).pop();
                         }
@@ -281,14 +281,14 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                             context,
                             listen: false);
                         if (alamacenProvider.listTemp.length >= 1) {
-                          alamacenProvider.listTemp.forEach((element) {
+                          for (var element in alamacenProvider.listTemp) {
                             element.codCop = controllerCod.text;
                             element.nomCop = controllerNom.text;
                             element.ngrCop = controllerNgr.text;
                             element.fgrCop = controllerFgr.text;
                             element.bltCop = double.parse(controllerBlt.text);
                             element.destino = destino;
-                          });
+                          }
                           resp = "1";
                           Navigator.of(context).pop();
                         }
@@ -331,8 +331,8 @@ String formatFecha(String tx) {
   //10/10/2021
   if (tx.length == 10) {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    DateTime dateTime = formatter.parse(
-        tx.split("/")[2] + "-" + tx.split("/")[1] + "-" + tx.split("/")[0]);
+    DateTime dateTime = formatter
+        .parse("${tx.split("/")[2]}-${tx.split("/")[1]}-${tx.split("/")[0]}");
     return "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
   } else {
     return "0000-00-00";

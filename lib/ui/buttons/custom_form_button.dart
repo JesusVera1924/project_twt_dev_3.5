@@ -19,27 +19,20 @@ class CustomFormButton extends StatelessWidget {
     return OutlinedButton(
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        side: MaterialStateProperty.all(
-          BorderSide(color: color),
-        ),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        side: MaterialStateProperty.all(BorderSide(color: color)),
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered))
+          if (states.contains(MaterialState.hovered)) {
             return color.withOpacity(0.3);
+          }
           return Colors.grey.withOpacity(0.3);
         }),
       ),
-      onPressed: () => onPressed(),
+      onPressed: () => isFilled ? null : onPressed(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 14, color: color),
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        child: Text(text, style: TextStyle(fontSize: 14, color: color)),
       ),
     );
   }

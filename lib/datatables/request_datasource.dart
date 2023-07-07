@@ -140,4 +140,8 @@ class RequestDTS extends DataGridSource {
 
     return list;
   }
+
+  void actualizarColumnas() {
+    notifyDataSourceListeners();
+  }
 }

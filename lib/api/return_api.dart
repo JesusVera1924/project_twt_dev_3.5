@@ -24,9 +24,9 @@ import 'package:devolucion_modulo/models/transport.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 
 class ReturnApi {
-  static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
+  //static String baseUrl = "http://192.168.100.4:8084/desarrollosolicitud";
   //static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.137.82:8084/desarrollosolicitud";
+  static String baseUrl = "http://181.39.96.138:8081/apisolicitud";
 
   //Listado de motivos
   Future<List<Motivo>> querylistMotivos(String codigo) async {
@@ -192,14 +192,14 @@ class ReturnApi {
   }
 
   Future<List<Cliente>?> queryClienteVen(String codigo, String vendcode) async {
-    dynamic resul;
+    List<Cliente>? resul = [];
     var url = Uri.parse(
         "$baseUrl/getvenclientes?empresa=01&codigo=$codigo&vendedor=$vendcode");
     try {
       http.Response respuesta = await http.get(url);
       if (respuesta.statusCode == 200) {
         if (respuesta.body != "") {
-          return respuesta.body.toString() != "[]"
+          resul = respuesta.body.toString() != "[]"
               ? parseClientVen(utf8.decode(respuesta.bodyBytes))
               : resul;
         }
@@ -209,7 +209,7 @@ class ReturnApi {
     } catch (e) {
       throw ('error el en GET: $e');
     }
-    return null;
+    return resul;
   }
 
   List<Cliente> parseClientVen(String respuesta) {
@@ -247,6 +247,8 @@ class ReturnApi {
   Future<Cliente?> querySeller(String code) async {
     dynamic resul;
     var url = Uri.parse("$baseUrl/getseller?empresa=01&codigo=$code");
+
+    print(url.toString());
 
     try {
       http.Response respuesta = await http.get(url);
@@ -1147,6 +1149,25 @@ class ReturnApi {
       throw 'Error en obtener los alternos: $e';
     }
     return _list;
+  }
+
+  /* obtiene el correo del usuario */
+  Future<String> getCorreoUsuario(String empresa, String codref) async {
+    String resul = "0";
+    var url =
+        Uri.parse("$baseUrl/obtenerCorreo?codEmp=$empresa&codRef=$codref");
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        return respuesta.body.toString() != "0"
+            ? resul = respuesta.body.toString().trim()
+            : resul;
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
   }
 
   List<Alterno> parseJsonToListAlterno(String body) {

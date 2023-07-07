@@ -87,7 +87,8 @@ class ListVendedorViewGridSource extends DataGridSource {
                       .clearItem(row.getCells()[3].value.toString());
                 }
               },
-              child: Icon(Icons.delete_outline_outlined, color: Colors.red),
+              child:
+                  const Icon(Icons.delete_outline_outlined, color: Colors.red),
             )),
       ),
     ]);

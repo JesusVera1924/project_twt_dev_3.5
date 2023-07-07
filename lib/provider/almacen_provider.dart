@@ -95,8 +95,7 @@ class AlmacenProvider extends ChangeNotifier {
     return x;
   }
 
-  onSelectedRow(List<DataGridRow> x, List<DataGridRow> y,
-      DataGridController dataGridController) {
+  onSelectedRow(List<DataGridRow> x, List<DataGridRow> y) {
     if (x.isNotEmpty) {
       for (var element in x) {
         var detalle = element.getCells()[4].value;
@@ -124,7 +123,7 @@ class AlmacenProvider extends ChangeNotifier {
         listaTemp.remove(detalle);
       }
     }
-    dataGridController.notifyDataSourceListeners();
+    //dataGridController.notifyDataSourceListeners();
     //selectedRows = dataGridController.selectedRows;
   }
 
@@ -301,7 +300,7 @@ class AlmacenProvider extends ChangeNotifier {
             bodMov: "01",
             auxilia: element.ucrSdv,
             secMov: "${element.secMov}",
-            uduMov: "",
+            uduMov: "*",
             fytMov: DateTime.now().toIso8601String()));
       }
     } catch (e) {

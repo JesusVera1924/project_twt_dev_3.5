@@ -19,14 +19,13 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 Future<String> showDialogRequestA(
     BuildContext context, AlmacenProvider provider, Usuario user) async {
-  //Validation validation = Validation();
-  ReturnApi returnApi = ReturnApi();
-
+  final returnApi = ReturnApi();
   int contError = 0;
   String resp = "0";
   var now = DateTime.now();
   var formatter = DateFormat('yyyy-MM-dd');
   final DataGridController dataGridController = DataGridController();
+  final dataSource = RequestDTS(context, provider, dataGridController);
 
   await showDialog(
       context: context,
@@ -69,11 +68,10 @@ Future<String> showDialogRequestA(
                             selectionMode: SelectionMode.multiple,
                             controller: dataGridController,
                             onSelectionChanged: (addedRows, removedRows) {
-                              provider.onSelectedRow(
-                                  addedRows, removedRows, dataGridController);
+                              provider.onSelectedRow(addedRows, removedRows);
+                              dataSource.actualizarColumnas();
                             },
-                            source: RequestDTS(
-                                context, provider, dataGridController),
+                            source: dataSource,
                             columns: _buildDataGridForSize(context))),
                   ),
                 ],
