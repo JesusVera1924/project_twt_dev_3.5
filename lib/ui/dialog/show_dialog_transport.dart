@@ -42,7 +42,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                 size: 20,
                 fontWeight: FontWeight.w400,
               ),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -63,7 +63,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                             length: 4,
                             onEditingComplete: () {}),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         flex: 3,
                         child: InputForm(
@@ -79,7 +79,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                                 viewContainer = "1";
                                 listTransport = await returnApi
                                     .queryTransport(value.toUpperCase());
-                                if (listTransport.length == 0) {
+                                if (listTransport.isEmpty) {
                                   viewContainer = "0";
                                   listTransport = [];
                                 }
@@ -90,7 +90,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Expanded(
@@ -104,7 +104,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                             onChanged: (value) {},
                             onEditingComplete: () {}),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: InputForm(
                             formatt: true,
@@ -117,7 +117,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                             onChanged: (value) {},
                             onEditingComplete: () {}),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: InputForm(
                             hint: 'Cantidad Bulto',
@@ -131,7 +131,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       SizedBox(
@@ -140,10 +140,8 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                             child: DropdownButton<String>(
                           isExpanded: true,
                           isDense: true,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black,
-                          ),
+                          icon: const Icon(Icons.keyboard_arrow_down,
+                              color: Colors.black),
                           value: destino,
                           items: UtilView.list.map((item) {
                             return DropdownMenuItem(
@@ -151,7 +149,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                               child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 10),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text(item, style: CustomLabels.h4),
                                   )),
                             );
@@ -165,7 +163,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   (viewContainer == "1")
                       ? Container(
                           decoration: BoxDecoration(
@@ -183,7 +181,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                                           child: Text(
                                             'Codigo'.toUpperCase(),
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -195,7 +193,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                                           child: Text(
                                             'Nombre'.toUpperCase(),
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -232,8 +230,8 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                           ),
                         )
                       : Container(
-                          margin: EdgeInsets.only(top: 20),
-                          child: Text(''),
+                          margin: const EdgeInsets.only(top: 20),
+                          child: const Text(''),
                         ),
                 ],
               ),

@@ -25,8 +25,8 @@ import 'package:devolucion_modulo/models/usuario.dart';
 
 class ReturnApi {
   //static String baseUrl = "http://192.168.100.4:8084/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
-  static String baseUrl = "http://181.39.96.138:8081/apisolicitud";
+  static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
+  //static String baseUrl = "http://181.39.96.138:8081/apisolicitud";
 
   //Listado de motivos
   Future<List<Motivo>> querylistMotivos(String codigo) async {

@@ -11,7 +11,7 @@ import 'package:devolucion_modulo/provider/items_provider.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
 import 'package:devolucion_modulo/models/inner/ig0062Response.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
-import 'package:devolucion_modulo/ui/dialog/show_dialog_client_item.dart';
+import 'package:devolucion_modulo/ui/dialog/cliente/show_dialog_client_item.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ApprovalAdminDataSource extends DataGridSource {

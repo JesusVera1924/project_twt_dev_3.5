@@ -3,7 +3,7 @@
 import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 import 'package:devolucion_modulo/provider/vendedor_provider.dart';
 import 'package:devolucion_modulo/ui/dialog/devolucion/custom_dev_dialog_ven.dart';
-import 'package:devolucion_modulo/ui/dialog/devolucion/dialog_alterno.dart';
+import 'package:devolucion_modulo/ui/dialog/devolucion/show_dialog_alterno.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:devolucion_modulo/ui/inputs/input_dialog.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
@@ -58,7 +58,7 @@ class RequestVDTS extends DataGridSource {
               onTap: () async {
                 var list = await provider
                     .getAlternos(row.getCells()[0].value.toString());
-                dialogAlternos(context, list);
+                showDialogAlternos(context, list);
               },
               child: Container(
                   padding: const EdgeInsets.all(8.0),
@@ -146,7 +146,7 @@ class RequestVDTS extends DataGridSource {
               onTap: () async {
                 var list = await provider
                     .getAlternos(row.getCells()[0].value.toString());
-                dialogAlternos(context, list);
+                showDialogAlternos(context, list);
               },
               child: Container(
                   padding: const EdgeInsets.all(8.0),

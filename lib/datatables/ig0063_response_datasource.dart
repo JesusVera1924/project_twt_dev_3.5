@@ -29,7 +29,17 @@ class Ig0063DTS extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
-    return DataGridRowAdapter(cells: [
+    Color getRowBackgroundColor() {
+      if (row.getCells()[4].value == "Devolución") {
+        return Colors.green[100]!;
+      } else if (row.getCells()[4].value == "Garantía") {
+        return Colors.blueGrey[200]!;
+      }
+
+      return Colors.transparent;
+    }
+
+    return DataGridRowAdapter(color: getRowBackgroundColor(), cells: [
       Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.centerLeft,

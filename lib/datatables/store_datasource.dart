@@ -3,7 +3,7 @@
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
-import 'package:devolucion_modulo/ui/dialog/devolucion/dialog_alterno.dart';
+import 'package:devolucion_modulo/ui/dialog/devolucion/show_dialog_alterno.dart';
 import 'package:devolucion_modulo/ui/dialog/kardex/show_dialog_kardex.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:devolucion_modulo/ui/inputs/input_bod.dart';
@@ -581,7 +581,7 @@ class StoreDataSource extends DataGridSource {
       list = [
         InkWell(
           onTap: () async {
-            dialogAlternos(
+            showDialogAlternos(
                 context, await provider.getAlternos(row.getCells()[0].value));
           },
           child: Container(

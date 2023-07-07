@@ -14,7 +14,7 @@ import 'package:devolucion_modulo/ui/buttons/custom_form_button.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
 import 'package:devolucion_modulo/ui/dialog/show_dialog_transport.dart';
-import 'package:devolucion_modulo/ui/dialog/show_dialog_view_items.dart';
+import 'package:devolucion_modulo/ui/dialog/devolucion/show_dialog_view_items.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

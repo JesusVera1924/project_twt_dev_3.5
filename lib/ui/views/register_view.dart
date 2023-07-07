@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,11 +12,13 @@ import 'package:devolucion_modulo/services/notifications_service.dart';
 import 'package:devolucion_modulo/ui/buttons/custom_outlined_button.dart';
 import 'package:devolucion_modulo/ui/buttons/link_text.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
-import 'package:devolucion_modulo/ui/dialog/vendedor/show_dialog_client.dart';
+import 'package:devolucion_modulo/ui/dialog/cliente/show_dialog_client.dart';
 import 'package:devolucion_modulo/ui/inputs/custom_inputs.dart';
 import 'package:provider/provider.dart';
 
 class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -26,11 +30,11 @@ class RegisterView extends StatelessWidget {
         ReturnApi returnApi = ReturnApi();
 
         return Container(
-          margin: EdgeInsets.only(top: 15),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
             child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 370),
+                constraints: const BoxConstraints(maxWidth: 370),
                 child: ListView(
                   children: [
                     Form(
@@ -38,7 +42,7 @@ class RegisterView extends StatelessWidget {
                         key: registerFormProvider.formKey,
                         child: Column(
                           children: [
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             // Nombre
                             TextFormField(
                               onChanged: (value) async {
@@ -52,28 +56,30 @@ class RegisterView extends StatelessWidget {
                                 }
                               },
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'Identificación es obligatario';
+                                }
                                 return null;
                               },
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^(?:\+|-)?\d+$')),
                               ],
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su identificación',
                                   label: 'Identificación',
                                   icon: Icons.supervised_user_circle_sharp),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             // Usuario
                             TextFormField(
                               onChanged: (value) =>
                                   registerFormProvider.usuario = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'El usuario es obligatario';
+                                }
                                 return null;
                               },
                               style: TextStyle(color: Colors.white),
@@ -83,69 +89,73 @@ class RegisterView extends StatelessWidget {
                                   icon: Icons.supervised_user_circle_sharp),
                             ),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
                             // Email
                             TextFormField(
                               onChanged: (value) =>
                                   registerFormProvider.tlfRef = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'Celular es obligatario';
+                                }
                                 return null;
                               },
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^(?:\+|-)?\d+$')),
                               ],
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su celular',
                                   label: 'Celular',
                                   icon: Icons.email_outlined),
                             ),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
                             // Email
                             TextFormField(
                               onChanged: (value) =>
                                   registerFormProvider.email = value,
                               validator: (value) {
-                                if (!EmailValidator.validate(value ?? ''))
+                                if (!EmailValidator.validate(value ?? '')) {
                                   return 'Email no válido';
+                                }
                                 return null;
                               },
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su correo',
                                   label: 'Email',
                                   icon: Icons.email_outlined),
                             ),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
                             // Password
                             TextFormField(
                               onChanged: (value) =>
                                   registerFormProvider.password = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'Ingrese su contraseña';
-                                if (value.length < 6)
+                                }
+                                if (value.length < 6) {
                                   return 'La contraseña debe de ser de 6 caracteres';
+                                }
 
                                 return null; // Válido
                               },
                               obscureText: true,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: '*********',
                                   label: 'Contraseña',
                                   icon: Icons.lock_outline_rounded),
                             ),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             CustomOutlinedButton(
                               onPressed: () async {
                                 final validForm =
@@ -200,7 +210,7 @@ class RegisterView extends StatelessWidget {
                               text: 'Crear cuenta',
                             ),
 
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             LinkText(
                               text: 'Ir al login',
                               onTap: () {

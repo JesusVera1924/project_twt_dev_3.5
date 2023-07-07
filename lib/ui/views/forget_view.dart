@@ -8,7 +8,7 @@ import 'package:devolucion_modulo/services/notifications_service.dart';
 import 'package:devolucion_modulo/ui/buttons/custom_outlined_button.dart';
 import 'package:devolucion_modulo/ui/buttons/link_text.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
-import 'package:devolucion_modulo/ui/dialog/show_dialog_users.dart';
+import 'package:devolucion_modulo/ui/dialog/cliente/show_dialog_users.dart';
 import 'package:devolucion_modulo/ui/inputs/custom_inputs.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:provider/provider.dart';

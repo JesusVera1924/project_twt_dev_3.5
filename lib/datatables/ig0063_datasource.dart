@@ -33,13 +33,13 @@ class Ig0063DTS extends DataTableSource {
           DataCell(Text(item.codPto)),
           DataCell(Text(item.codMov)),
           DataCell(Text(item.numMov)),
-          DataCell(Text(item.codVen + "-" + item.vendedor)),
+          DataCell(Text("${item.codVen}-${item.vendedor}")),
           DataCell(Text("${item.contar}")),
           DataCell(InkWell(
             onTap: () async {
               _showDetails(context, item);
             },
-            child: Tooltip(
+            child: const Tooltip(
                 message: "Datos del transporte",
                 child: Icon(Icons.assignment, color: Colors.blue)),
           )),
@@ -57,7 +57,7 @@ class Ig0063DTS extends DataTableSource {
               }
               Navigator.of(context).pop();
             },
-            child: Tooltip(
+            child: const Tooltip(
                 message: "Detalle de ítems",
                 child: Icon(Icons.find_in_page_outlined, color: Colors.blue)),
           )),
