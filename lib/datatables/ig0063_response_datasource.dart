@@ -66,14 +66,11 @@ class Ig0063DTS extends DataGridSource {
       Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.centerRight,
-        child: Tooltip(
-          message: row.getCells()[2].value.toString(),
-          child: Text(
-            row.getCells()[2].value.toString(),
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
+        child: Text(
+          row.getCells()[2].value.toString(),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
         ),
       ),
       Container(
@@ -97,6 +94,7 @@ class Ig0063DTS extends DataGridSource {
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     ]);

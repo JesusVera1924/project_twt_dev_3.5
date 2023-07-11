@@ -59,6 +59,7 @@ class _OtherDetailsState extends State<OtherDetails> {
 
                     var val = await showDialogTransport2(
                         context, widget.data.numSdv, data, true);
+
                     if (val != null) {
                       widget.provider
                           .getUpdateTransport(widget.data.numSdv, val);

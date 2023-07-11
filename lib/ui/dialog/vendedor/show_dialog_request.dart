@@ -159,7 +159,7 @@ Future<String> showDialogRequestV(
                                 numNex: "",
                                 fecNex: "",
                                 swsSdv: "",
-                                ucrSdv: user.ctaUsr,
+                                ucrSdv: "",
                                 fcrSdv: "",
                                 uacSdv: "",
                                 facSdv: "",
