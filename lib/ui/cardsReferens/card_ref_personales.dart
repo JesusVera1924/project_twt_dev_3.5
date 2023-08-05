@@ -10,74 +10,74 @@ class CardRefPersonales extends StatelessWidget {
   TextEditingController ciudad = TextEditingController();
   Validation rgx = Validation();
 
+  CardRefPersonales({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Row(
-          children: [
-            Expanded(
-              child: InputForm(
-                  hint: 'Nombre',
-                  enable: true,
-                  icon: Icons.perm_identity_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: nombre,
-                  regx: rgx.letras,
-                  length: 20,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Parentesco',
-                  enable: true,
-                  icon: Icons.family_restroom_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: parentesco,
-                  regx: rgx.letras,
-                  length: 20,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Telefono',
-                  enable: true,
-                  icon: Icons.phone_android_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: telefono,
-                  regx: rgx.numeros,
-                  length: 10,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Ciudad',
-                  enable: true,
-                  icon: Icons.location_city_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: ciudad,
-                  regx: rgx.letras,
-                  length: 20,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(
+        children: [
+          Expanded(
+            child: InputForm(
+                hint: 'Nombre',
+                enable: true,
+                icon: Icons.perm_identity_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: nombre,
+                regx: rgx.letras,
+                length: 20,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Parentesco',
+                enable: true,
+                icon: Icons.family_restroom_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: parentesco,
+                regx: rgx.letras,
+                length: 20,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Telefono',
+                enable: true,
+                icon: Icons.phone_android_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: telefono,
+                regx: rgx.numeros,
+                length: 10,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Ciudad',
+                enable: true,
+                icon: Icons.location_city_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: ciudad,
+                regx: rgx.letras,
+                length: 20,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+        ],
       ),
     );
   }

@@ -305,6 +305,7 @@ class VendedorProvider extends ChangeNotifier {
     List<Karmov> list = [];
     String correo1 = "";
     String correo2 = "";
+
     try {
       for (var element in listTemp) {
         list.add(Karmov(
@@ -320,7 +321,7 @@ class VendedorProvider extends ChangeNotifier {
             nx2Mov: "",
             fx2Mov: "",
             codRef: element.codRef,
-            nomRef: "",
+            nomRef: nombCli.text,
             codFb1: "",
             codFb2: "",
             codFb3: "",
@@ -331,7 +332,7 @@ class VendedorProvider extends ChangeNotifier {
             nomDg2: element.obsSdv.split("::")[1],
             nomDg3: element.obsSdv.split("::")[2],
             codPro: element.codPro,
-            nomPro: "",
+            nomPro: element.obsSdv.split("::")[0],
             codAl1: "",
             codAl2: "",
             codAl3: "",
@@ -348,7 +349,7 @@ class VendedorProvider extends ChangeNotifier {
             adaMov: "",
             cdaMov: 0,
             sdaMov: "",
-            odaMov: "",
+            odaMov: element.codVen,
             bodMov: "01",
             auxilia: element.ucrSdv,
             secMov: "${element.secMov}",
@@ -359,7 +360,7 @@ class VendedorProvider extends ChangeNotifier {
       correo1 = await _returnApi.getCorreoUsuario("01", tokenUser.ctaUsr);
       correo2 = await _returnApi.getCorreoUsuario("01", codCli.text);
 
-      CreateFilePdf().pdf4(listTemp, factura!.nomRef, correo1, correo2);
+      CreateFilePdf().pdf4(listTemp, factura!.nomRef, "$correo1,$correo2");
     } catch (e) {
       print(e);
     }

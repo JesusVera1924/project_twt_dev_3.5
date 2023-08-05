@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
@@ -19,8 +21,9 @@ class Ig0063DTS extends DataTableSource {
         color: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
           if (item.stsSdv == "E") return Colors.green.withOpacity(0.08);
-          if (states.contains(MaterialState.hovered))
+          if (states.contains(MaterialState.hovered)) {
             return Colors.black26.withOpacity(0.08);
+          }
 
           return Colors.white12;
         }),
@@ -78,7 +81,7 @@ class Ig0063DTS extends DataTableSource {
 Widget checkStatu(String statu) {
   switch (statu) {
     case "P":
-      return Tooltip(
+      return const Tooltip(
         message: "Pendiente",
         child: Icon(
           Icons.access_time,
@@ -94,7 +97,7 @@ Widget checkStatu(String statu) {
         ),
       );
     case "C":
-      return Tooltip(
+      return const Tooltip(
         message: "Terminado",
         child: Icon(
           Icons.check_circle_outline,
@@ -102,7 +105,7 @@ Widget checkStatu(String statu) {
         ),
       );
     case "R":
-      return Tooltip(
+      return const Tooltip(
         message: "Rechazado",
         child: Icon(
           Icons.cancel_outlined,
@@ -110,7 +113,7 @@ Widget checkStatu(String statu) {
         ),
       );
     default:
-      return Icon(
+      return const Icon(
         Icons.warning_amber_rounded,
         color: Colors.amberAccent,
       );

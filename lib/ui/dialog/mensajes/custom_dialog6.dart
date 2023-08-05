@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 
-Future<bool> customDialog2(BuildContext context, String title, String body,
+Future<String> customDialog6(BuildContext context, String title, String body,
     IconData iconData, Color color) async {
-  bool resp = false;
+  String resp = "0";
   await showDialog(
       barrierDismissible: false,
       context: context,
@@ -32,7 +32,7 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  resp = true;
+                  resp = "1";
                   Navigator.of(context).pop();
                 },
                 child: Padding(
@@ -49,7 +49,7 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  resp = false;
+                  resp = "2";
                   Navigator.of(context).pop();
                 },
                 child: Padding(
@@ -66,7 +66,7 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  resp = false;
+                  resp = "0";
                   Navigator.of(context).pop();
                 },
                 child: Padding(

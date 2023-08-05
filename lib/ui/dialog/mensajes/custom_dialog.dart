@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({
+    super.key,
     required this.child,
     this.showPadding = true,
   });
@@ -35,7 +36,6 @@ class CustomDialog extends StatelessWidget {
 }
 
 class CloseIcon extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Align(

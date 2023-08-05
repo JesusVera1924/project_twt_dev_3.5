@@ -16,8 +16,8 @@ class CustomInputs {
           icon,
           color: Colors.grey,
         ),
-        hintStyle: TextStyle(color: Colors.grey),
-        labelStyle: TextStyle(color: Colors.grey));
+        hintStyle: const TextStyle(color: Colors.grey),
+        labelStyle: const TextStyle(color: Colors.grey));
   }
 
   static InputDecoration searchInputDecoration(
@@ -30,8 +30,8 @@ class CustomInputs {
           icon,
           color: Colors.grey,
         ),
-        labelStyle: TextStyle(color: Colors.grey),
-        hintStyle: TextStyle(color: Colors.grey));
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey));
   }
 
   static InputDecoration searchInputDecoration2({required IconData icon}) {
@@ -42,16 +42,15 @@ class CustomInputs {
           icon,
           color: Colors.grey,
         ),
-        labelStyle: TextStyle(color: Colors.grey),
-        hintStyle: TextStyle(color: Colors.grey));
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey));
   }
-
-  static formInputDecoration({hint, icon}) {}
 
   static InputDecoration dialogDecoration(
       {required String hint, required String label, required IconData icon}) {
     return InputDecoration(
-        contentPadding: EdgeInsets.only(top: 4, bottom: 4, left: 6, right: 6),
+        contentPadding:
+            const EdgeInsets.only(top: 4, bottom: 4, left: 6, right: 6),
         isDense: true,
         filled: true,
         border: OutlineInputBorder(
@@ -66,7 +65,7 @@ class CustomInputs {
           icon,
           color: Colors.black,
         ),
-        hintStyle: TextStyle(color: Colors.grey),
-        labelStyle: TextStyle(color: Colors.grey));
+        hintStyle: const TextStyle(color: Colors.grey),
+        labelStyle: const TextStyle(color: Colors.grey));
   }
 }

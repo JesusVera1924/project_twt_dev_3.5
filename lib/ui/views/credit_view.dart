@@ -1257,17 +1257,14 @@ class _CreditViewState extends State<CreditView> {
                                                 creditApi
                                                     .postFormCredit(objSend);
 
-                                                creditProvider.listDocument
-                                                    .forEach((e) {
-                                                  if (e.arrayBs64 != "")
+                                                for (var e in creditProvider
+                                                    .listDocument) {
+                                                  if (e.arrayBs64 != "") {
                                                     creditApi.uploadDocument(
                                                         e.arrayBs64,
-                                                        e.sufijo +
-                                                            "-" +
-                                                            objSend.numSdc +
-                                                            "-" +
-                                                            objSend.stsSdc);
-                                                });
+                                                        "${e.sufijo}-${objSend.numSdc}-${objSend.stsSdc}");
+                                                  }
+                                                }
 
                                                 creditProvider.limpiarForm();
                                                 cardBan = [];
@@ -1321,7 +1318,7 @@ class _CreditViewState extends State<CreditView> {
         return;
       }
     }
-    cardBan.add(new CardBanco());
+    cardBan.add(CardBanco());
     setState(() {});
   }
 
@@ -1334,7 +1331,7 @@ class _CreditViewState extends State<CreditView> {
         return;
       }
     }
-    cardFam.add(new CardRefFamiliares());
+    cardFam.add(CardRefFamiliares());
     setState(() {});
   }
 
@@ -1347,7 +1344,7 @@ class _CreditViewState extends State<CreditView> {
         return;
       }
     }
-    cardPersonal.add(new CardRefPersonales());
+    cardPersonal.add(CardRefPersonales());
     setState(() {});
   }
 
@@ -1360,7 +1357,7 @@ class _CreditViewState extends State<CreditView> {
         return;
       }
     }
-    cardPropiedad.add(new CardRefPropiedades());
+    cardPropiedad.add(CardRefPropiedades());
     setState(() {});
   }
 
@@ -1373,14 +1370,14 @@ class _CreditViewState extends State<CreditView> {
         return;
       }
     }
-    cardComercial.add(new CardRefComerciles());
+    cardComercial.add(CardRefComerciles());
     setState(() {});
   }
 
   void buildValidetDocument(CreditProvider provider, opt) {
     if (opt == "1") {
       provider.setIsOpen(false);
-      provider.listDocument.forEach((element) {
+      for (var element in provider.listDocument) {
         if (element.sufijo == "CED" ||
             element.sufijo == "CSB" ||
             element.sufijo == "RCP") {
@@ -1393,10 +1390,10 @@ class _CreditViewState extends State<CreditView> {
         element.arrayBs64 = "";
         element.name = "";
         element.estado = false;
-      });
+      }
     } else if (opt == "0") {
       provider.setIsOpen(false);
-      provider.listDocument.forEach((element) {
+      for (var element in provider.listDocument) {
         if (element.sufijo == "CED" ||
             element.sufijo == "CSB" ||
             element.sufijo == "RCP") {
@@ -1409,10 +1406,10 @@ class _CreditViewState extends State<CreditView> {
         element.arrayBs64 = "";
         element.name = "";
         element.estado = false;
-      });
+      }
     } else if (opt == "4") {
       provider.setIsOpen(false);
-      provider.listDocument.forEach((element) {
+      for (var element in provider.listDocument) {
         if (element.sufijo == "CED" || element.sufijo == "CSB") {
           element.hide = true;
           element.requerido = "Requerido*";
@@ -1423,7 +1420,7 @@ class _CreditViewState extends State<CreditView> {
         element.arrayBs64 = "";
         element.name = "";
         element.estado = false;
-      });
+      }
     } else {
       provider.setIsOpen(true);
       provider.listDocument.forEach((element) {
@@ -1512,11 +1509,11 @@ class _CreditViewState extends State<CreditView> {
 
   bool buildArrayDocument(CreditProvider provider) {
     int val = 0;
-    provider.listDocument.forEach((element) {
+    for (var element in provider.listDocument) {
       if (element.requerido == "") {
         val++;
       }
-    });
+    }
     return val == 7 ? true : false;
   }
 }

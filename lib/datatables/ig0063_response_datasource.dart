@@ -16,8 +16,7 @@ class Ig0063DTS extends DataGridSource {
       return DataGridRow(cells: <DataGridCell>[
         DataGridCell<String>(columnName: '1-codigo', value: e.item.codPro),
         DataGridCell<String>(columnName: '2-marca', value: e.item.mrcPro),
-        DataGridCell<String>(
-            columnName: '3-devolver', value: e.item.canMov.toStringAsFixed(0)),
+        DataGridCell<String>(columnName: '3-devolver', value: e.cantidad),
         DataGridCell<String>(columnName: '4-motivo', value: e.motivo),
         DataGridCell<String>(columnName: '5-solicitud', value: e.tipo),
       ]);
@@ -47,6 +46,7 @@ class Ig0063DTS extends DataGridSource {
           row.getCells()[0].value.toString(),
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           maxLines: 2,
         ),
       ),
@@ -59,6 +59,7 @@ class Ig0063DTS extends DataGridSource {
             row.getCells()[1].value.toString(),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 12),
             maxLines: 2,
           ),
         ),
@@ -70,6 +71,7 @@ class Ig0063DTS extends DataGridSource {
           row.getCells()[2].value.toString(),
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
           maxLines: 2,
         ),
       ),
@@ -82,6 +84,7 @@ class Ig0063DTS extends DataGridSource {
             row.getCells()[3].value.toString(),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             maxLines: 2,
           ),
         ),
@@ -94,7 +97,12 @@ class Ig0063DTS extends DataGridSource {
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: row.getCells()[4].value.toString() == "Devolución"
+                  ? Colors.green
+                  : Colors.purple),
         ),
       ),
     ]);

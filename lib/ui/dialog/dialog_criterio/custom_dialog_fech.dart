@@ -12,7 +12,7 @@ Future<String> customDialogFech(BuildContext context, String title, String regx,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: Row(
             children: [
@@ -30,11 +30,11 @@ Future<String> customDialogFech(BuildContext context, String title, String regx,
               ),
             ],
           ),
-          content: Container(
+          content: SizedBox(
             height: 60,
             child: Column(
               children: [
-                Row(
+                const Row(
                   children: [
                     SizedBox(width: 120, child: Text('Desde')),
                     SizedBox(
@@ -84,8 +84,9 @@ Future<String> customDialogFech(BuildContext context, String title, String regx,
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.greenAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {
@@ -95,5 +96,5 @@ Future<String> customDialogFech(BuildContext context, String title, String regx,
           ],
         );
       });
-  return desde.text + "::" + hasta.text;
+  return "${desde.text}::${hasta.text}";
 }

@@ -10,6 +10,7 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AuthProvider>(context);
     const _url = 'https://www.cojapan.com';
     void _launchURL() async => await canLaunch(_url)
         ? await launch(_url)
@@ -52,7 +53,11 @@ class Footer extends StatelessWidget {
                     onTap: () => _launchURL(),
                     child: const Text('Cojapan',
                         style: TextStyle(color: Colors.blue, fontSize: 12)),
-                  )
+                  ),
+                  const Text(' | ',
+                      style: TextStyle(fontSize: 12, color: Color(0xCC232d37))),
+                  Text(provider.cliente!.nomUsr,
+                      style: const TextStyle(color: Colors.blue, fontSize: 12))
                 ],
               ),
               Container(

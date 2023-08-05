@@ -231,7 +231,8 @@ class Follow2DTS extends DataGridSource {
 
   void proceso2(DataGridRow row) async {
     Ig0063Response x = row.getCells()[10].value;
-    var lista = await provider.getListKardex(x.numSdv, x.codPro, x.numMov);
+    var lista =
+        await provider.getListKardex(x.numSdv, x.codPro, x.numMov, x.clsSdv);
     await showDialogKardex(context, 'kardex :: ${x.numSdv}', lista);
   }
 

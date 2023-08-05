@@ -8,11 +8,11 @@ Future<bool> dialogTerminos(BuildContext context, String title) async {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.contact_support_outlined,
                 color: Colors.blue,
                 size: 24,
@@ -24,14 +24,14 @@ Future<bool> dialogTerminos(BuildContext context, String title) async {
                   style: CustomLabels.h5,
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.contact_support_outlined,
                 color: Colors.blue,
                 size: 24,
               ),
             ],
           ),
-          content: Container(
+          content: SizedBox(
             width: 380,
             height: 250,
             child: RichText(
@@ -40,21 +40,21 @@ Future<bool> dialogTerminos(BuildContext context, String title) async {
                 text: 'Autorizo a ',
                 style: CustomLabels.h6,
                 children: <TextSpan>[
-                  TextSpan(
+                  const TextSpan(
                       text: 'COMERCIAL JAPONESA AUTOMOTRIZ CIA.LTDA (COJAPAN)',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(
                       style: CustomLabels.h6,
                       text:
                           ' , para que pueda recabar, reportar o informar a cualquier buró de crédito sobre mi comprtamiento crediticio. Renuncio a domicilio,me someto a jueces de este cantón y trámite verbal sumario o ejecutivo.Firmo como suscritor autorizado en la fecha indicada porcedente a nombre propio y/o de la compradora, sin protesto. Declaro bajo juramento que el origen de los fondos entregados a '),
-                  TextSpan(
+                  const TextSpan(
                       text: 'COMERCIAL JAPONESA AUTOMOTRIZ CIA.LTDA (COJAPAN)',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(
                       style: CustomLabels.h6,
                       text:
                           ' , provienen de actividades lícitas, y que los fondos y/o bienes que recibio de'),
-                  TextSpan(
+                  const TextSpan(
                       text: ' COMERCIAL JAPONESA AUTOMOTRIZ CIA.LTDA',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(
@@ -70,8 +70,9 @@ Future<bool> dialogTerminos(BuildContext context, String title) async {
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.greenAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {
@@ -83,8 +84,9 @@ Future<bool> dialogTerminos(BuildContext context, String title) async {
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.greenAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {

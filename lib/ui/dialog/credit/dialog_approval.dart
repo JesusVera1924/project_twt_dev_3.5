@@ -18,7 +18,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
   String msg = "";
 
   final rgx = Validation();
-  final formkey = new GlobalKey<FormState>();
+  final formkey = GlobalKey<FormState>();
   final _codigo = TextEditingController(text: obj.codRef);
   final _palzo = TextEditingController(text: "${obj.plzSdc}");
   final _cupo = TextEditingController(text: "${obj.cupSdc}");
@@ -32,13 +32,13 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
             //backgroundColor: Color(0xff092042),
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: Text(
               'Datos de Aprobación ($tipo)',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            content: Container(
+            content: SizedBox(
               width: 400,
               child: Form(
                 key: formkey,
@@ -72,7 +72,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                                 }
                               }),
                         ),
-                        if (obj.clsRef == "1") SizedBox(width: 5),
+                        if (obj.clsRef == "1") const SizedBox(width: 5),
                         if (obj.clsRef == "1")
                           Expanded(
                             child: InputForm(
@@ -91,7 +91,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                        if (obj.clsRef == "1") SizedBox(width: 5),
+                        if (obj.clsRef == "1") const SizedBox(width: 5),
                         if (obj.clsRef == "1")
                           Expanded(
                             child: InputForm(
@@ -112,7 +112,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                           ),
                       ],
                     ),
-                    if (obj.clsRef == "1") SizedBox(height: 10),
+                    if (obj.clsRef == "1") const SizedBox(height: 10),
                     if (obj.clsRef == "1")
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -134,7 +134,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                                       child: Text(
                                         item.nomCmg,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400),
                                       )),
@@ -147,7 +147,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                           ),
                         ],
                       ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -157,7 +157,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                           style: CustomLabels.h6
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             value: vendedor,
@@ -175,7 +175,7 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                                     child: Text(
                                       item.nomRef,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400),
                                     )),
@@ -202,8 +202,9 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.greenAccent;
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -234,8 +235,9 @@ Future<String> dialogApproval(BuildContext context, CreditsProvider provider,
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.greenAccent;
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {

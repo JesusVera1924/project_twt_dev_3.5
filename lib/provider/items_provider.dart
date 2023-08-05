@@ -220,6 +220,7 @@ class ItemsProvider extends ChangeNotifier {
             returnApi.postKardex(Kardex(
                 codEmp: "01",
                 codPto: "01",
+                clsSdv: "C",
                 codMov: e.codMov,
                 numMov: e.numMov,
                 fecMov: DateTime.now(),

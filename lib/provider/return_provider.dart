@@ -11,7 +11,7 @@ import 'package:devolucion_modulo/models/invoice.dart';
 import 'package:devolucion_modulo/models/product.dart';
 
 class ReturnProvider extends ChangeNotifier {
-  ReturnApi _returnApi = ReturnApi();
+  final _returnApi = ReturnApi();
   Cliente cliente = Cliente();
 
   //Informacion para el usuario de la solicitud
@@ -69,7 +69,7 @@ class ReturnProvider extends ChangeNotifier {
     if (resp != null) {
       final email = await _returnApi.queryCorreo(token);
       final city = await _returnApi.fillCity(resp.codCiu);
-      cceCli.text = email.length == 0 ? "null" : email.first.datCli;
+      cceCli.text = email.isEmpty ? "null" : email.first.datCli;
       cliNomb.text = resp.nomRef;
       codCli.text = resp.codRef;
       cuiCli.text = city;
@@ -83,7 +83,7 @@ class ReturnProvider extends ChangeNotifier {
     if (resp != null) {
       final email = await _returnApi.queryCorreo(uid);
       final city = await _returnApi.fillCity(resp.codCiu);
-      cceCli.text = email.length == 0 ? "null" : email.first.datCli;
+      cceCli.text = email.isEmpty ? "null" : email.first.datCli;
       cliNomb.text = resp.nomRef;
       codCli.text = resp.codRef;
       cuiCli.text = city;

@@ -8,7 +8,7 @@ Future<bool> customDialog5(BuildContext context, String body) async {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           content: Text(
             body,
@@ -19,8 +19,9 @@ Future<bool> customDialog5(BuildContext context, String body) async {
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.greenAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {
@@ -32,8 +33,9 @@ Future<bool> customDialog5(BuildContext context, String body) async {
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.redAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {

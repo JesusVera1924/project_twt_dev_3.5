@@ -12,6 +12,8 @@ import 'package:devolucion_modulo/ui/inputs/custom_inputs.dart';
 import 'package:provider/provider.dart';
 
 class ResetPassView extends StatelessWidget {
+  const ResetPassView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -22,11 +24,11 @@ class ResetPassView extends StatelessWidget {
         ReturnApi api = ReturnApi();
 
         return Container(
-          margin: EdgeInsets.only(top: 20),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
             child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 370),
+                constraints: const BoxConstraints(maxWidth: 370),
                 child: ListView(
                   children: [
                     Form(
@@ -39,21 +41,22 @@ class ResetPassView extends StatelessWidget {
                               onChanged: (value) =>
                                   registerFormProvider.codigo = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'El codigo es obligatario';
+                                }
                                 return null;
                               },
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^(?:\+|-)?\d+$')),
                               ],
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su codigo provisional',
                                   label: 'Codigo provisional',
                                   icon: Icons.supervised_user_circle_sharp),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
 
                             // Password
                             TextFormField(
@@ -62,46 +65,51 @@ class ResetPassView extends StatelessWidget {
                               validator: (value) {
                                 if (value == null || value.isEmpty)
                                   return 'Ingrese su contraseña';
-                                if (value.length < 6)
+                                if (value.length < 6) {
                                   return 'La contraseña debe de ser de 6 caracteres';
+                                }
                                 if (registerFormProvider.password !=
-                                    registerFormProvider.password2)
+                                    registerFormProvider.password2) {
                                   return 'No coincide la contraseña';
+                                }
 
                                 return null; // Válido
                               },
                               obscureText: true,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: '*********',
                                   label: 'Contraseña',
                                   icon: Icons.lock_outline_rounded),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             // Password
                             TextFormField(
                               onChanged: (value) =>
                                   registerFormProvider.password2 = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'Ingrese su contraseña';
-                                if (value.length < 6)
+                                }
+                                if (value.length < 6) {
                                   return 'La contraseña debe de ser de 6 caracteres';
+                                }
                                 if (registerFormProvider.password !=
-                                    registerFormProvider.password2)
+                                    registerFormProvider.password2) {
                                   return 'No coincide la contraseña';
+                                }
 
                                 return null; // Válido
                               },
                               obscureText: true,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: '*********',
                                   label: 'Repita su contraseña',
                                   icon: Icons.lock_outline_rounded),
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             CustomOutlinedButton(
                               onPressed: () async {
                                 final validForm =
@@ -133,7 +141,7 @@ class ResetPassView extends StatelessWidget {
                               text: 'Cambiar Contraseña',
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             LinkText(
                               text: 'Ir al login',
                               onTap: () {

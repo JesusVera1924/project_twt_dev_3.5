@@ -14,8 +14,8 @@ class CreateFilePdf {
   ReturnApi api = ReturnApi();
   List<List<String>> bodyTable = [];
 
-  Future<void> pdf4(List<Ig0063> cadena, String nombre, String destinatario,
-      String copias) async {
+  Future<void> pdf4(
+      List<Ig0063> cadena, String nombre, String destinatario) async {
     //VARIABLES
 /*     final netImage = await networkImage(
         'https://ci3.googleusercontent.com/proxy/aMKVP5SvujxE2xUHVOV29wXnlhB5qaoElrRXLrDzRX8UiEcBpi_wig4FYu6SLf4vlyon6y6tUfDmbKmkehr0EiQLiNBeEmU3mNkMsDOe4ke3A0NqxPGARj8Y5nwidC4MN3o2TXb-eVHdDx0Z95w_mbMsxFRpKUGerlI=s0-d-e1-ft');
@@ -73,7 +73,7 @@ class CreateFilePdf {
               pw.Padding(
                 padding: const pw.EdgeInsets.symmetric(vertical: 5),
                 child: pw.Text(
-                    "Las presente devoluciones o garantías se encuentran receptadas por nuestro departamento.Haciendo cita a los puntos número 6,7 de nuestras politicas:",
+                    "Se ha notificado a nuestro departamento de devoluciones esta solicitud de devolución o garantía.\n Una vez que recibamos la mercadería iniciaremos el proceso respectivo. Haciendo cita a los puntos número 6,7 de nuestras políticas:",
                     style: pw.TextStyle(
                         fontSize: _fontSize1, color: PdfColors.black)),
               ),
@@ -169,9 +169,9 @@ class CreateFilePdf {
 //VENDEDOR Y CLIENTE
     var email = Email(
         to: destinatario,
-        cc: copias,
-        subject: "Solicitud de devolución",
-        body: "Generacion de solicitud de solicitud",
+        cc: "desarrollodark@gmail.com",
+        subject: "Solicitud de devolución #${cadena[0].numSdv}",
+        body: "Generacion de solicitud de devolución",
         attachment: ["${UtilView.firmaDocumento()}.pdf", base64.encode(bytes)]);
     api.sendEmailReport(email);
     //FileSaveHelper.saveDocument(name: 'LecturaCP.pdf', pdf: doc);
@@ -340,7 +340,7 @@ class CreateFilePdf {
         element.obsSdv == "" ? "" : element.obsSdv.split("::")[1],
         element.numMov,
         element.clsMdm == "D" ? "Devolución" : "Garantía",
-        element.stsSdv == "P" ? "En revision" : "Procesado"
+        element.stsSdv == "P" ? "Notificación" : "Procesado"
       ]);
     }
   }

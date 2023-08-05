@@ -13,7 +13,7 @@ class MenuLayout extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [SideBar(), Expanded(child: child), Footer()],
+          children: [const SideBar(), Expanded(child: child), const Footer()],
         ),
       ),
     );

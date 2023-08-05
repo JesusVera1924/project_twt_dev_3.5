@@ -28,7 +28,7 @@ class AlmacenView extends StatefulWidget {
   const AlmacenView({Key? key}) : super(key: key);
 
   @override
-  _AlmacenViewState createState() => _AlmacenViewState();
+  State<AlmacenView> createState() => _AlmacenViewState();
 }
 
 class _AlmacenViewState extends State<AlmacenView> {

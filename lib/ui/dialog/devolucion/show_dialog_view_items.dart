@@ -35,8 +35,8 @@ Future<String> showDialogViewItems(
                       filterIconHoverColor: Colors.white),
                   child: SfDataGrid(
                       columnWidthMode: ColumnWidthMode.none,
-                      headerRowHeight: 40,
-                      rowHeight: 40,
+                      headerRowHeight: 37,
+                      rowHeight: 37,
                       source: Ig0063DTS(context, listDetail),
                       columns: _buildDataGridForSize(context))),
             ),

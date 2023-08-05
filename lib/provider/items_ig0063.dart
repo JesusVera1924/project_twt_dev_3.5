@@ -103,8 +103,8 @@ class ItemsIg0063 extends ChangeNotifier {
   }
 
   Future<List<Kardex>> getListKardex(
-      String nummov, String codpro, String documento) async {
-    final resp = await returnApi.getKardex66(nummov, codpro, documento);
+      String nummov, String codpro, String documento, String tipo) async {
+    final resp = await returnApi.getKardex66(nummov, codpro, documento, tipo);
     return resp;
   }
 
@@ -166,6 +166,7 @@ class ItemsIg0063 extends ChangeNotifier {
     await returnApi.postKardex(Kardex(
         codEmp: "01",
         codPto: "01",
+        clsSdv: e.clsSdv,
         codMov: "SD",
         numMov: e.numSdv,
         fecMov: DateTime.now(),

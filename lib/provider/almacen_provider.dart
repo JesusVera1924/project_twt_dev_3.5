@@ -7,6 +7,8 @@ import 'package:devolucion_modulo/models/karmov.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 import 'package:devolucion_modulo/models/motivo.dart';
 import 'package:devolucion_modulo/models/serie.dart';
+import 'package:devolucion_modulo/models/usuario.dart';
+import 'package:devolucion_modulo/services/local_storage.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,9 @@ class AlmacenProvider extends ChangeNotifier {
 
   get getNombre => this.pdfNomb;
 
+  final tokenUser =
+      Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
+
   void inizializacion() async {
     listMotivos = await _returnApi.querylistMotivos("10");
     listSeries = await _returnApi.querylistSeries();
@@ -99,7 +104,7 @@ class AlmacenProvider extends ChangeNotifier {
     if (x.isNotEmpty) {
       for (var element in x) {
         var detalle = element.getCells()[4].value;
-        detalle.bloqueo = false;
+        detalle.bloqueo = true;
         detalle.controller.text = '${detalle.item.canMov}';
         detalle.cantidad = '${detalle.item.canMov}';
         updateListTemp(detalle);
@@ -109,7 +114,7 @@ class AlmacenProvider extends ChangeNotifier {
     if (y.isNotEmpty) {
       for (var element in y) {
         var detalle = element.getCells()[4].value;
-        detalle.bloqueo = true;
+        detalle.bloqueo = false;
         detalle.estado = Colors.blueAccent;
         detalle.cantidad = "0";
         detalle.codMotivo = "00";
@@ -279,7 +284,7 @@ class AlmacenProvider extends ChangeNotifier {
             nomDg2: element.obsSdv.split("::")[1],
             nomDg3: element.obsSdv.split("::")[2],
             codPro: element.codPro,
-            nomPro: "",
+            nomPro: element.obsSdv.split("::")[0],
             codAl1: "",
             codAl2: "",
             codAl3: "",
@@ -296,11 +301,11 @@ class AlmacenProvider extends ChangeNotifier {
             adaMov: "",
             cdaMov: 0,
             sdaMov: "",
-            odaMov: "",
+            odaMov: "${tokenUser.ctaUsr}-${element.codVen}",
             bodMov: "01",
             auxilia: element.ucrSdv,
             secMov: "${element.secMov}",
-            uduMov: "*",
+            uduMov: "C",
             fytMov: DateTime.now().toIso8601String()));
       }
     } catch (e) {

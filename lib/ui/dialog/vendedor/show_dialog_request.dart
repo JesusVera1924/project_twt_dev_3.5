@@ -3,6 +3,7 @@
 import 'package:devolucion_modulo/datatables/request_datasource_v.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 import 'package:devolucion_modulo/ui/dialog/devolucion/custom_dev_dialog_ven.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog6.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,6 @@ import 'package:devolucion_modulo/provider/vendedor_provider.dart';
 import 'package:devolucion_modulo/models/ig0063.dart';
 import 'package:devolucion_modulo/ui/buttons/custom_form_button.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
-import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
 import 'package:devolucion_modulo/ui/dialog/show_dialog_transport.dart';
 import 'package:devolucion_modulo/ui/dialog/devolucion/show_dialog_view_items.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
@@ -174,14 +174,14 @@ Future<String> showDialogRequestV(
                                 'ítems a devolver (vista)', provider.listaTemp);
 
                             if (response == "1") {
-                              final value = await customDialog2(
+                              final value = await customDialog6(
                                   context,
                                   'Informacion',
                                   '¿Deseas ingresar datos el envio?',
                                   Icons.contact_support_outlined,
                                   Colors.blue);
 
-                              if (value) {
+                              if (value == "1") {
                                 final op =
                                     await showDialogTransport(context, "V");
                                 if (op == "1") {
@@ -205,10 +205,7 @@ Future<String> showDialogRequestV(
                                 } else {
                                   controllerWhile = true;
                                 }
-                              } else {
-                                //envio de enformacion
-                                await provider.convertKarmov(ticket);
-
+                              } else if (value == "2") {
                                 ticket = await returnApi
                                     .postListIg0063(provider.listTemp);
 
@@ -228,6 +225,8 @@ Future<String> showDialogRequestV(
                                 //devuelta al dialogo de pregunta
                                 controllerWhile = true;
                               } */
+                              } else {
+                                controllerWhile = true;
                               }
                             } else {
                               controllerWhile = false;

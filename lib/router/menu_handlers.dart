@@ -26,7 +26,7 @@ class MenuHandlers {
       if (authProvider.authStatus == AuthStatus.authenticated) {
         return MenuView();
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -42,7 +42,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -58,7 +58,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -93,7 +93,7 @@ class MenuHandlers {
           return MenuReturnView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -110,7 +110,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -127,7 +127,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -143,7 +143,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -159,7 +159,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -176,7 +176,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -193,7 +193,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );
@@ -209,7 +209,7 @@ class MenuHandlers {
           return const NoAccesPageView();
         }
       } else {
-        return LoginView();
+        return const LoginView();
       }
     },
   );

@@ -26,33 +26,31 @@ class _TraicingViewState extends State<TraicingView> {
   Widget build(BuildContext context) {
     final items = Provider.of<ItemsProvider>(context).itemsCliente;
 
-    if (items.length == 0) {
-      return Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            Text(
-              'No tiene ninguna solicitud realizada',
-              style: CustomLabels.h6,
-            )
-          ],
-        ),
+    if (items.isEmpty) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const CircularProgressIndicator(),
+          Text(
+            'No tiene ninguna solicitud realizada',
+            style: CustomLabels.h6,
+          )
+        ],
       );
     }
 
     return Container(
-      color: Color(0xCC232d37),
+      color: const Color(0xCC232d37),
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: PaginatedDataTable(
           columns: [
             DataColumn(
                 label: Text(
                   'Solicitud'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -61,7 +59,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'F.emision'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -70,7 +68,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'PV'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -79,7 +77,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Tp'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -88,7 +86,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Documento'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -97,7 +95,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Vendedor'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -106,7 +104,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Nombre vendedor'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false),
@@ -114,7 +112,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Items'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: true,
@@ -123,7 +121,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'Estado'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -132,7 +130,7 @@ class _TraicingViewState extends State<TraicingView> {
                 label: Text(
                   'ver'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -151,7 +149,7 @@ class _TraicingViewState extends State<TraicingView> {
                 onPressed: () =>
                     NavigationService.replaceTo(Flurorouter.menuRoute),
                 msj: 'Regresar',
-                color: Color(0xFFEE376E),
+                color: const Color(0xFFEE376E),
                 icon: Icons.exit_to_app_outlined)
           ],
         ),

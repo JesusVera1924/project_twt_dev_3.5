@@ -15,14 +15,14 @@ class AuthLayout extends StatelessWidget {
         body: Scrollbar(
       //isAlwaysShown: true,
       child: ListView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         children: [
           (size.width > 1000)
               ? _DesktopBody(child: child) //desktop
               : _MobileBody(child: child), //Mobile
 
           //linkBar
-          LinkBar()
+          const LinkBar()
         ],
       ),
     ));
@@ -41,16 +41,11 @@ class _MobileBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(height: 20),
+          const CustomTitle(),
           SizedBox(
-            height: 20,
-          ),
-          CustomTitle(),
-          Container(
-            width: double.infinity,
-            height: 410,
-            child: child,
-          ),
-          Container(
+              height: MediaQuery.of(context).size.height - 300, child: child),
+          const SizedBox(
             width: double.infinity,
             height: 400,
             child: BackgroundLogo(),
@@ -77,17 +72,15 @@ class _DesktopBody extends StatelessWidget {
       child: Row(
         children: [
           //background logo empresa
-          Expanded(child: BackgroundLogo()),
+          const Expanded(child: BackgroundLogo()),
           Container(
             width: 600,
             height: double.infinity,
             color: Colors.black,
             child: Column(
               children: [
-                CustomTitle(),
-                SizedBox(
-                  height: 40,
-                ),
+                const CustomTitle(),
+                const SizedBox(height: 40),
                 Expanded(child: child)
               ],
             ),

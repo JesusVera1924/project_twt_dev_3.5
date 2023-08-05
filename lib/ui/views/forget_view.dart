@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
@@ -14,6 +16,8 @@ import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:provider/provider.dart';
 
 class ForgetView extends StatefulWidget {
+  const ForgetView({super.key});
+
   @override
   _ForgetViewState createState() => _ForgetViewState();
 }
@@ -28,11 +32,11 @@ class _ForgetViewState extends State<ForgetView> {
             Provider.of<ForgetProvider>(context, listen: false);
         final api = ReturnApi();
         return Container(
-          margin: EdgeInsets.only(top: 130),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.only(top: 130),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
             child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 370),
+                constraints: const BoxConstraints(maxWidth: 370),
                 child: ListView(
                   children: [
                     Form(
@@ -52,40 +56,42 @@ class _ForgetViewState extends State<ForgetView> {
                                 }
                               },
                               validator: (value) {
-                                if (value!.length < 10)
+                                if (value!.length < 10) {
                                   return 'identificación incorrecta';
+                                }
 
                                 return null;
                               },
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su Identificación',
                                   label: 'Identificación',
                                   icon: Icons.person),
                             ),
 
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             TextFormField(
                               controller: forgetFormProvider.email,
                               enabled: false,
                               validator: (value) {
-                                if (!EmailValidator.validate(value ?? ''))
+                                if (!EmailValidator.validate(value ?? '')) {
                                   return 'Email no válido';
+                                }
 
                                 return null;
                               },
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su correo',
                                   label: 'correo',
                                   icon: Icons.email_outlined),
                             ),
 
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                                 'Se le enviara un correo electronico con un codigo de acceso.\nSe suguiere que verifique en bandeja de correo no deseado o spam.\nSi su cuenta de correo no es la correcta comuniquese a nuestras oficinas.',
                                 style: CustomLabels.h7),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             CustomOutlinedButton(
                               onPressed: () async {
                                 final validForm =
@@ -128,7 +134,7 @@ class _ForgetViewState extends State<ForgetView> {
                               text: 'Resetear Contraseña',
                             ),
 
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             LinkText(
                               text: 'Ir al login',
                               onTap: () {

@@ -16,35 +16,39 @@ class AdminHandlers {
       Provider.of<SideMenuProvider>(context, listen: false)
           .setCurrentPageUrl(Flurorouter.loginRoute);
 
-      if (authProvider.authStatus == AuthStatus.notAuthenticated)
-        return LoginView();
-      else
+      if (authProvider.authStatus == AuthStatus.notAuthenticated) {
+        return const LoginView();
+      } else {
         return MenuView();
+      }
     },
   );
 
   static Handler register = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.authStatus == AuthStatus.notAuthenticated)
-      return RegisterView();
-    else
-      return LoginView();
+    if (authProvider.authStatus == AuthStatus.notAuthenticated) {
+      return const RegisterView();
+    } else {
+      return const LoginView();
+    }
   });
   static Handler forget = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.authStatus == AuthStatus.notAuthenticated)
-      return ForgetView();
-    else
-      return LoginView();
+    if (authProvider.authStatus == AuthStatus.notAuthenticated) {
+      return const ForgetView();
+    } else {
+      return const LoginView();
+    }
   });
   static Handler reset = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.authStatus == AuthStatus.notAuthenticated)
+    if (authProvider.authStatus == AuthStatus.notAuthenticated) {
       return ResetPassView();
-    else
-      return LoginView();
+    } else {
+      return const LoginView();
+    }
   });
 }

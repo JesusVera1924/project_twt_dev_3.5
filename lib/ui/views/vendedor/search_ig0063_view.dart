@@ -30,9 +30,9 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
   Widget build(BuildContext context) {
     final providerIg0063 = Provider.of<ItemsIg0063>(context);
     return Container(
-      color: Color(0xCC232d37),
+      color: const Color(0xCC232d37),
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: PaginatedDataTable(
           columnSpacing: 40,
           columns: [
@@ -40,7 +40,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Solicitud'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -49,7 +49,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'F.emision'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -58,7 +58,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'PV'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -67,7 +67,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Tp'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -76,7 +76,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Documento'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -85,7 +85,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Cliente'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -95,7 +95,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                   child: Text(
                     'Vendedor'.toUpperCase(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -105,7 +105,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Items'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: true,
@@ -114,7 +114,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'transporte'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false),
@@ -122,7 +122,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'Detalle'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,
@@ -131,7 +131,7 @@ class _SearchIg0063ViewState extends State<SearchIg0063View> {
                 label: Text(
                   'estado'.toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 numeric: false,

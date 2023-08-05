@@ -10,6 +10,8 @@ import 'package:devolucion_modulo/ui/buttons/custom_outlined_button.dart';
 import 'package:devolucion_modulo/inputs/custom_inputs.dart';
 
 class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -66,11 +68,12 @@ class LoginView extends StatelessWidget {
           } */
 
           return Container(
-            margin: EdgeInsets.only(top: 100),
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            height: 600,
             child: Center(
               child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 370),
+                constraints: const BoxConstraints(maxWidth: 370),
                 child: Form(
                     key: loginFormProvider.formkey,
                     child: Column(
@@ -89,15 +92,13 @@ class LoginView extends StatelessWidget {
                           onChanged: (value) {
                             loginFormProvider.usuario = value;
                           },
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           decoration: CustomInputs.loginInputDecoration(
                               hint: 'Ingrese su usuario',
                               label: 'Usuario',
                               icon: Icons.person),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                         TextFormField(
                           onChanged: (value) {
                             loginFormProvider.password = value;
@@ -114,7 +115,7 @@ class LoginView extends StatelessWidget {
                             return null;
                           },
                           obscureText: true,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           decoration: CustomInputs.loginInputDecoration(
                               hint: '******',
                               label: 'Password',
@@ -123,15 +124,13 @@ class LoginView extends StatelessWidget {
                             sendLogin();
                           },
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                         CustomOutlinedButton(
                             onPressed: () async {
                               sendLogin();
                             },
                             text: 'Ingresar'),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         LinkText(
                           text: 'Crear Cuenta',
                           onTap: () {
@@ -139,7 +138,7 @@ class LoginView extends StatelessWidget {
                                 context, Flurorouter.registerRoute);
                           },
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         LinkText(
                           text: 'Recuperar Contraseña',
                           onTap: () {

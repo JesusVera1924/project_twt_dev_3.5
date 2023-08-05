@@ -23,7 +23,7 @@ class RequestVendedorGridSource extends DataGridSource {
         DataGridCell<String>(columnName: 'codigo', value: e.item.codPro),
         DataGridCell<String>(
             columnName: 'producto',
-            value: e.item.nomPro + "::" + e.item.mrcPro + "::" + e.item.grpPro),
+            value: "${e.item.nomPro}::${e.item.mrcPro}::${e.item.grpPro}"),
         DataGridCell<String>(
             columnName: 'cantidad', value: e.item.canMov.toString()),
         DataGridCell<Widget>(

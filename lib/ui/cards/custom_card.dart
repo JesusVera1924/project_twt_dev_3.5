@@ -23,7 +23,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => onPressed(),
-      child: Container(
+      child: SizedBox(
         height: 150,
         width: 200,
         child: Card(

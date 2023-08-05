@@ -24,7 +24,7 @@ import 'package:devolucion_modulo/models/transport.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 
 class ReturnApi {
-  //static String baseUrl = "http://192.168.100.4:8084/desarrollosolicitud";
+  //static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
   static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
   //static String baseUrl = "http://181.39.96.138:8081/apisolicitud";
 
@@ -331,7 +331,7 @@ class ReturnApi {
     Invoice? resul;
     var url = Uri.parse(
         "$baseUrl/getfacturaNew?empresa=01&punto=$tp&codigo=$punto&numero=$numero");
-    print(url);
+    /* print(url); */
     try {
       http.Response respuesta = await http.get(url);
 
@@ -885,7 +885,7 @@ class ReturnApi {
     List<Usuario> resul = [];
     var url =
         Uri.parse("$baseUrl/getusers?empresa=01&usuario=$code&password=$pass");
-    print(url.toString());
+    /* print(url.toString()); */
     try {
       http.Response respuesta = await http.get(url);
       if (respuesta.statusCode == 200) {
@@ -1108,13 +1108,13 @@ class ReturnApi {
 
   /* Permisos para la representacion de modulos de la tarjetas del menu*/
   Future<List<Kardex>> getKardex66(
-      String nummov, String codpro, String documento) async {
+      String nummov, String codpro, String documento, String tipo) async {
     List<Kardex> resul = [];
 
     var url = Uri.parse(
-        "$baseUrl/getkardex66?nummov=$nummov&codpro=$codpro&numero=$documento");
+        "$baseUrl/getkardex66?nummov=$nummov&codpro=$codpro&numero=$documento&tipo=$tipo");
 
-    print(url.toString());
+    /* print(url.toString()); */
 
     try {
       http.Response respuesta = await http.get(url);

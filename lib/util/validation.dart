@@ -57,7 +57,7 @@ class Validation {
         if (_digitoValidador == int.parse(_ultimoDigito)) {
           return null;
         } else {
-          return 'La cedula: ' + value + ' es incorrecta';
+          return 'La cedula: $value es incorrecta';
         }
       } else {
         return 'Esta cedula no pertenece a ninguna region';

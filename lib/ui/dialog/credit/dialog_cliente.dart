@@ -11,7 +11,7 @@ Future dialogCliente(
   String city = obj.ciuRef;
   String province = obj.estRef;
   Validation inspectorValue = Validation();
-  GlobalKey<FormState> formkey = new GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   TextEditingController _razon = TextEditingController(text: obj.nomRef);
   TextEditingController _comercio = TextEditingController(text: obj.nmcRef);
@@ -27,12 +27,12 @@ Future dialogCliente(
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
+            title: const Text(
               'Datos del Cliente',
             ),
-            content: Container(
+            content: SizedBox(
               width: 1000,
               child: Form(
                 key: formkey,
@@ -59,7 +59,7 @@ Future dialogCliente(
                                   length: 80,
                                   onEditingComplete: () {},
                                   onChanged: (value) {})),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Nombre Comercial',
@@ -72,7 +72,7 @@ Future dialogCliente(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Direccion comercial',
@@ -113,7 +113,7 @@ Future dialogCliente(
                                       child: Text(
                                         item.nomOcg,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400),
                                       )),
@@ -124,7 +124,7 @@ Future dialogCliente(
                               ),
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: DropdownButtonFormField<String>(
                               value: province,
@@ -142,7 +142,7 @@ Future dialogCliente(
                                       child: Text(
                                         item.nomOcg,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400),
                                       )),
@@ -153,7 +153,7 @@ Future dialogCliente(
                               ),
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Telefono negocio (opcional)',
@@ -166,7 +166,7 @@ Future dialogCliente(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Celular negocio',
@@ -197,8 +197,9 @@ Future dialogCliente(
                                 enable: true,
                                 icon: Icons.email_outlined,
                                 validator: (value) {
-                                  if (!EmailValidator.validate(value ?? ''))
+                                  if (!EmailValidator.validate(value ?? '')) {
                                     return 'Email no válido';
+                                  }
 
                                   return null;
                                 },
@@ -208,7 +209,7 @@ Future dialogCliente(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Otro Correo (opcional)',
@@ -239,8 +240,9 @@ Future dialogCliente(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -259,16 +261,17 @@ Future dialogCliente(
                       Navigator.of(context).pop();
                     }
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Guardar'),
                   )),
               TextButton(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -281,8 +284,8 @@ Future dialogCliente(
                     _correo2.clear();
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Cancelar'),
                   )),
             ],

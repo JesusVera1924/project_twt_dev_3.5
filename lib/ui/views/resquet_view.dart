@@ -79,14 +79,14 @@ class _RequestViewState extends State<RequestView> {
           final invoice = await returnProvider.getFillInvoice(
               valTipo, _selectCombo, returnProvider.numMov.text);
 
-          listDetailInvoice.forEach((element) {
+          for (var element in listDetailInvoice) {
             Detail detail = Detail(
               item: element,
               controller: TextEditingController(),
             );
 
             listDetailInvoiceUser.add(detail);
-          });
+          }
 
           returnProvider.numMov.text = "";
           Navigator.of(context).pop();

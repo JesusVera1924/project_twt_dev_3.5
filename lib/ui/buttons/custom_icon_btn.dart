@@ -22,7 +22,7 @@ class CustomIconBtn extends StatelessWidget {
       message: msj,
       child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(StadiumBorder()),
+            shape: MaterialStateProperty.all(const StadiumBorder()),
             backgroundColor: MaterialStateProperty.all(color.withOpacity(0.5)),
             overlayColor: MaterialStateProperty.all(color.withOpacity(0.9)),
           ),

@@ -26,7 +26,7 @@ class _LinkTextState extends State<LinkText> {
         onEnter: (event) => setState(() => isHover = true),
         onExit: (event) => setState(() => isHover = false),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Text(
             widget.text,
             style: TextStyle(

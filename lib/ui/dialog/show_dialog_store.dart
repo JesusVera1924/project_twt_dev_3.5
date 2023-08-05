@@ -294,6 +294,7 @@ void registroKardex(
   returnapi.postKardex(Kardex(
       codEmp: "01",
       codPto: "01",
+      clsSdv: e.clsSdv,
       codMov: e.codMov,
       numMov: e.numSdv,
       fecMov: DateTime.now(),

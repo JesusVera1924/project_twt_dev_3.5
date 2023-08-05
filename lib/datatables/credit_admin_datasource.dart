@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/mg0031.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
@@ -33,8 +35,9 @@ class CreditAdminDTS extends DataTableSource {
     return DataRow.byIndex(
         color: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered))
+          if (states.contains(MaterialState.hovered)) {
             return Colors.black26.withOpacity(0.10);
+          }
           if (item.stsSdc == "A") return Colors.green.withOpacity(0.10);
           if (item.stsSdc == "R") return Colors.red.withOpacity(0.10);
           return Colors.white12;
@@ -47,8 +50,9 @@ class CreditAdminDTS extends DataTableSource {
           DataCell(Text(item.nomRef)),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogCliente(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Datos del Cliente",
@@ -58,8 +62,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogNegocio(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Datos del Negocio",
@@ -69,8 +74,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogFamiliar(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Referencia de contactos",
@@ -80,8 +86,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogBanco(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Datos de Bancos",
@@ -91,8 +98,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () async {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 await dialogComercial(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Datos Comerciales",
@@ -102,8 +110,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogPatrimonio(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Patrimonio",
@@ -113,8 +122,9 @@ class CreditAdminDTS extends DataTableSource {
           )),
           DataCell(InkWell(
             onTap: () {
-              if (item.stsSdc != "R" && permiss.contains("M"))
+              if (item.stsSdc != "R" && permiss.contains("M")) {
                 dialogFamilias(context, item, myprovider);
+              }
             },
             child: Tooltip(
                 message: "Contactos Familiares",
@@ -130,8 +140,9 @@ class CreditAdminDTS extends DataTableSource {
                 final opt = await dialogApproval(
                     context, myprovider, item, myprovider.listFormPago);
 
-                if (opt == "1")
+                if (opt == "1") {
                   NotificationsService.showSnackbar('Solicitud / Aprobada');
+                }
               }
             },
             child: Tooltip(
@@ -146,7 +157,7 @@ class CreditAdminDTS extends DataTableSource {
                   item.stsSdc != "A" &&
                   permiss.contains("X")) {
                 final dialog = AlertDialog(
-                  backgroundColor: Color(0xff092042),
+                  backgroundColor: const Color(0xff092042),
                   title: Text(
                     '¿Está seguro?',
                     style: CustomLabels.h10,

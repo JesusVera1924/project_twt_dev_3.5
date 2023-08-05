@@ -8,10 +8,10 @@ class BackgroundLogo extends StatelessWidget {
     return Container(
       decoration: builBoxDecoration(),
       child: Container(
-        constraints: BoxConstraints(maxWidth: 400),
-        child: Center(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.symmetric(horizontal: 30),
             child: Image(
               image: AssetImage('assets/logoVertical.png'),
               width: 400,
@@ -22,7 +22,7 @@ class BackgroundLogo extends StatelessWidget {
     );
   }
 
-  BoxDecoration builBoxDecoration() => BoxDecoration(
-      image:
-          DecorationImage(image: AssetImage('assets/cielo.jpg'), fit: BoxFit.cover));
+  BoxDecoration builBoxDecoration() => const BoxDecoration(
+      image: DecorationImage(
+          image: AssetImage('assets/cielo.jpg'), fit: BoxFit.cover));
 }

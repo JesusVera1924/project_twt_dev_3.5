@@ -221,10 +221,10 @@ class UtilView {
   static Widget checkStatu(String statu) {
     switch (statu) {
       case "P":
-        return Row(
+        return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.access_time, color: Colors.black),
             Text("Pendiente",
                 style: TextStyle(color: Colors.black, fontSize: 12))
@@ -252,10 +252,10 @@ class UtilView {
         );
 
       case "C":
-        return Row(
+        return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.check_circle_outline, color: Colors.green),
             Text("Terminado",
                 style: TextStyle(color: Colors.green, fontSize: 12))
@@ -274,20 +274,20 @@ class UtilView {
         );
 
       case "R":
-        return Row(
+        return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.cancel_outlined, color: Colors.red),
             Text("Rechazado", style: TextStyle(color: Colors.red, fontSize: 12))
           ],
         );
 
       case "X":
-        return Row(
+        return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.error_rounded, color: Colors.red),
             Text("Anulado", style: TextStyle(color: Colors.red, fontSize: 12))
           ],

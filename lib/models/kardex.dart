@@ -4,6 +4,7 @@ class Kardex {
   Kardex({
     required this.codEmp,
     required this.codPto,
+    required this.clsSdv,
     required this.codMov,
     required this.numMov,
     required this.fecMov,
@@ -30,6 +31,7 @@ class Kardex {
 
   String codEmp;
   String codPto;
+  String clsSdv;
   String codMov;
   String numMov;
   DateTime fecMov;
@@ -60,6 +62,7 @@ class Kardex {
   factory Kardex.fromMap(Map<String, dynamic> json) => Kardex(
         codEmp: json["cod_emp"],
         codPto: json["cod_pto"],
+        clsSdv: json["cls_sdv"],
         codMov: json["cod_mov"],
         numMov: json["num_mov"],
         fecMov: DateTime.parse(json["fec_mov"]),
@@ -87,6 +90,7 @@ class Kardex {
   Map<String, dynamic> toMap() => {
         "cod_emp": codEmp,
         "cod_pto": codPto,
+        "cls_sdv": clsSdv,
         "cod_mov": codMov,
         "num_mov": numMov,
         "fec_mov": fecMov.toIso8601String(),

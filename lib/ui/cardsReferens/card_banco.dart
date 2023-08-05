@@ -11,89 +11,89 @@ class CardBanco extends StatelessWidget {
   TextEditingController tipo = TextEditingController();
   Validation rgx = Validation();
 
+  CardBanco({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Row(
-          children: [
-            Expanded(
-              child: InputForm(
-                  hint: 'Banco',
-                  enable: true,
-                  icon: Icons.account_balance_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: banco,
-                  regx: rgx.letras,
-                  length: 40,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Agencia',
-                  enable: true,
-                  icon: Icons.holiday_village_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: agencia,
-                  regx: rgx.letras,
-                  length: 40,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'N°.Cuenta',
-                  enable: true,
-                  icon: Icons.fact_check_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: cta,
-                  regx: rgx.numeros,
-                  length: 15,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Telefono',
-                  enable: true,
-                  icon: Icons.phone_android_outlined,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: telf,
-                  regx: rgx.numeros,
-                  length: 10,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: InputForm(
-                  hint: 'Tipo de Cuenta',
-                  enable: true,
-                  icon: Icons.bookmark_rounded,
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: tipo,
-                  regx: rgx.letras,
-                  length: 7,
-                  onEditingComplete: () {},
-                  onChanged: (value) {}),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(
+        children: [
+          Expanded(
+            child: InputForm(
+                hint: 'Banco',
+                enable: true,
+                icon: Icons.account_balance_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: banco,
+                regx: rgx.letras,
+                length: 40,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Agencia',
+                enable: true,
+                icon: Icons.holiday_village_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: agencia,
+                regx: rgx.letras,
+                length: 40,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'N°.Cuenta',
+                enable: true,
+                icon: Icons.fact_check_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: cta,
+                regx: rgx.numeros,
+                length: 15,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Telefono',
+                enable: true,
+                icon: Icons.phone_android_outlined,
+                validator: (value) {
+                  return null;
+                },
+                controller: telf,
+                regx: rgx.numeros,
+                length: 10,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: InputForm(
+                hint: 'Tipo de Cuenta',
+                enable: true,
+                icon: Icons.bookmark_rounded,
+                validator: (value) {
+                  return null;
+                },
+                controller: tipo,
+                regx: rgx.letras,
+                length: 7,
+                onEditingComplete: () {},
+                onChanged: (value) {}),
+          ),
+        ],
       ),
     );
   }

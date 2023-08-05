@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/detailProductResponse.dart';
 import 'package:devolucion_modulo/provider/vendedor_provider.dart';
@@ -87,16 +88,21 @@ class _RequestViewVState extends State<RequestViewV> {
                 context, vendedorProvider, UtilView.usuario);
 
             if (resp != "0") {
-              await customDialog1(
+              final opt = await customDialog2(
                   context,
-                  'Informacion',
-                  'Registrado con exito\nNumero de\nseguimiento:$resp! ',
-                  Icons.check_box,
-                  Colors.blueGrey);
-              vendedorProvider.numMov.text = "";
-              vendedorProvider.codCli.text = "";
-              vendedorProvider.nombCli.text = "";
-              myFocusNodeV.requestFocus();
+                  'Enhorabuena',
+                  'Solicitud realizada con exito\nNumero de\nseguimiento:$resp!\nDeseas seguir ingresando?',
+                  Icons.check_circle_outline_outlined,
+                  Colors.green);
+
+              if (opt) {
+                vendedorProvider.numMov.text = "";
+              } else {
+                vendedorProvider.numMov.text = "";
+                vendedorProvider.codCli.text = "";
+                vendedorProvider.nombCli.text = "";
+                myFocusNodeV.requestFocus();
+              }
             }
           } else {
             await customDialog1(context, 'Informacion',
@@ -175,7 +181,7 @@ class _RequestViewVState extends State<RequestViewV> {
                     enable: true,
                     controller: vendedorProvider.codCli,
                     regx: r'^(?:\+|-)?\d+$',
-                    length: 10,
+                    length: 4,
                     onEditingComplete: () async {
                       if (vendedorProvider.codCli.text != "" &&
                           vendedorProvider.codVen.text != "" &&
@@ -199,7 +205,21 @@ class _RequestViewVState extends State<RequestViewV> {
                         Navigator.of(context).pop();
                       }
                     },
-                    onChanged: (value) {}),
+                    onChanged: (String value) async {
+                      if (value.length == 4) {
+                        UtilView.buildShowDialog(context);
+
+                        final opt = await vendedorProvider.getCliente(
+                            vendedorProvider.codCli.text,
+                            vendedorProvider.codVen.text);
+
+                        if (!opt) {
+                          myFocusNodeF.requestFocus();
+                        }
+
+                        Navigator.of(context).pop();
+                      }
+                    }),
               ),
               const CustomLabelsForm(text: 'Serie: '),
               Container(
@@ -273,7 +293,12 @@ class _RequestViewVState extends State<RequestViewV> {
                     regx: r'^(?:\+|-)?\d+$',
                     length: 20,
                     onEditingComplete: () async {
-                      _methodPressed();
+                      if (vendedorProvider.numMov.text != "") {
+                        _methodPressed();
+                      } else {
+                        customDialog1(context, "Advertencia", "Campo vacio",
+                            Icons.warning_amber_rounded, Colors.amber);
+                      }
                     },
                     onChanged: (value) {}),
               ),
