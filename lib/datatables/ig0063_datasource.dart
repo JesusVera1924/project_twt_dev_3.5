@@ -1,141 +1,212 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
-import 'package:devolucion_modulo/provider/items_ig0063.dart';
-import 'package:devolucion_modulo/ui/cards/other_details2.dart';
-import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
+import 'package:devolucion_modulo/util/responsive.dart';
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class Ig0063DTS extends DataTableSource {
-  final List<Ig0063Response> listCliente;
+class Ig0063DTS extends DataGridSource {
   final BuildContext context;
-  final ItemsIg0063 provider;
+  List<Ig0063Response> list;
+  List<DataGridRow> _dataGridRows = [];
 
-  Ig0063DTS(this.listCliente, this.context, this.provider);
+  Ig0063DTS(this.context, this.list) {
+    buildDataGridRows();
+  }
 
-  @override
-  DataRow getRow(int index) {
-    final item = this.listCliente[index];
-
-    return DataRow.byIndex(
-        color: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          if (item.stsSdv == "E") return Colors.green.withOpacity(0.08);
-          if (states.contains(MaterialState.hovered)) {
-            return Colors.black26.withOpacity(0.08);
-          }
-
-          return Colors.white12;
-        }),
-        index: index,
-        cells: [
-          DataCell(Text(item.numSdv)),
-          DataCell(Text(item.fecSdv)),
-          DataCell(
-              Align(alignment: Alignment.centerLeft, child: Text(item.clsSdv))),
-          DataCell(Text(item.codPto)),
-          DataCell(Text(item.codMov)),
-          DataCell(Text(item.numMov)),
-          DataCell(Text("${item.codVen}-${item.vendedor}")),
-          DataCell(Text("${item.contar}")),
-          DataCell(InkWell(
-            onTap: () async {
-              _showDetails(context, item);
-            },
-            child: const Tooltip(
-                message: "Datos del transporte",
-                child: Icon(Icons.assignment, color: Colors.blue)),
-          )),
-          DataCell(InkWell(
-            onTap: () async {
-              buildShowDialog(context);
-
-              final listDetail =
-                  await provider.getListItemsDetail(item.numSdv, item.clsSdv);
-
-              if (listDetail.isNotEmpty) {
-                print("Valor a tratar :: ${listDetail.length}");
-              } else {
-                Navigator.of(context).pop();
-              }
-              Navigator.of(context).pop();
-            },
-            child: const Tooltip(
-                message: "Detalle de ítems",
-                child: Icon(Icons.find_in_page_outlined, color: Colors.blue)),
-          )),
-          DataCell(checkStatu(item.stsSdv)),
-        ]);
+  void buildDataGridRows() {
+    _dataGridRows = list.map<DataGridRow>((Ig0063Response e) {
+      return DataGridRow(cells: <DataGridCell>[
+        DataGridCell<String>(columnName: '1-codigo', value: e.codPro),
+        DataGridCell<String>(
+            columnName: '2-producto', value: e.obsSdv.split("::")[0]),
+        DataGridCell<String>(
+            columnName: '3-marca', value: e.obsSdv.split("::")[1]),
+        DataGridCell<String>(
+            columnName: '4-cantidad', value: e.canB91.toString()),
+        DataGridCell<String>(columnName: '5-motivo', value: e.obsMdm),
+        DataGridCell<String>(columnName: '6-solicitud', value: e.clsMdm),
+        DataGridCell<String>(columnName: '7-estado', value: e.stsSdv),
+      ]);
+    }).toList();
   }
 
   @override
-  bool get isRowCountApproximate => false;
+  List<DataGridRow> get rows => _dataGridRows;
 
   @override
-  int get rowCount => listCliente.length;
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    Color? selectColor = row.getCells()[5].value.toString() == "D"
+        ? Colors.green[800]
+        : Colors.purple;
 
-  @override
-  int get selectedRowCount => 0;
-}
-
-Widget checkStatu(String statu) {
-  switch (statu) {
-    case "P":
-      return const Tooltip(
-        message: "Pendiente",
-        child: Icon(
-          Icons.access_time,
-          color: Colors.blueAccent,
-        ),
-      );
-    case "E":
-      return Tooltip(
-        message: "En proceso",
-        child: Icon(
-          Icons.handyman_rounded,
-          color: Colors.amberAccent[700],
-        ),
-      );
-    case "C":
-      return const Tooltip(
-        message: "Terminado",
-        child: Icon(
-          Icons.check_circle_outline,
-          color: Colors.green,
-        ),
-      );
-    case "R":
-      return const Tooltip(
-        message: "Rechazado",
-        child: Icon(
-          Icons.cancel_outlined,
-          color: Colors.red,
-        ),
-      );
-    default:
-      return const Icon(
-        Icons.warning_amber_rounded,
-        color: Colors.amberAccent,
-      );
+    return DataGridRowAdapter(
+        cells: Responsive.isDesktop(context)
+            ? [
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    row.getCells()[0].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 3,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Tooltip(
+                    message: row.getCells()[1].value.toString(),
+                    child: Text(
+                      row.getCells()[1].value.toString(),
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: selectColor),
+                      maxLines: 3,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    row.getCells()[2].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    row.getCells()[3].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    row.getCells()[4].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    row.getCells()[5].value.toString() == "D"
+                        ? "DEVOLUCIÓN"
+                        : "GARANTÍA",
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    row.getCells()[6].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+              ]
+            : [
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Tooltip(
+                    message:
+                        "${row.getCells()[1].value}\n${row.getCells()[2].value}",
+                    child: Text(
+                      row.getCells()[0].value.toString(),
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: selectColor),
+                      maxLines: 2,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    row.getCells()[3].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    row.getCells()[4].value.toString(),
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    row.getCells()[5].value.toString() == "D" ? "DEV" : "GAR",
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: selectColor),
+                    maxLines: 2,
+                  ),
+                ),
+              ]);
   }
-}
-
-void _showDetails(BuildContext c, Ig0063Response data) async =>
-    await showDialog<bool>(
-      context: c,
-      builder: (_) => CustomDialog(
-        showPadding: false,
-        child: OtherDetails2(data: data),
-      ),
-    );
-
-buildShowDialog(BuildContext context) {
-  return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      });
 }

@@ -12,7 +12,7 @@ class TraicingView extends StatefulWidget {
   const TraicingView({Key? key}) : super(key: key);
 
   @override
-  _TraicingViewState createState() => _TraicingViewState();
+  State<TraicingView> createState() => _TraicingViewState();
 }
 
 class _TraicingViewState extends State<TraicingView> {

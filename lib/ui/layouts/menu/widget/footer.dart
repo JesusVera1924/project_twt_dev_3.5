@@ -35,13 +35,13 @@ class Footer extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-/*                   InkWell(
-                onTap: () => {},
-                child: const Text('TwT',
-                    style: TextStyle(color: Colors.blue, fontSize: 12)),
-              ),
-              Text(' | ',
-                  style: TextStyle(fontSize: 12, color: Color(0xCC232d37))), */
+                  InkWell(
+                    onTap: () => {},
+                    child: const Text('TwT 1.6.4',
+                        style: TextStyle(color: Colors.blue, fontSize: 12)),
+                  ),
+                  const Text(' | ',
+                      style: TextStyle(fontSize: 12, color: Color(0xCC232d37))),
                   InkWell(
                     onTap: () => NavigationService.replaceTo('/menu'),
                     child: const Text('Inicio',

@@ -45,6 +45,7 @@ dependencies:
   printing: ^5.10.3
   provider: ^6.0.5
   responsive_grid: ^2.2.0
+  searchfield: ^0.8.4
   shared_preferences: ^2.1.0
   syncfusion_flutter_core: ^21.1.41
   syncfusion_flutter_datagrid: ^21.1.41

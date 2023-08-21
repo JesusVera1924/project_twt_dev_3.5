@@ -20,6 +20,32 @@ class CustomInputs {
         labelStyle: const TextStyle(color: Colors.grey));
   }
 
+  static InputDecoration formInputDecoration2({required IconData icon}) {
+    return InputDecoration(
+        filled: true,
+        isDense: true,
+        border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide.none),
+        enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide.none),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Icon(icon, size: 20, color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          // borderSide: BorderSide(color: kTitleTextColor),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(color: Color(0xFFEE376E))),
+        contentPadding: const EdgeInsets.all(5),
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14));
+  }
+
   static InputDecoration searchInputDecoration(
       {required String hint, required IconData icon}) {
     return InputDecoration(

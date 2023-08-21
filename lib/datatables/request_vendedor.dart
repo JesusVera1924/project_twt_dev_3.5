@@ -39,12 +39,8 @@ class RequestVendedorGridSource extends DataGridSource {
                   if (value != "") {
                     if (int.parse(value) > e.item.canMov) {
                       e.controller.text = "${e.item.canMov}";
-                      customDialog1(
-                          context,
-                          'Advertencia',
-                          'Has Superado la cantidad máxima',
-                          Icons.warning_rounded,
-                          Colors.amberAccent);
+                      customDialog1(context, 'Has Superado la cantidad máxima',
+                          Icons.warning_rounded, Colors.amberAccent);
                     } else {
                       e.cantidad = value;
                     }

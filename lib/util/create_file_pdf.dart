@@ -11,11 +11,13 @@ import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
 
 class CreateFilePdf {
   final double _fontSize1 = 6;
-  ReturnApi api = ReturnApi();
+  final api = ReturnApi();
   List<List<String>> bodyTable = [];
 
-  Future<void> pdf4(
-      List<Ig0063> cadena, String nombre, String destinatario) async {
+  Future<void> pdf4(List<Ig0063> cadena, String nombre, String destinatario,
+      String ticket) async {
+    final netImage = await networkImage(
+        'https://res.cloudinary.com/diasdh7zo/image/upload/v1683323355/cojapan_m6oltf.png');
     //VARIABLES
 /*     final netImage = await networkImage(
         'https://ci3.googleusercontent.com/proxy/aMKVP5SvujxE2xUHVOV29wXnlhB5qaoElrRXLrDzRX8UiEcBpi_wig4FYu6SLf4vlyon6y6tUfDmbKmkehr0EiQLiNBeEmU3mNkMsDOe4ke3A0NqxPGARj8Y5nwidC4MN3o2TXb-eVHdDx0Z95w_mbMsxFRpKUGerlI=s0-d-e1-ft');
@@ -71,9 +73,16 @@ class CreateFilePdf {
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               pw.Padding(
-                padding: const pw.EdgeInsets.symmetric(vertical: 5),
+                padding: const pw.EdgeInsets.only(top: 5, bottom: 2),
                 child: pw.Text(
-                    "Se ha notificado a nuestro departamento de devoluciones esta solicitud de devolución o garantía.\n Una vez que recibamos la mercadería iniciaremos el proceso respectivo. Haciendo cita a los puntos número 6,7 de nuestras políticas:",
+                    "Se ha notificado a nuestro departamento de devoluciones esta solicitud de devolución o garantía.",
+                    style: pw.TextStyle(
+                        fontSize: _fontSize1, color: PdfColors.black)),
+              ),
+              pw.Padding(
+                padding: const pw.EdgeInsets.symmetric(vertical: 2),
+                child: pw.Text(
+                    "Una vez que recibamos la mercadería iniciaremos el proceso respectivo. Haciendo cita a los puntos número 6,7 de nuestras políticas:",
                     style: pw.TextStyle(
                         fontSize: _fontSize1, color: PdfColors.black)),
               ),
@@ -135,10 +144,10 @@ class CreateFilePdf {
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: pw.CrossAxisAlignment.center,
                     children: [
+                      pw.Image(netImage, width: 40, height: 40),
                       pw.Text("",
                           style: pw.TextStyle(
                               fontSize: _fontSize1, color: PdfColors.black)),
-                      /* pw.Image(netImage, width: 40, height: 40), */
                       pw.Text("RESPUESTA AUTOMÁTICA PARA CLIENTES",
                           style: pw.TextStyle(
                               fontSize: _fontSize1, color: PdfColors.black)),
@@ -169,8 +178,9 @@ class CreateFilePdf {
 //VENDEDOR Y CLIENTE
     var email = Email(
         to: destinatario,
+        //to: "jesusvera19_24@hotmail.com",
         cc: "desarrollodark@gmail.com",
-        subject: "Solicitud de devolución #${cadena[0].numSdv}",
+        subject: "Solicitud de devolución #$ticket",
         body: "Generacion de solicitud de devolución",
         attachment: ["${UtilView.firmaDocumento()}.pdf", base64.encode(bytes)]);
     api.sendEmailReport(email);
@@ -179,6 +189,7 @@ class CreateFilePdf {
 
   Future<void> pdf5(List<DetailBodega> cadena) async {
     //VARIABLES
+
     final netImage = await networkImage(
         'https://res.cloudinary.com/diasdh7zo/image/upload/v1683323355/cojapan_m6oltf.png');
 

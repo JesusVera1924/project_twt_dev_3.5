@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuView extends StatefulWidget {
+  const MenuView({super.key});
+
   @override
   _MenuViewState createState() => _MenuViewState();
 }

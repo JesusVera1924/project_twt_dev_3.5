@@ -250,7 +250,6 @@ Future<Map<String, String>?> showDialogTransport2(
                     } else {
                       customDialog1(
                           context,
-                          'Advertencia',
                           'Debe de completar todo los campos',
                           Icons.warning,
                           Colors.amberAccent);

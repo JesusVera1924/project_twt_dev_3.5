@@ -2,12 +2,12 @@ import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class Ig0063DTS extends DataGridSource {
+class Ig0063ResponseDTS extends DataGridSource {
   final BuildContext context;
   List<Detail> list;
   List<DataGridRow> _dataGridRows = [];
 
-  Ig0063DTS(this.context, this.list) {
+  Ig0063ResponseDTS(this.context, this.list) {
     buildDataGridRows();
   }
 

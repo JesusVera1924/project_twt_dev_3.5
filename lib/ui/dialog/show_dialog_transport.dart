@@ -294,7 +294,6 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                     } else {
                       customDialog1(
                           context,
-                          'Advertencia',
                           'Debe de completar todo los campos',
                           Icons.warning,
                           Colors.amberAccent);

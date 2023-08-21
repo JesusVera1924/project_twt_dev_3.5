@@ -104,12 +104,8 @@ class RequestDTS extends DataGridSource {
                   if (int.parse(value) > row.getCells()[4].value.item.canMov) {
                     row.getCells()[4].value.controller.text =
                         "${row.getCells()[4].value.item.canMov}";
-                    customDialog1(
-                        context,
-                        'Advertencia',
-                        'Has Superado la cantidad máxima',
-                        Icons.warning_rounded,
-                        Colors.amberAccent);
+                    customDialog1(context, 'Has Superado la cantidad máxima',
+                        Icons.warning_rounded, Colors.amberAccent);
                   } else {
                     row.getCells()[4].value.cantidad = value;
                   }

@@ -37,7 +37,7 @@ Future<String> showDialogViewItems(
                       columnWidthMode: ColumnWidthMode.none,
                       headerRowHeight: 37,
                       rowHeight: 37,
-                      source: Ig0063DTS(context, listDetail),
+                      source: Ig0063ResponseDTS(context, listDetail),
                       columns: _buildDataGridForSize(context))),
             ),
           ),

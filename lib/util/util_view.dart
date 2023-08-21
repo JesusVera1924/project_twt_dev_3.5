@@ -224,6 +224,7 @@ class UtilView {
         return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.access_time, color: Colors.black),
             Text("Pendiente",
@@ -234,6 +235,7 @@ class UtilView {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.access_time, color: Colors.amberAccent[700]),
             Text("Generado",
@@ -244,6 +246,7 @@ class UtilView {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.access_time, color: Colors.amberAccent[700]),
             Text("Generado",
@@ -255,6 +258,7 @@ class UtilView {
         return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.check_circle_outline, color: Colors.green),
             Text("Terminado",
@@ -265,6 +269,7 @@ class UtilView {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.playlist_add_check_circle_rounded,
                 color: Colors.amber[900]),
@@ -277,6 +282,7 @@ class UtilView {
         return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.cancel_outlined, color: Colors.red),
             Text("Rechazado", style: TextStyle(color: Colors.red, fontSize: 12))
@@ -287,6 +293,7 @@ class UtilView {
         return const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.error_rounded, color: Colors.red),
             Text("Anulado", style: TextStyle(color: Colors.red, fontSize: 12))

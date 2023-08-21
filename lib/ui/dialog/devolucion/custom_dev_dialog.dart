@@ -104,7 +104,6 @@ Future<bool> showDialogDevDialog(
                                       if (!resp) {
                                         customDialog1(
                                             context,
-                                            'Error',
                                             'Formato Invalido',
                                             Icons.error,
                                             Colors.red);
@@ -139,7 +138,6 @@ Future<bool> showDialogDevDialog(
                                         } else {
                                           customDialog1(
                                               context,
-                                              'Advertencia',
                                               'Error cargar el pdf en el ítem correspondiente',
                                               Icons.warning_rounded,
                                               Colors.amberAccent);
@@ -240,7 +238,6 @@ Future<bool> showDialogDevDialog(
                                         } else {
                                           customDialog1(
                                               context,
-                                              'Advertencia',
                                               'Seleccione el tipo de razón a devolver',
                                               Icons.warning_rounded,
                                               Colors.amberAccent);

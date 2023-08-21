@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:devolucion_modulo/inputs/custom_inputs.dart';
+import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/detailProductResponse.dart';
@@ -13,6 +15,7 @@ import 'package:devolucion_modulo/ui/dialog/vendedor/show_dialog_request.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels_form.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:devolucion_modulo/util/util_view.dart';
+import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
@@ -20,6 +23,7 @@ import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:devolucion_modulo/ui/inputs/input_form.dart';
 import 'package:devolucion_modulo/util/validation.dart';
+import 'package:searchfield/searchfield.dart';
 
 class RequestViewV extends StatefulWidget {
   const RequestViewV({Key? key}) : super(key: key);
@@ -105,12 +109,12 @@ class _RequestViewVState extends State<RequestViewV> {
               }
             }
           } else {
-            await customDialog1(context, 'Informacion',
-                'No se encontro factura', Icons.error, Colors.redAccent);
+            await customDialog1(context, 'No se encontro factura', Icons.error,
+                Colors.redAccent);
           }
         } else {
-          await customDialog1(context, 'Informacion',
-              'Error para obtener datos', Icons.error, Colors.amberAccent);
+          await customDialog1(context, 'Error para obtener datos', Icons.error,
+              Colors.amberAccent);
         }
         Navigator.of(context).pop();
       } else {
@@ -134,20 +138,67 @@ class _RequestViewVState extends State<RequestViewV> {
                     maxWidth: !Responsive.isMobile(context)
                         ? Responsive.width(size.width, 2)
                         : double.infinity),
-                child: InputForm(
-                    hint: '',
-                    node: myFocusNodeV,
-                    icon: Icons.contacts_outlined,
-                    validator: (value) {
-                      return null;
-                    },
-                    enable: false,
-                    controller: vendedorProvider.codVen,
-                    regx: r'(^[a-zA-Z 0-9]*$)',
-                    mayuscula: true,
-                    length: 10,
-                    onEditingComplete: () async {
-                      /* if (vendedorProvider.codVen.text != "" &&
+                child: vendedorProvider.isBloqueo
+                    ? SizedBox(
+                        height: 44,
+                        child: SearchField(
+                          searchInputDecoration:
+                              CustomInputs.formInputDecoration2(
+                                  icon: Icons.supervised_user_circle_rounded),
+                          inputFormatters: [
+                            UpperCaseTextFormatter(),
+                            LengthLimitingTextInputFormatter(4)
+                          ],
+                          suggestions: vendedorProvider.listVCallCenter
+                              .map(
+                                (i) => SearchFieldListItem<Yk0001>(
+                                  i.omision,
+                                  item: i,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          i.omision,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          controller: vendedorProvider.codVen,
+                          onSuggestionTap: (value) async {
+                            if (value.item != null) {
+                              vendedorProvider.codVen.text =
+                                  value.item!.omision;
+                              await vendedorProvider.callEventCliente(
+                                  value.item!.omision.toString());
+                              myFocusNodeC.requestFocus();
+                            }
+                          },
+                        ),
+                      )
+                    : InputForm(
+                        hint: '',
+                        node: myFocusNodeV,
+                        icon: Icons.contacts_outlined,
+                        validator: (value) {
+                          return null;
+                        },
+                        enable: false,
+                        controller: vendedorProvider.codVen,
+                        regx: r'(^[a-zA-Z 0-9]*$)',
+                        mayuscula: true,
+                        length: 4,
+                        onEditingComplete: () async {
+                          /* if (vendedorProvider.codVen.text != "" &&
                           vendedorProvider.codVen.text.length == 4) {
                         UtilView.buildShowDialog(context);
                         final opt = await vendedorProvider.getVendedor(
@@ -160,8 +211,8 @@ class _RequestViewVState extends State<RequestViewV> {
                           myFocusNodeC.requestFocus();
                         }
                       } */
-                    },
-                    onChanged: (value) {}),
+                        },
+                        onChanged: (value) {}),
               ),
               const CustomLabelsForm(text: 'Cliente: '),
               Container(
@@ -296,7 +347,7 @@ class _RequestViewVState extends State<RequestViewV> {
                       if (vendedorProvider.numMov.text != "") {
                         _methodPressed();
                       } else {
-                        customDialog1(context, "Advertencia", "Campo vacio",
+                        customDialog1(context, "Campo vacio",
                             Icons.warning_amber_rounded, Colors.amber);
                       }
                     },

@@ -104,11 +104,11 @@ Future<bool> showDialogDevDialogVen(
                                       if (!resp) {
                                         customDialog1(
                                             context,
-                                            'Error',
                                             'Formato Invalido',
                                             Icons.error,
                                             Colors.red);
                                       }
+                                      setState(() {});
                                     },
                                     color: Colors.blueGrey,
                                     text: 'Subir Documento '),
@@ -139,7 +139,6 @@ Future<bool> showDialogDevDialogVen(
                                         } else {
                                           customDialog1(
                                               context,
-                                              'Advertencia',
                                               'Error cargar el pdf en el ítem correspondiente',
                                               Icons.warning_rounded,
                                               Colors.amberAccent);
@@ -238,7 +237,6 @@ Future<bool> showDialogDevDialogVen(
                                           } else {
                                             customDialog1(
                                                 context,
-                                                'Advertencia',
                                                 'Seleccione el tipo de razón a devolver',
                                                 Icons.warning_rounded,
                                                 Colors.amberAccent);
@@ -270,7 +268,6 @@ Future<bool> showDialogDevDialogVen(
                                           } else {
                                             customDialog1(
                                                 context,
-                                                'Advertencia',
                                                 'Seleccione el tipo de razón a devolver',
                                                 Icons.warning_rounded,
                                                 Colors.amberAccent);

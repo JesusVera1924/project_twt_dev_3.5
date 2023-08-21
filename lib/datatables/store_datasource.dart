@@ -6,6 +6,7 @@ import 'package:devolucion_modulo/provider/items_ig0063.dart';
 import 'package:devolucion_modulo/ui/dialog/devolucion/show_dialog_alterno.dart';
 import 'package:devolucion_modulo/ui/dialog/kardex/show_dialog_kardex.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog7.dart';
 import 'package:devolucion_modulo/ui/inputs/input_bod.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:devolucion_modulo/util/util_view.dart';
@@ -104,7 +105,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -229,7 +229,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -313,7 +312,6 @@ class StoreDataSource extends DataGridSource {
                 })
           ],
         ),
-
         Row(
           children: [
             SizedBox(
@@ -349,7 +347,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -475,7 +472,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -575,7 +571,10 @@ class StoreDataSource extends DataGridSource {
         //------------------------------------
         InkWell(
             onTap: () async => proceso2(row),
-            child: const Icon(Icons.segment_sharp))
+            child: const Icon(Icons.segment_sharp)),
+        InkWell(
+            onTap: () async => proceso3(row.getCells()[5].value),
+            child: const Icon(Icons.info))
       ];
     } else {
       list = [
@@ -641,7 +640,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -765,7 +763,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -884,7 +881,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -1009,7 +1005,6 @@ class StoreDataSource extends DataGridSource {
                       } else {
                         customDialog1(
                             context,
-                            'Advertencia!!',
                             'Supero la cantida maxima de ítems recibido',
                             Icons.warning_amber_outlined,
                             Colors.amberAccent);
@@ -1120,7 +1115,10 @@ class StoreDataSource extends DataGridSource {
             child: Text("${row.getCells()[3].value.item.canB92}")),
         InkWell(
             onTap: () async => proceso2(row),
-            child: const Icon(Icons.segment_sharp))
+            child: const Icon(Icons.segment_sharp)),
+        InkWell(
+            onTap: () async => proceso3(row.getCells()[5].value),
+            child: const Icon(Icons.info))
       ];
     }
 
@@ -1133,5 +1131,9 @@ class StoreDataSource extends DataGridSource {
         await provider.getListKardex(x.numSdv, x.codPro, x.numMov, x.clsSdv);
     await showDialogKardex(
         context, 'kardex :: ${x.numSdv} :: ${x.codPro} ', lista);
+  }
+
+  void proceso3(Ig0063Response objeto) async {
+    customDialog7(context, "Información", objeto, provider);
   }
 }

@@ -6,6 +6,7 @@ import 'package:devolucion_modulo/models/alterno.dart';
 import 'package:devolucion_modulo/models/karmov.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail.dart';
 import 'package:devolucion_modulo/models/serie.dart';
+import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
 import 'package:devolucion_modulo/util/create_file_pdf.dart';
 import 'package:file_picker/file_picker.dart';
@@ -24,9 +25,11 @@ import 'package:devolucion_modulo/services/local_storage.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class VendedorProvider extends ChangeNotifier {
-  final ReturnApi _returnApi = ReturnApi();
+  final _returnApi = ReturnApi();
 
   //Informacion para el usuario de la solicitud
+  Usuario? tokenUser;
+  String permisos = "";
 
   Invoice? factura;
   List<Detail> listDetailInvoiceUser = [];
@@ -49,9 +52,7 @@ class VendedorProvider extends ChangeNotifier {
 
   List<Serie> listSeries = [];
   List<Motivo> listMotivos = [];
-
-  final tokenUser =
-      Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
+  List<Yk0001> listVCallCenter = [];
 
   String pdfNomb = "";
   String valVendedor = "";
@@ -67,7 +68,9 @@ class VendedorProvider extends ChangeNotifier {
   TextEditingController controllerG = TextEditingController();
   Motivo obj = Motivo(cICmg: "", codCmg: "", nomCmg: "", numMes: 0);
   String selectComboMotivo = "00";
+  bool isBloqueo = false;
   bool isSelectAll = true;
+  String countIntems = "";
 
   get getValVendedor => this.valVendedor;
 
@@ -92,6 +95,13 @@ class VendedorProvider extends ChangeNotifier {
     } else {
       return false;
     }
+  }
+
+  Future callValueConst() async {
+    tokenUser =
+        Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
+
+    permisos = LocalStorage.prefs.getString('permiss')!;
   }
 
   Future getFillMotivo() async {
@@ -140,12 +150,27 @@ class VendedorProvider extends ChangeNotifier {
     return resp;
   }
 
+  Future<bool> verificarCantG() async {
+    bool resp = false;
+    if (isSelectAll) {
+      for (var element in listaTemp) {
+        resp = await verificarCantidad(int.parse(element.cantidad), element);
+        if (resp) {
+          resp = true;
+          break;
+        }
+      }
+    }
+
+    return resp;
+  }
+
   //hacer metodo de verificacion
 
   Future<bool> getCliente(String token, String vendcode) async {
     bool opt = false;
-    final resp =
-        await _returnApi.queryClienteVen(token, vendcode.toUpperCase());
+    final resp = await _returnApi.queryClienteVen(
+        token, vendcode.toUpperCase(), isBloqueo ? "O" : "");
     if (resp!.isNotEmpty) {
       nombCli.text = resp.first.nomRef;
       valVendedor = vendcode;
@@ -231,12 +256,8 @@ class VendedorProvider extends ChangeNotifier {
           }
         }
       } else {
-        customDialog1(
-            context,
-            'Error de extensión',
-            "Extension permitida [pdf]",
-            Icons.warning_amber_rounded,
-            Colors.red);
+        customDialog1(context, "Extension permitida [pdf]",
+            Icons.warning_amber_rounded, Colors.red);
       }
     }
     return resp;
@@ -245,6 +266,13 @@ class VendedorProvider extends ChangeNotifier {
   Future<List<Alterno>> getAlternos(String producto) async {
     var x = await _returnApi.getAlternos("01", producto);
     return x;
+  }
+
+  Future<bool> verificarCantidad(int x, Detail detalle) async {
+    countIntems = await _returnApi.verificarCantidad(
+        detalle.item.numMov, detalle.item.codPro);
+
+    return x > double.parse(countIntems);
   }
 
   void escogerItem(Detail e) {
@@ -261,6 +289,7 @@ class VendedorProvider extends ChangeNotifier {
       controllerG.text = e.infoAdicional;
       btn = "Actualizar Archivo";
     } else {
+      btn = "Ingresar Razón";
       valItemTipo = "Devolución";
       selectComboMotivo = e.codMotivo;
       controllerD.text = "";
@@ -283,22 +312,47 @@ class VendedorProvider extends ChangeNotifier {
   }
 
   Future getVendedorInicial() async {
-    final resp = await _returnApi.querySeller(tokenUser.ctaUsr);
-    if (resp != null) {
-      codVen.text = tokenUser.ctaUsr;
-      nombVen.text = resp.nomRef;
-      listMotivos = await _returnApi.querylistMotivos("10");
-      listSeries = await _returnApi.querylistSeries();
-      if (listMotivos.isNotEmpty) {
-        listMotivos.add(Motivo(
-            cICmg: "00",
-            codCmg: "00",
-            nomCmg: "SELECCIONE UN MOTIVO",
-            numMes: 0));
+    await callValueConst();
+    if (permisos.substring(14) == "V") {
+      listVCallCenter =
+          await _returnApi.querylistCallCenter("01", tokenUser!.ctaUsr);
+      if (listVCallCenter.isNotEmpty) {
+        codVen.text = listVCallCenter[0].omision;
+        isBloqueo = true;
+        await callEventInt();
+        await callEventCliente(codVen.text);
+      }
+    } else {
+      final resp = await _returnApi.querySeller(tokenUser!.ctaUsr);
+      isBloqueo = false;
+      if (resp != null) {
+        codVen.text = tokenUser!.ctaUsr;
+        nombVen.text = resp.nomRef;
+        await callEventInt();
       }
     }
 
     notifyListeners();
+  }
+
+  Future callEventCliente(String usuario) async {
+    final resp = await _returnApi.querySeller(usuario);
+    if (resp != null) {
+      codVen.text = isBloqueo ? resp.codRef : tokenUser!.ctaUsr;
+      nombVen.text = resp.nomRef;
+    }
+  }
+
+  Future callEventInt() async {
+    listMotivos = await _returnApi.querylistMotivos("10");
+    listSeries = await _returnApi.querylistSeries();
+    if (listMotivos.isNotEmpty) {
+      listMotivos.add(Motivo(
+          cICmg: "00",
+          codCmg: "00",
+          nomCmg: "SELECCIONE UN MOTIVO",
+          numMes: 0));
+    }
   }
 
   Future convertKarmov(String tic) async {
@@ -357,10 +411,9 @@ class VendedorProvider extends ChangeNotifier {
             fytMov: DateTime.now().toIso8601String()));
       }
 
-      correo1 = await _returnApi.getCorreoUsuario("01", tokenUser.ctaUsr);
+      correo1 = await _returnApi.getCorreoUsuario("01", tokenUser!.ctaUsr);
       correo2 = await _returnApi.getCorreoUsuario("01", codCli.text);
-
-      CreateFilePdf().pdf4(listTemp, factura!.nomRef, "$correo1,$correo2");
+      CreateFilePdf().pdf4(listTemp, factura!.nomRef, "$correo1,$correo2", tic);
     } catch (e) {
       print(e);
     }

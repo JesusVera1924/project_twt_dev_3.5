@@ -86,6 +86,7 @@ class AuthProvider extends ChangeNotifier {
   logout() {
     LocalStorage.prefs.remove('token');
     LocalStorage.prefs.remove('usuario');
+    LocalStorage.prefs.remove('permiss');
     authStatus = AuthStatus.notAuthenticated;
     notifyListeners();
   }

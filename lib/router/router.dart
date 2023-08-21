@@ -33,8 +33,9 @@ class Flurorouter {
   static String alamacenRoute = '/menu/almacen';
   // Vendedor
   static String vendedorRoute = '/menu/vendedor';
-  static String vendedorProcesoRoute = '/menu/proceso';
+  //static String vendedorProcesoRoute = '/menu/proceso';
   static String chatProcesoRoute = '/menu/chatbot';
+  static String traicingVendedorRoute = '/menu/vendedor/seguimiento';
 
   static void configureRoutes() {
     //login
@@ -87,8 +88,12 @@ class Flurorouter {
     router.define(vendedorRoute,
         handler: MenuHandlers.vendedor, transitionType: TransitionType.fadeIn);
 
-    router.define(vendedorProcesoRoute,
+    /*  router.define(vendedorProcesoRoute,
         handler: MenuHandlers.vendedorProceso,
+        transitionType: TransitionType.fadeIn); */
+
+    router.define(traicingVendedorRoute,
+        handler: MenuHandlers.seguimientoVendedor,
         transitionType: TransitionType.fadeIn);
 
     //404

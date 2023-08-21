@@ -271,7 +271,6 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                               "${e.item.canMov}";
                                                           customDialog1(
                                                               context,
-                                                              'Advertencia',
                                                               'Has Superado la cantidad máxima',
                                                               Icons
                                                                   .warning_rounded,
@@ -526,7 +525,6 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                   } else {
                                                     customDialog1(
                                                         context,
-                                                        'Advertencia',
                                                         'Seleccione el tipo de razón a devolver',
                                                         Icons.warning_rounded,
                                                         Colors.amberAccent);
@@ -594,7 +592,6 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                   } else {
                                                     customDialog1(
                                                         context,
-                                                        'Advertencia',
                                                         'Error cargar el pdf en el ítem correspondiente',
                                                         Icons.warning_rounded,
                                                         Colors.amberAccent);
@@ -746,7 +743,6 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                       } else {
                         await customDialog1(
                             context,
-                            'Advertencia',
                             'completar todas las razones de los ítems a devolver',
                             Icons.warning_amber_rounded,
                             Colors.amberAccent);
@@ -754,12 +750,8 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                         passWhile = false;
                       }
                     } else {
-                      customDialog1(
-                          context,
-                          'Advertencia',
-                          'No se agrego ningun ítem',
-                          Icons.warning_rounded,
-                          Colors.amberAccent);
+                      customDialog1(context, 'No se agrego ningun ítem',
+                          Icons.warning_rounded, Colors.amberAccent);
                     }
                   },
                   text: 'Aceptar',

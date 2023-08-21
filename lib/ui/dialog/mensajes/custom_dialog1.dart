@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 
-Future<bool> customDialog1(BuildContext context, String title, String body,
-    IconData iconData, Color color) async {
+Future<bool> customDialog1(
+    BuildContext context, String body, IconData iconData, Color color) async {
   bool op = false;
   await showDialog(
       barrierDismissible: true,
@@ -13,6 +13,7 @@ Future<bool> customDialog1(BuildContext context, String title, String body,
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           content: Text(
             body,
+            textAlign: TextAlign.center,
             style: CustomLabels.h2,
           ),
           actions: [

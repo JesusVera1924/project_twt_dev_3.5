@@ -3,9 +3,9 @@ import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
 import 'package:devolucion_modulo/ui/cards/other_details2.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
+import 'package:devolucion_modulo/util/save_file_web.dart';
 import 'package:devolucion_modulo/util/util_view.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
 import 'package:devolucion_modulo/models/kardex.dart';
@@ -14,7 +14,9 @@ class ItemsIg0063 extends ChangeNotifier {
   List<Ig0063Response> itemsCliente = [];
   List<Ig0063Response> tempItemsClient = [];
   List<DetailBodega> listBodega = [];
-  ReturnApi returnApi = ReturnApi();
+
+  final returnApi = ReturnApi();
+
   List<MenuItem> menuResponseItems = const [
     MenuItem(uid: "1", text: "Detalle", icon: Icons.assignment_rounded),
     MenuItem(uid: "2", text: "Transporte", icon: Icons.drive_eta_rounded),
@@ -28,12 +30,10 @@ class ItemsIg0063 extends ChangeNotifier {
     notifyListeners();
   }
 
-  getListItemsVendedor(String codigo) async {
+  getListItemsVendedor() async {
     this.itemsCliente = [];
-    this.tempItemsClient = [];
-    final resp = await returnApi.listIg0063Vendedor(codigo);
+    final resp = await returnApi.listIg0063Vendedor(UtilView.usuario.ctaUsr);
     this.itemsCliente = [...resp];
-    this.tempItemsClient = [...resp];
     notifyListeners();
   }
 
@@ -43,32 +43,9 @@ class ItemsIg0063 extends ChangeNotifier {
     notifyListeners();
   }
 
-  getListNumero(String numero) async {
-    final resp = this.itemsCliente.where((element) => element.numMov == numero);
-    this.itemsCliente = [...resp];
-    notifyListeners();
-  }
-
   Future<List<Alterno>> getAlternos(String producto) async {
     var x = await returnApi.getAlternos("01", producto);
     return x;
-  }
-
-  getListBeteween(DateTime antes, DateTime despues) async {
-    if (antes.compareTo(despues) == 0) {
-      String fecha = DateFormat('yyyy-MM-dd').format(despues);
-      despues = despues.add(const Duration(days: 1));
-      final resp =
-          this.itemsCliente.where((element) => element.fecSdv == fecha);
-      this.itemsCliente = [...resp];
-    } else {
-      final resp = this.itemsCliente.where((element) =>
-          antes.isBefore(DateTime.parse(element.fecSdv)) &&
-          despues.isAfter(DateTime.parse(element.fecSdv)));
-      this.itemsCliente = [...resp];
-    }
-
-    notifyListeners();
   }
 
   getUpdateTransport(String numero, dynamic mapa) async {
@@ -151,6 +128,21 @@ class ItemsIg0063 extends ChangeNotifier {
     }
 
     return resp;
+  }
+
+  Future downloadDocument(Ig0063Response element) async {
+    String resp = "false";
+
+    if (element.clsMdm == "G") {
+      resp = await returnApi
+          .downloadBase64Info("InfTec-${element.numSdv}-${element.codPro}.pdf");
+      if (resp != "false") {
+        FileSaveHelper.createLaunchFile2(
+            "${element.numSdv}-${element.codPro}.pdf", resp);
+      } else {
+        UtilView.messageWarning("Error en la descarga");
+      }
+    }
   }
 
   void updateBodega(String uid, String bod1, String value, String bod2) async {

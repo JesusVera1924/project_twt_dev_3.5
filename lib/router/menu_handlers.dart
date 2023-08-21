@@ -1,3 +1,4 @@
+import 'package:devolucion_modulo/ui/views/traicing_v_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:devolucion_modulo/provider/auth_provider.dart';
 import 'package:devolucion_modulo/provider/side_menu_provider.dart';
@@ -14,7 +15,6 @@ import 'package:devolucion_modulo/ui/views/no_acces_page_view.dart';
 import 'package:devolucion_modulo/ui/views/resquet_view.dart';
 import 'package:devolucion_modulo/ui/views/traicing_view.dart';
 import 'package:devolucion_modulo/ui/views/vendedor/request_view_v.dart';
-import 'package:devolucion_modulo/ui/views/vendedor/search_ig0063_view.dart';
 import 'package:provider/provider.dart';
 
 class MenuHandlers {
@@ -24,7 +24,7 @@ class MenuHandlers {
       Provider.of<SideMenuProvider>(context, listen: false)
           .setCurrentPageUrl(Flurorouter.menuRoute);
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        return MenuView();
+        return const MenuView();
       } else {
         return const LoginView();
       }
@@ -187,7 +187,7 @@ class MenuHandlers {
       Provider.of<SideMenuProvider>(context, listen: false)
           .setCurrentPageUrl(Flurorouter.vendedorRoute);
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        if (authProvider.cliente!.rolUsr == "A") {
+        if (authProvider.cliente!.rolUsr == "V") {
           return const RequestViewV();
         } else {
           return const NoAccesPageView();
@@ -197,7 +197,7 @@ class MenuHandlers {
       }
     },
   );
-  static Handler vendedorProceso = Handler(
+/*   static Handler vendedorProceso = Handler(
     handlerFunc: (context, parameters) {
       final authProvider = Provider.of<AuthProvider>(context!);
       Provider.of<SideMenuProvider>(context, listen: false)
@@ -205,6 +205,23 @@ class MenuHandlers {
       if (authProvider.authStatus == AuthStatus.authenticated) {
         if (authProvider.cliente!.rolUsr == "A") {
           return const SearchIg0063View();
+        } else {
+          return const NoAccesPageView();
+        }
+      } else {
+        return const LoginView();
+      }
+    },
+  ); */
+
+  static Handler seguimientoVendedor = Handler(
+    handlerFunc: (context, params) {
+      final authProvider = Provider.of<AuthProvider>(context!);
+      Provider.of<SideMenuProvider>(context, listen: false)
+          .setCurrentPageUrl(Flurorouter.traicingRoute);
+      if (authProvider.authStatus == AuthStatus.authenticated) {
+        if (authProvider.cliente!.rolUsr == "V") {
+          return const TraicingVendedorView();
         } else {
           return const NoAccesPageView();
         }

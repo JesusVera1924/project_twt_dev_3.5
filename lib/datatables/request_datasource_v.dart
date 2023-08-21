@@ -109,7 +109,6 @@ class RequestVDTS extends DataGridSource {
                               "${row.getCells()[4].value.item.canMov}";
                           customDialog1(
                               context,
-                              'Advertencia',
                               'Has Superado la cantidad máxima',
                               Icons.warning_rounded,
                               Colors.amberAccent);
@@ -129,11 +128,27 @@ class RequestVDTS extends DataGridSource {
             InkWell(
                 onTap: () async {
                   var e = row.getCells()[4].value;
-                  provider.escogerItem(e);
-                  var respuesta = await showDialogDevDialogVen(
-                      context, provider, "Ingresar Motivo");
-                  if (respuesta) {
-                    notifyDataSourceListeners();
+                  var op = await provider.verificarCantidad(
+                      int.parse(row.getCells()[4].value.controller.text), e);
+                  if (op) {
+                    String x =
+                        double.parse(provider.countIntems).toStringAsFixed(0);
+                    customDialog1(
+                        context,
+                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x',
+                        Icons.warning_rounded,
+                        Colors.amberAccent);
+                  } else {
+                    provider.escogerItem(e);
+                    if (provider.listDetailInvoiceUser.length == 1) {
+                      provider.isSelectAll = false;
+                    }
+
+                    var respuesta = await showDialogDevDialogVen(
+                        context, provider, "Ingresar Motivo");
+                    if (respuesta) {
+                      notifyDataSourceListeners();
+                    }
                   }
                 },
                 child: Icon(
@@ -180,7 +195,6 @@ class RequestVDTS extends DataGridSource {
                               "${row.getCells()[4].value.item.canMov}";
                           customDialog1(
                               context,
-                              'Advertencia',
                               'Has Superado la cantidad máxima',
                               Icons.warning_rounded,
                               Colors.amberAccent);
@@ -200,11 +214,27 @@ class RequestVDTS extends DataGridSource {
             InkWell(
                 onTap: () async {
                   var e = row.getCells()[4].value;
-                  provider.escogerItem(e);
-                  var respuesta = await showDialogDevDialogVen(
-                      context, provider, "Ingresar Motivo");
-                  if (respuesta) {
-                    notifyDataSourceListeners();
+                  var op = await provider.verificarCantidad(
+                      int.parse(row.getCells()[4].value.controller.text), e);
+                  if (op) {
+                    String x =
+                        double.parse(provider.countIntems).toStringAsFixed(0);
+                    customDialog1(
+                        context,
+                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x',
+                        Icons.warning_rounded,
+                        Colors.amberAccent);
+                  } else {
+                    provider.escogerItem(e);
+                    if (provider.listDetailInvoiceUser.length == 1) {
+                      provider.isSelectAll = false;
+                    }
+
+                    var respuesta = await showDialogDevDialogVen(
+                        context, provider, "Ingresar Motivo");
+                    if (respuesta) {
+                      notifyDataSourceListeners();
+                    }
                   }
                 },
                 child: Icon(

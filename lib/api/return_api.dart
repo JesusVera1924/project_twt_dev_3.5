@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:devolucion_modulo/models/karmov.dart';
+import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:http/http.dart' as http;
 import 'package:devolucion_modulo/models/alterno.dart';
 import 'package:devolucion_modulo/models/bodega.dart';
@@ -26,7 +27,7 @@ import 'package:devolucion_modulo/models/usuario.dart';
 class ReturnApi {
   //static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
   static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
-  //static String baseUrl = "http://181.39.96.138:8081/apisolicitud";
+  //static String baseUrl = "http://192.168.100.4:8081/desarrollosolicitud";
 
   //Listado de motivos
   Future<List<Motivo>> querylistMotivos(String codigo) async {
@@ -191,10 +192,11 @@ class ReturnApi {
     }
   }
 
-  Future<List<Cliente>?> queryClienteVen(String codigo, String vendcode) async {
+  Future<List<Cliente>?> queryClienteVen(
+      String codigo, String vendcode, String tipo) async {
     List<Cliente>? resul = [];
     var url = Uri.parse(
-        "$baseUrl/getvenclientes?empresa=01&codigo=$codigo&vendedor=$vendcode");
+        "$baseUrl/getvenclientes?empresa=01&codigo=$codigo&vendedor=$vendcode&tipo=$tipo");
     try {
       http.Response respuesta = await http.get(url);
       if (respuesta.statusCode == 200) {
@@ -529,7 +531,7 @@ class ReturnApi {
       bod.add(element.toMap());
     }
     var data = json.encode(bod);
-    print(data);
+    //print(data);
     var url = Uri.parse("$baseUrl/insertKarmov");
     final resquet = await http.post(url, body: data, headers: {
       "Content-type": "application/json;charset=UTF-8",
@@ -547,7 +549,7 @@ class ReturnApi {
 
 /* Cargar archivos al repositorio */
   Future uploadDocument(String base64, String titulo) async {
-    var url = Uri.parse("$baseUrl/uploadpdf");
+    var url = Uri.parse("$baseUrl/uploadDocVen");
     // print(url);
     final respuesta = await http.post(
       url,
@@ -588,6 +590,25 @@ class ReturnApi {
   Future<String> downloadBase64(String data) async {
     String dato = "";
     var url = Uri.parse("$baseUrl/downloaddoc?data=$data");
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        dato = utf8.decode(respuesta.bodyBytes) == "false"
+            ? ""
+            : utf8.decode(respuesta.bodyBytes);
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+    return dato;
+  }
+
+  /* Recuperacion de archivo */
+  Future<String> downloadBase64Info(String data) async {
+    String dato = "";
+    var url = Uri.parse("$baseUrl/downloaddoc2?data=$data");
     try {
       http.Response respuesta = await http.get(url);
       if (respuesta.statusCode == 200) {
@@ -1190,5 +1211,45 @@ class ReturnApi {
     } else {
       print(resquet.body);
     }
+  }
+
+  Future<String> verificarCantidad(String numMov, String codPro) async {
+    String dato = "";
+    var url =
+        Uri.parse("$baseUrl/verificarFactura?numMov=$numMov&codPro=$codPro");
+    print(url);
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        dato = utf8.decode(respuesta.bodyBytes);
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+    return dato;
+  }
+
+  Future<List<Yk0001>> querylistCallCenter(
+      String empresa, String usuario) async {
+    var url = Uri.parse(
+        "$baseUrl/getUserYk001?empresa=$empresa&grupo=USEV&usuario=$usuario");
+
+    try {
+      final respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        return parseListYk0001(utf8.decode(respuesta.bodyBytes));
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+  }
+
+  List<Yk0001> parseListYk0001(String respuesta) {
+    final parseo = jsonDecode(respuesta);
+    return parseo.map<Yk0001>((json) => Yk0001.fromMap(json)).toList();
   }
 }

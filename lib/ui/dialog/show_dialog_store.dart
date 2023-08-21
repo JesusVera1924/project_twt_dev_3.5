@@ -155,6 +155,17 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),
+      GridColumn(
+        columnName: '12-obs',
+        width: 60,
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('INFO.',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
     ];
   } else {
     list = [
@@ -279,6 +290,17 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
           child: Text('KARDEX',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
+      GridColumn(
+        columnName: '12-obs',
+        width: 60,
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('INFO.',
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),

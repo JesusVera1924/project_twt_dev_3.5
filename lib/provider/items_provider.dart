@@ -55,8 +55,8 @@ class ItemsProvider extends ChangeNotifier {
 
     for (var element in itemsDetail) {
       if (element.clsMdm == "G" && element.codPro == row.codPro) {
-        resp = await returnApi
-            .downloadBase64("InfTec-${element.numSdv}-${element.codPro}.pdf");
+        resp = await returnApi.downloadBase64Info(
+            "InfTec-${element.numSdv}-${element.codPro}.pdf");
         if (resp != "false") {
           FileSaveHelper.createLaunchFile2(
               "${element.numSdv}-${element.codPro}.pdf", resp);

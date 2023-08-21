@@ -86,107 +86,137 @@ Future<String> showDialogRequestV(
                   onPressed: () async {
                     //evento para saber si todo esta seleccionado
 
-                    final respuesta = await provider.verificarMotivoG();
-
-                    if (respuesta) {
-                      isPaso = await showDialogDevDialogVen(
-                          context, provider, "Motivo en General");
+                    final passCant = await provider.verificarCantG();
+                    if (passCant) {
+                      customDialog1(
+                          context,
+                          "Error no se puede generar\nun devolución total",
+                          Icons.warning_amber_rounded,
+                          Colors.red);
                     } else {
-                      isPaso = true;
-                    }
+                      final respuesta = await provider.verificarMotivoG();
 
-                    if (isPaso) {
-                      //control del while
-                      bool controllerWhile = true;
-                      String ticket = "";
-                      provider.listTemp.clear();
+                      if (respuesta) {
+                        isPaso = await showDialogDevDialogVen(
+                            context, provider, "Motivo en General");
+                      } else {
+                        isPaso = true;
+                      }
 
-                      if (provider.listaTemp.isNotEmpty) {
-                        /*   final ticket = validation.relleno(
+                      if (isPaso) {
+                        //control del while
+                        bool controllerWhile = true;
+                        String ticket = "";
+                        provider.listTemp.clear();
+
+                        if (provider.listaTemp.isNotEmpty) {
+                          /*   final ticket = validation.relleno(
                           await returnApi.lastValueClase("A"), 9); */
-                        for (var element in provider.listaTemp) {
-                          if (element.tipo == "Devolución" &&
-                              element.codMotivo == "00") contError++;
-                          if (element.tipo == "Garantía" &&
-                              element.archivo == "") {
-                            contError++;
-                          }
-                        }
-
-                        if (contError == 0) {
-                          for (var e in provider.listaTemp) {
-                            Ig0063 ig0063 = Ig0063(
-                                codEmp: "01",
-                                clsSdv: "V",
-                                codVen: provider.factura!.codVen,
-                                numSdv: ticket,
-                                fecSdv: formatter.format(now),
-                                nunSdv: "", //vacio
-                                frmSdv: formatter.format(now),
-                                codRef: provider.codCli.text,
-                                codPto: e.item.codPto,
-                                codMov: e.item.codMov,
-                                numMov: provider.factura!.numMov,
-                                fecMov: provider.factura!.fecMov,
-                                frmMov: "1800-01-02",
-                                secMov: provider.listTemp.length + 1,
-                                codPro: e.item.codPro,
-                                canB91: double.parse(e.cantidad),
-                                canB92: double.parse(e.cantidad),
-                                canB93: 0,
-                                canB94: 0,
-                                canB95: 0,
-                                canB96: 0,
-                                clsMdm: e.tipo.substring(0, 1),
-                                codMdm: e.codMotivo,
-                                obsMdm: e.motivo,
-                                codMrm: "",
-                                obsMrm: "",
-                                ofsSdv: e.infoAdicional,
-                                obsSdv: e.informacion,
-                                codCop: "",
-                                nomCop: "",
-                                ngrCop: "",
-                                fgrCop: "",
-                                bltCop: 0,
-                                destino: "",
-                                ptoRel: "",
-                                codRel: "",
-                                numRel: "",
-                                fecRel: "",
-                                ptoNex: "",
-                                codNex: "",
-                                numNex: "",
-                                fecNex: "",
-                                swsSdv: "",
-                                ucrSdv: "",
-                                fcrSdv: "",
-                                uacSdv: "",
-                                facSdv: "",
-                                uapSdv: "",
-                                fapSdv: "",
-                                stsSdv: "P");
-                            provider.listTemp.add(ig0063);
+                          for (var element in provider.listaTemp) {
+                            if (element.tipo == "Devolución" &&
+                                element.codMotivo == "00") contError++;
+                            if (element.tipo == "Garantía" &&
+                                element.archivo == "") {
+                              contError++;
+                            }
                           }
 
-                          do {
-                            final response = await showDialogViewItems(context,
-                                'ítems a devolver (vista)', provider.listaTemp);
+                          if (contError == 0) {
+                            for (var e in provider.listaTemp) {
+                              Ig0063 ig0063 = Ig0063(
+                                  codEmp: "01",
+                                  clsSdv: "V",
+                                  codVen: provider.factura!.codVen,
+                                  numSdv: ticket,
+                                  fecSdv: formatter.format(now),
+                                  nunSdv: "", //vacio
+                                  frmSdv: formatter.format(now),
+                                  codRef: provider.codCli.text,
+                                  codPto: e.item.codPto,
+                                  codMov: e.item.codMov,
+                                  numMov: provider.factura!.numMov,
+                                  fecMov: provider.factura!.fecMov,
+                                  frmMov: "1800-01-02",
+                                  secMov: provider.listTemp.length + 1,
+                                  codPro: e.item.codPro,
+                                  canB91: double.parse(e.cantidad),
+                                  canB92: double.parse(e.cantidad),
+                                  canB93: 0,
+                                  canB94: 0,
+                                  canB95: 0,
+                                  canB96: 0,
+                                  clsMdm: e.tipo.substring(0, 1),
+                                  codMdm: e.codMotivo,
+                                  obsMdm: e.motivo,
+                                  codMrm: "",
+                                  obsMrm: "",
+                                  ofsSdv: e.infoAdicional,
+                                  obsSdv: e.informacion,
+                                  codCop: "",
+                                  nomCop: "",
+                                  ngrCop: "",
+                                  fgrCop: "",
+                                  bltCop: 0,
+                                  destino: "",
+                                  ptoRel: "",
+                                  codRel: "",
+                                  numRel: "",
+                                  fecRel: "",
+                                  ptoNex: "",
+                                  codNex: "",
+                                  numNex: "",
+                                  fecNex: "",
+                                  swsSdv: "",
+                                  ucrSdv: "",
+                                  fcrSdv: "",
+                                  uacSdv: "",
+                                  facSdv: "",
+                                  uapSdv: "",
+                                  fapSdv: "",
+                                  stsSdv: "G");
+                              provider.listTemp.add(ig0063);
+                            }
 
-                            if (response == "1") {
-                              final value = await customDialog6(
+                            do {
+                              final response = await showDialogViewItems(
                                   context,
-                                  'Informacion',
-                                  '¿Deseas ingresar datos el envio?',
-                                  Icons.contact_support_outlined,
-                                  Colors.blue);
+                                  'ítems a devolver (vista)',
+                                  provider.listaTemp);
 
-                              if (value == "1") {
-                                final op =
-                                    await showDialogTransport(context, "V");
-                                if (op == "1") {
-                                  //envio de informacion
+                              if (response == "1") {
+                                final value = await customDialog6(
+                                    context,
+                                    'Informacion',
+                                    '¿Deseas ingresar datos el envio?',
+                                    Icons.contact_support_outlined,
+                                    Colors.blue);
 
+                                if (value == "1") {
+                                  final op =
+                                      await showDialogTransport(context, "V");
+                                  if (op == "1") {
+                                    //envio de informacion
+
+                                    ticket = await returnApi
+                                        .postListIg0063(provider.listTemp);
+
+                                    await provider.convertKarmov(ticket);
+
+                                    for (var element in provider.listaTemp) {
+                                      if (element.tipo == "Garantía") {
+                                        returnApi.uploadDocument(
+                                            element.archivo,
+                                            "InfTec-$ticket-${element.item.codPro}");
+                                      }
+                                    }
+                                    controllerWhile = false;
+                                    resp = "1";
+                                    provider.listaTemp = [];
+                                    Navigator.of(context).pop();
+                                  } else {
+                                    controllerWhile = true;
+                                  }
+                                } else if (value == "2") {
                                   ticket = await returnApi
                                       .postListIg0063(provider.listTemp);
 
@@ -199,56 +229,33 @@ Future<String> showDialogRequestV(
                                     }
                                   }
                                   controllerWhile = false;
-                                  resp = "1";
                                   provider.listaTemp = [];
+                                  resp = ticket;
                                   Navigator.of(context).pop();
-                                } else {
-                                  controllerWhile = true;
-                                }
-                              } else if (value == "2") {
-                                ticket = await returnApi
-                                    .postListIg0063(provider.listTemp);
-
-                                await provider.convertKarmov(ticket);
-
-                                for (var element in provider.listaTemp) {
-                                  if (element.tipo == "Garantía") {
-                                    returnApi.uploadDocument(element.archivo,
-                                        "InfTec-$ticket-${element.item.codPro}");
-                                  }
-                                }
-                                controllerWhile = false;
-                                provider.listaTemp = [];
-                                resp = ticket;
-                                Navigator.of(context).pop();
-                                /*    }  else {
+                                  /*    }  else {
                                 //devuelta al dialogo de pregunta
                                 controllerWhile = true;
                               } */
+                                } else {
+                                  controllerWhile = true;
+                                }
                               } else {
-                                controllerWhile = true;
+                                controllerWhile = false;
                               }
-                            } else {
-                              controllerWhile = false;
-                            }
-                          } while (controllerWhile);
+                            } while (controllerWhile);
+                          } else {
+                            await customDialog1(
+                                context,
+                                'completar todas las razones de los ítems a devolver',
+                                Icons.warning_amber_rounded,
+                                Colors.amberAccent);
+                            contError = 0;
+                            controllerWhile = false;
+                          }
                         } else {
-                          await customDialog1(
-                              context,
-                              'Advertencia',
-                              'completar todas las razones de los ítems a devolver',
-                              Icons.warning_amber_rounded,
-                              Colors.amberAccent);
-                          contError = 0;
-                          controllerWhile = false;
+                          customDialog1(context, 'No se agrego ningun ítem',
+                              Icons.warning_rounded, Colors.amberAccent);
                         }
-                      } else {
-                        customDialog1(
-                            context,
-                            'Advertencia',
-                            'No se agrego ningun ítem',
-                            Icons.warning_rounded,
-                            Colors.amberAccent);
                       }
                     }
                   },
