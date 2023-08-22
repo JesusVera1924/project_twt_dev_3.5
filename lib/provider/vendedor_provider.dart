@@ -256,8 +256,7 @@ class VendedorProvider extends ChangeNotifier {
           }
         }
       } else {
-        customDialog1(context, "Extension permitida [pdf]",
-            Icons.warning_amber_rounded, Colors.red);
+        customDialog1(context, "Extension permitida [pdf]");
       }
     }
     return resp;
