@@ -101,10 +101,7 @@ class _AlmacenViewState extends State<AlmacenView> {
 
               if (!opt) {
                 isError = await customDialog1(
-                    context,
-                    'No se encontro ningun cliente',
-                    Icons.info_outline,
-                    Colors.blue);
+                    context, 'No se encontro ningun cliente');
               }
             }
 
@@ -147,13 +144,11 @@ class _AlmacenViewState extends State<AlmacenView> {
             UtilView.messageWarning("Cliente no coincide");
           }
         } else {
-          await customDialog1(
-              context, 'No se encontro factura', Icons.error, Colors.redAccent);
+          await customDialog1(context, 'No se encontro factura');
           Navigator.of(context).pop();
         }
       } else {
-        customDialog1(context, 'Campos Vacios', Icons.warning_amber_rounded,
-            Colors.amberAccent);
+        customDialog1(context, 'Campos Vacios');
       }
     }
 
@@ -188,10 +183,7 @@ class _AlmacenViewState extends State<AlmacenView> {
 
                         if (!opt) {
                           customDialog1(
-                              context,
-                              'No se encontro ningun cliente',
-                              Icons.info_outline,
-                              Colors.blue);
+                              context, 'No se encontro ningun cliente');
                         } else {
                           focusNodeFactura.requestFocus();
                           isNoSearch = false;

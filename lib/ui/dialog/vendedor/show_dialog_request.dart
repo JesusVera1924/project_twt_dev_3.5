@@ -88,11 +88,8 @@ Future<String> showDialogRequestV(
 
                     final passCant = await provider.verificarCantG();
                     if (passCant) {
-                      customDialog1(
-                          context,
-                          "Error no se puede generar\nun devolución total",
-                          Icons.warning_amber_rounded,
-                          Colors.red);
+                      customDialog1(context,
+                          "Error no se puede generar\nun devolución total");
                     } else {
                       final respuesta = await provider.verificarMotivoG();
 
@@ -244,17 +241,13 @@ Future<String> showDialogRequestV(
                               }
                             } while (controllerWhile);
                           } else {
-                            await customDialog1(
-                                context,
-                                'completar todas las razones de los ítems a devolver',
-                                Icons.warning_amber_rounded,
-                                Colors.amberAccent);
+                            await customDialog1(context,
+                                'completar todas las razones de los ítems a devolver');
                             contError = 0;
                             controllerWhile = false;
                           }
                         } else {
-                          customDialog1(context, 'No se agrego ningun ítem',
-                              Icons.warning_rounded, Colors.amberAccent);
+                          customDialog1(context, 'No se agrego ningun ítem');
                         }
                       }
                     }

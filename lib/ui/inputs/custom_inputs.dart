@@ -20,6 +20,41 @@ class CustomInputs {
         labelStyle: TextStyle(color: Colors.grey));
   }
 
+  static InputDecoration boxInputDecoration2({
+    required String hint,
+    required IconData icon,
+  }) {
+    return InputDecoration(
+      border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey.withOpacity(0.3))),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey.withOpacity(0.3))),
+      hintText: hint,
+      isDense: true,
+      contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      prefixIcon: Icon(icon, color: Colors.grey),
+      labelStyle: const TextStyle(color: Colors.grey),
+      hintStyle: const TextStyle(color: Colors.grey),
+    );
+  }
+
+  static InputDecoration boxInputDecorationDatePicker(
+      {required String labelText, required Function fc}) {
+    return InputDecoration(
+        border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.3))),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.withOpacity(0.3))),
+        labelText: labelText,
+        isDense: true,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 13, horizontal: 10),
+        suffixIcon: InkWell(
+          onTap: () => fc(),
+          child: const Icon(Icons.calendar_today),
+        ));
+  }
+
   static InputDecoration cantInputDecoration({required String hint}) {
     return InputDecoration(
         border: OutlineInputBorder(

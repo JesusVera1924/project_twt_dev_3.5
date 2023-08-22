@@ -103,11 +103,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
                         e.controller93.text = e.tempVal93;
                         e.item.canB93 = double.parse(e.tempVal93);
                       }
@@ -227,11 +224,8 @@ class StoreDataSource extends DataGridSource {
                           vistaText = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
                         e.controller94.text = e.tempVal94;
                         e.item.canB94 = double.parse(e.tempVal94);
                       }
@@ -345,11 +339,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
 
                         e.controller95.text = e.tempVal95;
 
@@ -470,11 +461,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
 
                         e.controller96.text = e.tempVal96;
 
@@ -638,11 +626,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
                         e.controller93.text = e.tempVal93;
                         e.item.canB93 = double.parse(e.tempVal93);
                       }
@@ -761,11 +746,8 @@ class StoreDataSource extends DataGridSource {
                           vistaText = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
                         e.controller94.text = e.tempVal94;
                         e.item.canB94 = double.parse(e.tempVal94);
                       }
@@ -879,11 +861,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
 
                         e.controller95.text = e.tempVal95;
 
@@ -1003,11 +982,8 @@ class StoreDataSource extends DataGridSource {
                           vistaCombo = "0";
                         }); */
                       } else {
-                        customDialog1(
-                            context,
-                            'Supero la cantida maxima de ítems recibido',
-                            Icons.warning_amber_outlined,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'Supero la cantida maxima de ítems recibido');
 
                         e.controller96.text = e.tempVal96;
 

@@ -108,10 +108,7 @@ class RequestVDTS extends DataGridSource {
                           row.getCells()[4].value.controller.text =
                               "${row.getCells()[4].value.item.canMov}";
                           customDialog1(
-                              context,
-                              'Has Superado la cantidad máxima',
-                              Icons.warning_rounded,
-                              Colors.amberAccent);
+                              context, 'Has Superado la cantidad máxima');
                         } else {
                           row.getCells()[4].value.cantidad = value;
                         }
@@ -133,11 +130,8 @@ class RequestVDTS extends DataGridSource {
                   if (op) {
                     String x =
                         double.parse(provider.countIntems).toStringAsFixed(0);
-                    customDialog1(
-                        context,
-                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x',
-                        Icons.warning_rounded,
-                        Colors.amberAccent);
+                    customDialog1(context,
+                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x');
                   } else {
                     provider.escogerItem(e);
                     if (provider.listDetailInvoiceUser.length == 1) {
@@ -194,10 +188,7 @@ class RequestVDTS extends DataGridSource {
                           row.getCells()[4].value.controller.text =
                               "${row.getCells()[4].value.item.canMov}";
                           customDialog1(
-                              context,
-                              'Has Superado la cantidad máxima',
-                              Icons.warning_rounded,
-                              Colors.amberAccent);
+                              context, 'Has Superado la cantidad máxima');
                         } else {
                           row.getCells()[4].value.cantidad = value;
                         }
@@ -219,11 +210,8 @@ class RequestVDTS extends DataGridSource {
                   if (op) {
                     String x =
                         double.parse(provider.countIntems).toStringAsFixed(0);
-                    customDialog1(
-                        context,
-                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x',
-                        Icons.warning_rounded,
-                        Colors.amberAccent);
+                    customDialog1(context,
+                        'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x');
                   } else {
                     provider.escogerItem(e);
                     if (provider.listDetailInvoiceUser.length == 1) {

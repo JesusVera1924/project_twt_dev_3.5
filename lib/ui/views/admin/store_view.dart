@@ -1,9 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:devolucion_modulo/ui/dialog/devolucion/dialog_acep_canc.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
+import 'package:devolucion_modulo/ui/inputs/custom_inputs.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
+import 'package:devolucion_modulo/util/date_formatter.dart';
 import 'package:devolucion_modulo/util/navbar.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
+import 'package:devolucion_modulo/util/util_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:devolucion_modulo/datatables/follow2_datasource.dart';
+import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
@@ -31,13 +39,150 @@ class _StoreViewState extends State<StoreView> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ItemsIg0063>(context);
 
+    void selectDate(String cadena) async {
+      DateTime fecha = UtilView.convertStringToDate(
+          cadena == 'init' ? provider.txtInicio.text : provider.txtFin.text);
+      final DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: fecha,
+          firstDate: DateTime(2023),
+          lastDate: DateTime(2024),
+          initialEntryMode: DatePickerEntryMode.input,
+          //initialDatePickerMode: DatePickerMode.year,
+          helpText: "Seleccionar Fecha",
+          errorInvalidText: "Rango fecha [2023-2024]");
+      if (fecha.isAfter(picked!)) {
+        setState(() {
+          switch (cadena) {
+            case 'init':
+              provider.txtInicio.text =
+                  UtilView.dateFormatDMY(picked.toString());
+              break;
+            case 'finish':
+              provider.txtFin.text = UtilView.dateFormatDMY(picked.toString());
+              break;
+            default:
+          }
+        });
+      }
+    }
+
     return Container(
       color: const Color.fromARGB(128, 164, 166, 168),
       child: Column(
         children: [
           Navbar(listW: [
+            if (provider.permisos.substring(4, 5) == "C")
+              CustomIconBtn(
+                  onPressed: () async {
+                    UtilView.buildShowDialog(context);
+                    final op = await dialogAcepCanc(
+                        context,
+                        "Generar Lote Devolución",
+                        SizedBox(
+                          width: 350,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 5),
+                                child: Text("Rango fecha",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextFormField(
+                                        controller: provider.txtInicio,
+                                        decoration: CustomInputs
+                                            .boxInputDecorationDatePicker(
+                                                labelText: 'Inicio',
+                                                fc: () => selectDate('init')),
+                                        inputFormatters: [DateFormatter()],
+                                        onChanged: (value) {},
+                                        onTap: () {
+                                          provider.txtInicio.selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: provider
+                                                      .txtInicio.text.length);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextFormField(
+                                        controller: provider.txtFin,
+                                        decoration: CustomInputs
+                                            .boxInputDecorationDatePicker(
+                                                labelText: 'Fin',
+                                                fc: () => selectDate('finish')),
+                                        inputFormatters: [DateFormatter()],
+                                        onTap: () {
+                                          provider.txtFin.selection =
+                                              TextSelection(
+                                                  baseOffset: 0,
+                                                  extentOffset: provider
+                                                      .txtFin.text.length);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 5),
+                                child: Text("Observación",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: provider.txtObs,
+                                  decoration: CustomInputs.boxInputDecoration2(
+                                      hint: 'Ingresar Observación',
+                                      icon: Icons.menu_open_sharp),
+                                  onTap: () {
+                                    provider.txtObs.selection = TextSelection(
+                                        baseOffset: 0,
+                                        extentOffset:
+                                            provider.txtObs.text.length);
+                                  },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'(^[A-Za-z ]*$)')),
+                                    LengthLimitingTextInputFormatter(150),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icons.list,
+                        Colors.blueGrey);
+                    if (op) {
+                      String x = await provider.createBatchReturn();
+                      Navigator.of(context).pop();
+                      if (x != "") {
+                        customDialog1(context, x);
+                      }
+                    }
+                  },
+                  color: Colors.blueGrey,
+                  msj: "Generar lote",
+                  icon: Icons.assignment_rounded),
             CustomIconBtn(
-                onPressed: () async => await provider.getRenew(),
+                onPressed: () async => await provider.getListItems(),
                 color: Colors.blueGrey,
                 msj: "Recargar",
                 icon: Icons.refresh_outlined),

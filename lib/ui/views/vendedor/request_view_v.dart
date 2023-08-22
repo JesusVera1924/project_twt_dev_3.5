@@ -109,12 +109,10 @@ class _RequestViewVState extends State<RequestViewV> {
               }
             }
           } else {
-            await customDialog1(context, 'No se encontro factura', Icons.error,
-                Colors.redAccent);
+            await customDialog1(context, 'No se encontro factura');
           }
         } else {
-          await customDialog1(context, 'Error para obtener datos', Icons.error,
-              Colors.amberAccent);
+          await customDialog1(context, 'Error para obtener datos');
         }
         Navigator.of(context).pop();
       } else {
@@ -347,8 +345,7 @@ class _RequestViewVState extends State<RequestViewV> {
                       if (vendedorProvider.numMov.text != "") {
                         _methodPressed();
                       } else {
-                        customDialog1(context, "Campo vacio",
-                            Icons.warning_amber_rounded, Colors.amber);
+                        customDialog1(context, "Campo vacio");
                       }
                     },
                     onChanged: (value) {}),

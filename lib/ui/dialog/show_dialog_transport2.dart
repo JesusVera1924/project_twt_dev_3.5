@@ -249,10 +249,7 @@ Future<Map<String, String>?> showDialogTransport2(
                       Navigator.of(context).pop();
                     } else {
                       customDialog1(
-                          context,
-                          'Debe de completar todo los campos',
-                          Icons.warning,
-                          Colors.amberAccent);
+                          context, 'Debe de completar todo los campos');
                     }
                   },
                   text: 'Aceptar',

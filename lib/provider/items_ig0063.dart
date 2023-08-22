@@ -1,6 +1,7 @@
 import 'package:devolucion_modulo/models/alterno.dart';
 import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
+import 'package:devolucion_modulo/services/local_storage.dart';
 import 'package:devolucion_modulo/ui/cards/other_details2.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
 import 'package:devolucion_modulo/util/save_file_web.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
 import 'package:devolucion_modulo/models/kardex.dart';
+import 'package:intl/intl.dart';
 
 class ItemsIg0063 extends ChangeNotifier {
   List<Ig0063Response> itemsCliente = [];
@@ -17,6 +19,14 @@ class ItemsIg0063 extends ChangeNotifier {
 
   final returnApi = ReturnApi();
 
+  final txtInicio = TextEditingController(
+      text: DateFormat("dd/MM/yyyy").format(DateTime.now()));
+  final txtFin = TextEditingController(
+      text: DateFormat("dd/MM/yyyy").format(DateTime.now()));
+  final txtObs = TextEditingController();
+
+  String permisos = "";
+
   List<MenuItem> menuResponseItems = const [
     MenuItem(uid: "1", text: "Detalle", icon: Icons.assignment_rounded),
     MenuItem(uid: "2", text: "Transporte", icon: Icons.drive_eta_rounded),
@@ -24,21 +34,28 @@ class ItemsIg0063 extends ChangeNotifier {
   ];
 
   getListItems() async {
+    callValueConst();
     this.itemsCliente = [];
     final resp = await returnApi.listIg0063(UtilView.usuario.ctaUsr);
     this.itemsCliente = [...resp];
     notifyListeners();
+  }
+
+  Future callValueConst() async {
+    permisos = LocalStorage.prefs.getString('permiss')!;
+  }
+
+  Future<String> createBatchReturn() async {
+    return await returnApi.generarLoteNC(
+        "01",
+        "01",
+        UtilView.dateFormatYMD(txtInicio.text),
+        UtilView.dateFormatYMD(txtFin.text));
   }
 
   getListItemsVendedor() async {
     this.itemsCliente = [];
     final resp = await returnApi.listIg0063Vendedor(UtilView.usuario.ctaUsr);
-    this.itemsCliente = [...resp];
-    notifyListeners();
-  }
-
-  getRenew() async {
-    final resp = await returnApi.listIg0063(UtilView.usuario.ctaUsr);
     this.itemsCliente = [...resp];
     notifyListeners();
   }

@@ -103,10 +103,7 @@ Future<bool> showDialogDevDialogVen(
                                           .openFileExplorer(context);
                                       if (!resp) {
                                         customDialog1(
-                                            context,
-                                            'Formato Invalido',
-                                            Icons.error,
-                                            Colors.red);
+                                            context, 'Formato Invalido');
                                       }
                                       setState(() {});
                                     },
@@ -137,11 +134,8 @@ Future<bool> showDialogDevDialogVen(
                                           op = true;
                                           Navigator.of(context).pop();
                                         } else {
-                                          customDialog1(
-                                              context,
-                                              'Error cargar el pdf en el ítem correspondiente',
-                                              Icons.warning_rounded,
-                                              Colors.amberAccent);
+                                          customDialog1(context,
+                                              'Error cargar el pdf en el ítem correspondiente');
                                         }
                                       },
                                       color: Colors.green[800]!,
@@ -235,11 +229,8 @@ Future<bool> showDialogDevDialogVen(
                                             provider.limpiar();
                                             Navigator.of(context).pop();
                                           } else {
-                                            customDialog1(
-                                                context,
-                                                'Seleccione el tipo de razón a devolver',
-                                                Icons.warning_rounded,
-                                                Colors.amberAccent);
+                                            customDialog1(context,
+                                                'Seleccione el tipo de razón a devolver');
                                           }
                                         } else {
                                           if (provider.selectComboMotivo !=
@@ -266,11 +257,8 @@ Future<bool> showDialogDevDialogVen(
                                             provider.limpiar();
                                             Navigator.of(context).pop();
                                           } else {
-                                            customDialog1(
-                                                context,
-                                                'Seleccione el tipo de razón a devolver',
-                                                Icons.warning_rounded,
-                                                Colors.amberAccent);
+                                            customDialog1(context,
+                                                'Seleccione el tipo de razón a devolver');
                                           }
                                         }
                                       },

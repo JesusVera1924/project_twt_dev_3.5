@@ -45,20 +45,6 @@ class UtilView {
 
   static List<String> lisDecision = ["Si", "No"];
 
-  static messageDanger(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 4,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 17.0,
-      webPosition: "center",
-      webBgColor: "red",
-    );
-  }
-
   static DateTime convertStringToDate(String cadena) {
     return DateFormat("dd/MM/yyyy").parse(cadena).add(const Duration(hours: 5));
   }
@@ -67,34 +53,6 @@ class UtilView {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     return formattedDate;
-  }
-
-  static messageAccess(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 2,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 17.0,
-      webPosition: "center",
-      webBgColor: 'rgb(46,64,83)',
-    );
-  }
-
-  static messageWarning(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 3,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 17.0,
-      webPosition: "center",
-      webBgColor: "orange",
-    );
   }
 
   static buildShowDialog(BuildContext context) {
@@ -213,6 +171,15 @@ class UtilView {
     return respuesta;
   }
 
+  static String dateFormatDMY(String cadena) {
+    DateTime date = DateTime.parse(cadena);
+    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+  }
+
+  static String dateFormatYMD(String cadena) {
+    return '${cadena.toString().substring(6, 10)}-${cadena.toString().substring(3, 5)}-${cadena.toString().substring(0, 2)}';
+  }
+
   static String firmaDocumento() {
     DateTime date = DateTime.now();
     return '${date.day.toString().padLeft(2, '0')}${date.month.toString().padLeft(2, '0')}${date.year}_${date.hour}_${date.minute}';
@@ -305,5 +272,47 @@ class UtilView {
           color: Colors.amberAccent,
         );
     }
+  }
+
+  static messageDanger(String _message) {
+    Fluttertoast.showToast(
+      msg: _message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 4,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 12,
+      webPosition: "center",
+      webBgColor: "red",
+    );
+  }
+
+  static messageAccess(String _message) {
+    Fluttertoast.showToast(
+      msg: _message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Colors.lightBlue,
+      textColor: Colors.white,
+      fontSize: 12,
+      webPosition: "center",
+      webBgColor: 'rgb(46,64,83)',
+    );
+  }
+
+  static messageWarning(String _message) {
+    Fluttertoast.showToast(
+      msg: _message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 4,
+      backgroundColor: Colors.yellowAccent,
+      textColor: Colors.white,
+      fontSize: 12,
+      webPosition: "center",
+      webBgColor: "orange",
+    );
   }
 }

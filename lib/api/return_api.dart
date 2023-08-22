@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:devolucion_modulo/models/karmov.dart';
+import 'package:devolucion_modulo/models/repuesta.dart';
 import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:http/http.dart' as http;
 import 'package:devolucion_modulo/models/alterno.dart';
@@ -172,7 +173,6 @@ class ReturnApi {
 
   Future<List<Ig0063Response>> listDetailIg0063(
       String numero, String tipo) async {
-    dynamic resul;
     var url = Uri.parse(
         "$baseUrl/getdevolucionlist2?empresa=01&numero=$numero&clase=$tipo");
 
@@ -1251,5 +1251,27 @@ class ReturnApi {
   List<Yk0001> parseListYk0001(String respuesta) {
     final parseo = jsonDecode(respuesta);
     return parseo.map<Yk0001>((json) => Yk0001.fromMap(json)).toList();
+  }
+
+  Future<String> generarLoteNC(
+      String codEmp, String codPto, String fechaI, String fechaF) async {
+    String dato = "";
+    var url = Uri.parse(
+        "http://192.168.3.57:8080/ebs_wms/bodega/createReturnTasks?cod_emp=$codEmp&cod_pto=$codPto&fechaI=$fechaI&fechaF=$fechaF");
+
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        final dao = Respuesta.fromJson(utf8.decode(respuesta.bodyBytes));
+        if (dao.code == 200 || dao.code == 204) {
+          dato = dao.data;
+        }
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+    return dato;
   }
 }

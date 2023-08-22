@@ -96,21 +96,16 @@ class _RequestViewState extends State<RequestView> {
 
           if (resp == "1") {
             await customDialog1(
-                context,
-                'Su solicitud se a realizado con exito',
-                Icons.check_circle_outline_outlined,
-                Colors.green);
+                context, 'Su solicitud se a realizado con exito');
 
             //Mensaje de enviarlo a la pantalla de seguimiento si desea
           }
         } else {
-          await customDialog1(
-              context, 'No se encontro factura', Icons.error, Colors.redAccent);
+          await customDialog1(context, 'No se encontro factura');
           Navigator.of(context).pop();
         }
       } else {
-        customDialog1(context, 'Campos Vacios', Icons.warning_amber_rounded,
-            Colors.amberAccent);
+        customDialog1(context, 'Campos Vacios');
         Navigator.of(context).pop();
       }
     }

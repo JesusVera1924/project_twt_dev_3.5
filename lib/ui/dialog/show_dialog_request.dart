@@ -269,13 +269,8 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                             e.item.canMov) {
                                                           e.controller.text =
                                                               "${e.item.canMov}";
-                                                          customDialog1(
-                                                              context,
-                                                              'Has Superado la cantidad máxima',
-                                                              Icons
-                                                                  .warning_rounded,
-                                                              Colors
-                                                                  .amberAccent);
+                                                          customDialog1(context,
+                                                              'Has Superado la cantidad máxima');
                                                         } else {
                                                           e.cantidad = value;
                                                         }
@@ -523,11 +518,8 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                     limpiar();
                                                     setState(() {});
                                                   } else {
-                                                    customDialog1(
-                                                        context,
-                                                        'Seleccione el tipo de razón a devolver',
-                                                        Icons.warning_rounded,
-                                                        Colors.amberAccent);
+                                                    customDialog1(context,
+                                                        'Seleccione el tipo de razón a devolver');
                                                   }
                                                 },
                                                 color: Colors.red,
@@ -591,10 +583,9 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                     setState(() {});
                                                   } else {
                                                     customDialog1(
-                                                        context,
-                                                        'Error cargar el pdf en el ítem correspondiente',
-                                                        Icons.warning_rounded,
-                                                        Colors.amberAccent);
+                                                      context,
+                                                      'Error cargar el pdf en el ítem correspondiente',
+                                                    );
                                                   }
                                                 },
                                                 color: Colors.red,
@@ -741,17 +732,13 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                           }
                         } while (passWhile);
                       } else {
-                        await customDialog1(
-                            context,
-                            'completar todas las razones de los ítems a devolver',
-                            Icons.warning_amber_rounded,
-                            Colors.amberAccent);
+                        customDialog1(context,
+                            'completar todas las razones de los ítems a devolver');
                         contError = 0;
                         passWhile = false;
                       }
                     } else {
-                      customDialog1(context, 'No se agrego ningun ítem',
-                          Icons.warning_rounded, Colors.amberAccent);
+                      customDialog1(context, 'No se agrego ningun ítem');
                     }
                   },
                   text: 'Aceptar',

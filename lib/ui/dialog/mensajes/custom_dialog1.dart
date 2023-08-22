@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 
-Future<bool> customDialog1(
-    BuildContext context, String body, IconData iconData, Color color) async {
-  bool op = false;
+Future customDialog1(BuildContext context, String body) async {
   await showDialog(
       barrierDismissible: true,
       context: context,
@@ -27,12 +25,10 @@ Future<bool> customDialog1(
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  op = true;
                   Navigator.of(context).pop();
                 },
                 child: Text('Aceptar', style: CustomLabels.h4)),
           ],
         );
       });
-  return op;
 }

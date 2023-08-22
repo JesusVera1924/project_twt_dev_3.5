@@ -293,10 +293,7 @@ Future<String> showDialogTransport(BuildContext context, String val) async {
                       }
                     } else {
                       customDialog1(
-                          context,
-                          'Debe de completar todo los campos',
-                          Icons.warning,
-                          Colors.amberAccent);
+                          context, 'Debe de completar todo los campos');
                     }
                   },
                   text: 'Aceptar',

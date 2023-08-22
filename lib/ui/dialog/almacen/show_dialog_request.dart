@@ -292,17 +292,13 @@ Future<String> showDialogRequestA(
                           }
                         } while (controllerWhile);
                       } else {
-                        await customDialog1(
-                            context,
-                            'completar todas las razones de los ítems a devolver',
-                            Icons.warning_amber_rounded,
-                            Colors.amberAccent);
+                        await customDialog1(context,
+                            'completar todas las razones de los ítems a devolver');
                         contError = 0;
                         controllerWhile = false;
                       }
                     } else {
-                      customDialog1(context, 'No se agrego ningun ítem',
-                          Icons.warning_rounded, Colors.amberAccent);
+                      customDialog1(context, 'No se agrego ningun ítem');
                     }
                   },
                   text: 'Aceptar',
