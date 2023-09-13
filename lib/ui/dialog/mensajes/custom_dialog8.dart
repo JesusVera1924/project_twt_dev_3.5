@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 
-Future<bool> customDialog2(BuildContext context, String title, String body,
+Future<bool> customDialog8(BuildContext context, String title, String body,
     IconData iconData, Color color) async {
   bool resp = false;
   await showDialog(
@@ -37,7 +37,7 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Aceptar', style: CustomLabels.h4),
+                  child: Text('Si', style: CustomLabels.h4),
                 )),
             TextButton(
                 style: ButtonStyle(backgroundColor:
@@ -54,7 +54,7 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Cancelar', style: CustomLabels.h4),
+                  child: Text('No', style: CustomLabels.h4),
                 )),
           ],
         );

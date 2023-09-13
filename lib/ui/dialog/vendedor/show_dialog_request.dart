@@ -8,7 +8,6 @@ import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:devolucion_modulo/api/return_api.dart';
 import 'package:devolucion_modulo/provider/vendedor_provider.dart';
 import 'package:devolucion_modulo/models/ig0063.dart';
 import 'package:devolucion_modulo/ui/buttons/custom_form_button.dart';
@@ -22,7 +21,6 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 Future<String> showDialogRequestV(
     BuildContext context, VendedorProvider provider, Usuario user) async {
   //lista temporal para guardar el carrito de items
-  final returnApi = ReturnApi();
   int contError = 0;
   String resp = "0";
   bool isPaso = false;
@@ -103,7 +101,7 @@ Future<String> showDialogRequestV(
                       if (isPaso) {
                         //control del while
                         bool controllerWhile = true;
-                        String ticket = "";
+
                         provider.listTemp.clear();
 
                         if (provider.listaTemp.isNotEmpty) {
@@ -124,7 +122,7 @@ Future<String> showDialogRequestV(
                                   codEmp: "01",
                                   clsSdv: "V",
                                   codVen: provider.factura!.codVen,
-                                  numSdv: ticket,
+                                  numSdv: "",
                                   fecSdv: formatter.format(now),
                                   nunSdv: "", //vacio
                                   frmSdv: formatter.format(now),
@@ -194,18 +192,12 @@ Future<String> showDialogRequestV(
                                   if (op == "1") {
                                     //envio de informacion
 
-                                    ticket = await returnApi
-                                        .postListIg0063(provider.listTemp);
+                                    provider.listSolicitudes
+                                        .addAll(provider.listTemp);
 
-                                    await provider.convertKarmov(ticket);
+                                    provider.listArchivos
+                                        .addAll(provider.listaTemp);
 
-                                    for (var element in provider.listaTemp) {
-                                      if (element.tipo == "Garantía") {
-                                        returnApi.uploadDocument(
-                                            element.archivo,
-                                            "InfTec-$ticket-${element.item.codPro}");
-                                      }
-                                    }
                                     controllerWhile = false;
                                     resp = "1";
                                     provider.listaTemp = [];
@@ -214,20 +206,15 @@ Future<String> showDialogRequestV(
                                     controllerWhile = true;
                                   }
                                 } else if (value == "2") {
-                                  ticket = await returnApi
-                                      .postListIg0063(provider.listTemp);
+                                  provider.listSolicitudes
+                                      .addAll(provider.listTemp);
 
-                                  await provider.convertKarmov(ticket);
+                                  provider.listArchivos
+                                      .addAll(provider.listaTemp);
 
-                                  for (var element in provider.listaTemp) {
-                                    if (element.tipo == "Garantía") {
-                                      returnApi.uploadDocument(element.archivo,
-                                          "InfTec-$ticket-${element.item.codPro}");
-                                    }
-                                  }
                                   controllerWhile = false;
                                   provider.listaTemp = [];
-                                  resp = ticket;
+                                  resp = "1";
                                   Navigator.of(context).pop();
                                   /*    }  else {
                                 //devuelta al dialogo de pregunta

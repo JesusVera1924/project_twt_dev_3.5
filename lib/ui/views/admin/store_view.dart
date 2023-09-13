@@ -176,6 +176,8 @@ class _StoreViewState extends State<StoreView> {
                       if (x != "") {
                         customDialog1(context, x);
                       }
+                    } else {
+                      Navigator.of(context).pop();
                     }
                   },
                   color: Colors.blueGrey,
@@ -221,7 +223,7 @@ class _StoreViewState extends State<StoreView> {
 List<GridColumn> _buildDataGridForSize(BuildContext context) {
   List<GridColumn> list = [];
 
-  if (Responsive.isTablet(context)) {
+  if (Responsive.isTablet(context) || Responsive.isMobile(context)) {
     list = [
       GridColumn(
         columnName: '1-solicitud',
@@ -470,6 +472,18 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
           child: Text('HISTORIAL',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
+      GridColumn(
+        columnName: '14-anul',
+        columnWidthMode: ColumnWidthMode.fitByColumnName,
+        allowFiltering: false,
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('ANULAR',
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),

@@ -37,7 +37,7 @@ class Footer extends StatelessWidget {
                 children: <Widget>[
                   InkWell(
                     onTap: () => {},
-                    child: const Text('TwT 1.6.4',
+                    child: const Text('TwT 2.0.2',
                         style: TextStyle(color: Colors.blue, fontSize: 12)),
                   ),
                   const Text(' | ',

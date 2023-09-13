@@ -65,6 +65,7 @@ class AlmacenProvider extends ChangeNotifier {
   String pdfNomb = ""; // nombre del pdf vista para el usuario
 
   get getNombre => this.pdfNomb;
+  String countIntems = "";
 
   final tokenUser =
       Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
@@ -139,6 +140,13 @@ class AlmacenProvider extends ChangeNotifier {
       }
       return e;
     }).toList();
+  }
+
+  Future<bool> verificarCantidad(int x, Detail detalle) async {
+    countIntems = await _returnApi.verificarCantidad(
+        detalle.item.numMov, detalle.item.codPro);
+
+    return x > double.parse(countIntems);
   }
 
   Future<bool> openFileExplorer(BuildContext context) async {

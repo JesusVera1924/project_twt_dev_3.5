@@ -134,10 +134,7 @@ class RequestVDTS extends DataGridSource {
                         'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x');
                   } else {
                     provider.escogerItem(e);
-                    if (provider.listDetailInvoiceUser.length == 1) {
-                      provider.isSelectAll = false;
-                    }
-
+                    provider.isSelectAll = false;
                     var respuesta = await showDialogDevDialogVen(
                         context, provider, "Ingresar Motivo");
                     if (respuesta) {
@@ -214,9 +211,7 @@ class RequestVDTS extends DataGridSource {
                         'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x');
                   } else {
                     provider.escogerItem(e);
-                    if (provider.listDetailInvoiceUser.length == 1) {
-                      provider.isSelectAll = false;
-                    }
+                    provider.isSelectAll = false;
 
                     var respuesta = await showDialogDevDialogVen(
                         context, provider, "Ingresar Motivo");

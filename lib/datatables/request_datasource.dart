@@ -121,10 +121,18 @@ class RequestDTS extends DataGridSource {
       InkWell(
           onTap: () async {
             var e = row.getCells()[4].value;
-            provider.escogerItem(e);
-            var respuesta = await showDialogDevDialog(context, provider);
-            if (respuesta) {
-              notifyDataSourceListeners();
+            var op = await provider.verificarCantidad(
+                int.parse(row.getCells()[4].value.controller.text), e);
+            if (op) {
+              String x = double.parse(provider.countIntems).toStringAsFixed(0);
+              customDialog1(context,
+                  'Se a alcanzado el numero\nmaximo de items a devolver\nRestantes: $x');
+            } else {
+              provider.escogerItem(e);
+              var respuesta = await showDialogDevDialog(context, provider);
+              if (respuesta) {
+                notifyDataSourceListeners();
+              }
             }
           },
           child: Icon(

@@ -2,6 +2,8 @@
 
 import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/ui/dialog/kardex/show_dialog_kardex.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog1.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog9.dart';
 import 'package:devolucion_modulo/util/menus_items.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:devolucion_modulo/util/util_view.dart';
@@ -54,19 +56,19 @@ class Follow2DTS extends DataGridSource {
   List<Widget> _buildDataGridForDts(DataGridRow row) {
     List<Widget> list = [];
 
-    if (Responsive.isTablet(context)) {
+    if (Responsive.isTablet(context) || Responsive.isMobile(context)) {
       list = [
         Container(
             padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             child: Text(row.getCells()[0].value.toString())),
         Container(
             padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             child: Text(row.getCells()[1].value.toString())),
         Container(
             padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             child: Tooltip(
                 message:
                     "Clase: ${row.getCells()[2].value}\nPV: ${row.getCells()[3].value}\nTP: ${row.getCells()[4].value}",
@@ -74,7 +76,9 @@ class Follow2DTS extends DataGridSource {
         Container(
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.centerLeft,
-            child: Text(row.getCells()[7].value.toString().toUpperCase())),
+            child: Tooltip(
+                message: row.getCells()[7].value.toString().toUpperCase(),
+                child: Text(row.getCells()[7].value.toString().toUpperCase()))),
         UtilView.checkStatu(row.getCells()[9].value.toString()),
         Container(
           alignment: Alignment.center,
@@ -105,6 +109,9 @@ class Follow2DTS extends DataGridSource {
                   break;
                 case "3":
                   proceso2(row);
+                  break;
+                case "4":
+                  proceso3(row);
                   break;
               }
             },
@@ -176,6 +183,9 @@ class Follow2DTS extends DataGridSource {
         InkWell(
             onTap: () async => proceso2(row),
             child: const Icon(Icons.move_up_rounded)),
+        InkWell(
+            onTap: () async => proceso3(row),
+            child: const Icon(Icons.block_outlined, color: Colors.red)),
       ];
     }
 
@@ -184,8 +194,8 @@ class Follow2DTS extends DataGridSource {
 
   void proceso1(DataGridRow row) async {
     UtilView.buildShowDialog(context);
-    await provider.getListItemsDetail(
-        row.getCells()[0].value.toString(), row.getCells()[2].value.toString());
+    await provider.getListItemsDetail(row.getCells()[0].value.toString(),
+        row.getCells()[2].value.toString(), row.getCells()[5].value.toString());
 
     if (provider.tempItemsClient.isNotEmpty) {
       for (var element in provider.tempItemsClient) {
@@ -223,7 +233,7 @@ class Follow2DTS extends DataGridSource {
       }
       Navigator.of(context).pop();
       await showDialogStore(context, provider,
-          'Detalle Items: #${row.getCells()[10].value.numSdv}\nFecha: ${UtilView.convertDateToString()} - Vendedor: ${row.getCells()[10].value.codVen}');
+          'Detalle Items: #${row.getCells()[10].value.numSdv}\nFecha: ${UtilView.convertDateToString()} - Vendedor: ${row.getCells()[10].value.codVen}\nFactura: ${row.getCells()[10].value.numMov}');
     } else {
       Navigator.of(context).pop();
     }
@@ -234,6 +244,34 @@ class Follow2DTS extends DataGridSource {
     var lista =
         await provider.getListKardex(x.numSdv, x.codPro, x.numMov, x.clsSdv);
     await showDialogKardex(context, 'kardex :: ${x.numSdv}', lista);
+  }
+
+  void proceso3(DataGridRow row) async {
+    UtilView.buildShowDialog(context);
+    Ig0063Response x = row.getCells()[10].value;
+    final opt = await customDialog9(
+        context,
+        'Información',
+        'Estas seguro que deseas anular?',
+        Icons.info_outline_rounded,
+        Colors.blue);
+
+    if (opt.toUpperCase() == "N" || opt.toUpperCase() == "R") {
+      String resp = await provider.anularProceso(
+          x,
+          opt == "R"
+              ? "errores de items duplicados"
+              : "producto no llego fisicamente y fue registrado");
+      if (resp != "") {
+        await customDialog1(context, '$resp!');
+        await provider.clearItem(x.numSdv);
+        Navigator.of(context).pop();
+      } else {
+        Navigator.of(context).pop();
+      }
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 
   bool verificar(String estado) {

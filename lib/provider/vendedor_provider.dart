@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unrelated_type_equality_checks
 
 import 'dart:convert';
 
@@ -17,7 +17,6 @@ import 'package:devolucion_modulo/models/ig0063.dart';
 import 'package:devolucion_modulo/models/inner/detailProductResponse.dart';
 
 import 'package:devolucion_modulo/models/invoice.dart';
-import 'package:devolucion_modulo/models/modifyModel/detail_vendedor.dart';
 import 'package:devolucion_modulo/models/motivo.dart';
 import 'package:devolucion_modulo/models/product.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
@@ -45,10 +44,15 @@ class VendedorProvider extends ChangeNotifier {
   TextEditingController codVen = TextEditingController();
   TextEditingController codRef = TextEditingController();
 
+  //VARIABLES DE TRANSITO
   List<Detail> listaTemp = [];
   List<Ig0063> listTemp = []; // lista de detalles del usuario
 
-  List<DetailVendedor> listVendedor = []; // lista para el vendedor
+  //VARIABLE DE GUARDADO COMPLETO DE FACTURAS
+  List<Detail> listArchivos = [];
+  List<Ig0063> listSolicitudes = []; // lista de detalles del usuario
+
+  //List<DetailVendedor> listVendedor = []; // lista para el vendedor
 
   List<Serie> listSeries = [];
   List<Motivo> listMotivos = [];
@@ -119,9 +123,8 @@ class VendedorProvider extends ChangeNotifier {
     factura = await _returnApi.queryInvoice(tipo, tp, numero);
   }
 
-  clearItem(String code) async {
-    listVendedor.removeWhere((element) => element.codigo == code);
-    notifyListeners();
+  Future clearItem(String code) async {
+    listSolicitudes.removeWhere((element) => element.codPro == code);
   }
 
   Future<List<DetailProductResponse>> getFillDetail(
@@ -145,6 +148,16 @@ class VendedorProvider extends ChangeNotifier {
           break;
         }
       }
+    }
+
+    return resp;
+  }
+
+  bool verificarExistenciaFact(String facture) {
+    bool resp = false;
+
+    if (listSolicitudes.isNotEmpty) {
+      resp = listSolicitudes.any((e) => e.numMov == facture);
     }
 
     return resp;
@@ -194,15 +207,43 @@ class VendedorProvider extends ChangeNotifier {
     setNombre = "";
   }
 
+  Future<bool> verificar(String factura) async {
+    String resp =
+        await _returnApi.checkClientFactura("01", codCli.text, factura);
+    return resp == codVen.text;
+  }
+
+  Future<String> generarProcesso() async {
+    String ticket = await _returnApi.postListIg0063(listSolicitudes);
+    await convertKarmov(ticket);
+    for (var element in listArchivos) {
+      if (element.tipo == "Garantía") {
+        _returnApi.uploadDocument(
+            element.archivo, "InfTec-$ticket-${element.item.codPro}");
+      }
+    }
+    listSolicitudes.clear();
+    listArchivos.clear();
+    numMov.text = "";
+    codCli.text = "";
+    nombCli.text = "";
+    return ticket;
+  }
+
   onSelectedRow(List<DataGridRow> x, List<DataGridRow> y) {
     if (x.isNotEmpty) {
       for (var element in x) {
         var detalle = element.getCells()[4].value;
-        detalle.bloqueo = true;
-        detalle.controller.text = '${detalle.item.canMov}';
-        detalle.cantidad = '${detalle.item.canMov}';
-        updateListTemp(detalle);
-        listaTemp.add(detalle);
+        var isExitencia = listaTemp
+            .where((e) => e.item.codPro == detalle.item.codPro)
+            .toList();
+        if (isExitencia.isEmpty) {
+          detalle.bloqueo = true;
+          detalle.controller.text = '${detalle.item.canMov}';
+          detalle.cantidad = '${detalle.item.canMov}';
+          updateListTemp(detalle);
+          listaTemp.add(detalle);
+        }
       }
     }
     if (y.isNotEmpty) {
@@ -356,25 +397,29 @@ class VendedorProvider extends ChangeNotifier {
 
   Future convertKarmov(String tic) async {
     List<Karmov> list = [];
+    List<Alterno> alternos = [];
+    int i = 1;
     String correo1 = "";
     String correo2 = "";
 
     try {
-      for (var element in listTemp) {
-        list.add(Karmov(
+      for (var element in listSolicitudes) {
+        alternos = await getAlternos(element.codPro);
+
+        var karmov = Karmov(
             codEmp: element.codEmp,
             codPto: "01",
             codMov: "NC",
             numMov: tic,
             fecMov: DateTime.now(),
-            cx1Mov: element.codMov,
-            nx1Mov: element.numMov,
-            fx1Mov: element.frmSdv,
-            cx2Mov: "",
-            nx2Mov: "",
-            fx2Mov: "",
+            cx1Mov: "",
+            nx1Mov: "",
+            fx1Mov: "",
+            cx2Mov: element.codMov,
+            nx2Mov: element.numMov,
+            fx2Mov: element.frmSdv,
             codRef: element.codRef,
-            nomRef: nombCli.text,
+            nomRef: "",
             codFb1: "",
             codFb2: "",
             codFb3: "",
@@ -407,11 +452,30 @@ class VendedorProvider extends ChangeNotifier {
             auxilia: element.ucrSdv,
             secMov: "${element.secMov}",
             uduMov: "*",
-            fytMov: DateTime.now().toIso8601String()));
+            fytMov: DateTime.now().toIso8601String());
+
+        for (var element in alternos) {
+          if (i == 1) {
+            karmov.codAl1 = element.codAlt;
+          }
+          if (i == 2) {
+            karmov.codAl2 = element.codAlt;
+          }
+          if (i == 3) {
+            karmov.codAl3 = element.codAlt;
+          }
+          i++;
+        }
+        list.add(karmov);
+        i = 1;
       }
 
-      correo1 = await _returnApi.getCorreoUsuario("01", tokenUser!.ctaUsr);
+      correo1 = tokenUser!.codUsr.trim() == "ACEF"
+          ? tokenUser!.corUsr
+          : await _returnApi.getCorreoUsuario("01", tokenUser!.ctaUsr);
+
       correo2 = await _returnApi.getCorreoUsuario("01", codCli.text);
+
       CreateFilePdf().pdf4(listTemp, factura!.nomRef, "$correo1,$correo2", tic);
     } catch (e) {
       print(e);

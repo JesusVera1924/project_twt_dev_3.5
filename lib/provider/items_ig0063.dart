@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:devolucion_modulo/models/alterno.dart';
+import 'package:devolucion_modulo/models/email.dart';
 import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
+import 'package:devolucion_modulo/models/usuario.dart';
 import 'package:devolucion_modulo/services/local_storage.dart';
 import 'package:devolucion_modulo/ui/cards/other_details2.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
@@ -25,12 +29,14 @@ class ItemsIg0063 extends ChangeNotifier {
       text: DateFormat("dd/MM/yyyy").format(DateTime.now()));
   final txtObs = TextEditingController();
 
+  Usuario? tokenUser;
   String permisos = "";
 
   List<MenuItem> menuResponseItems = const [
     MenuItem(uid: "1", text: "Detalle", icon: Icons.assignment_rounded),
     MenuItem(uid: "2", text: "Transporte", icon: Icons.drive_eta_rounded),
-    MenuItem(uid: "3", text: "Historial", icon: Icons.history)
+    MenuItem(uid: "3", text: "Historial", icon: Icons.history),
+    MenuItem(uid: "4", text: "Anular", icon: Icons.block_outlined)
   ];
 
   getListItems() async {
@@ -42,6 +48,8 @@ class ItemsIg0063 extends ChangeNotifier {
   }
 
   Future callValueConst() async {
+    tokenUser =
+        Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
     permisos = LocalStorage.prefs.getString('permiss')!;
   }
 
@@ -90,10 +98,11 @@ class ItemsIg0063 extends ChangeNotifier {
     }).toList();
   }
 
-  Future getListItemsDetail(String numSdv, String clsSdv) async {
+  Future getListItemsDetail(
+      String numSdv, String factura, String clsSdv) async {
     listBodega.clear();
     tempItemsClient.clear();
-    tempItemsClient = await returnApi.listDetailIg0063(numSdv, clsSdv);
+    tempItemsClient = await returnApi.listDetailIg0063(numSdv, factura, clsSdv);
   }
 
   Future<List<Kardex>> getListKardex(
@@ -116,7 +125,8 @@ class ItemsIg0063 extends ChangeNotifier {
     bool resp = false;
     if (verificarRevision()) {
       for (DetailBodega e in listBodega) {
-        await returnApi.updateEstatusIg0063(e.item.numSdv, e.item.codRef);
+        await returnApi.updateEstatusIg0063(
+            e.item.numSdv, e.item.codRef, e.item.numMov);
         uid = e.item.numSdv;
       }
       itemsCliente.removeWhere((element) => element.numSdv == uid);
@@ -170,6 +180,11 @@ class ItemsIg0063 extends ChangeNotifier {
     await returnApi.postIg0063Update(item);
   }
 
+  Future clearItem(String code) async {
+    itemsCliente.removeWhere((element) => element.numSdv == code);
+    notifyListeners();
+  }
+
   void registroKardex(Ig0063Response e, String cantidad, String bodega,
       String signo, double resuido) async {
     await returnApi.postKardex(Kardex(
@@ -198,5 +213,26 @@ class ItemsIg0063 extends ChangeNotifier {
         dacMov: DateTime.now(),
         somMov: signo,
         stsMov: "1"));
+  }
+
+  Future<String> anularProceso(Ig0063Response objeto, String error) async {
+    String x = await returnApi.anularNC("NC", objeto.numSdv,
+        "ANULADO POR $error - USER: ${tokenUser!.ctaUsr}", objeto.clsSdv);
+
+    if (x != "") {
+      String correo1 = await returnApi.getCorreoUsuario("01", objeto.codRef);
+      String correo2 = await returnApi.getCorreoUsuario("01", objeto.codVen);
+      String correo3 = tokenUser!.corUsr;
+
+      await returnApi.sendEmailDev(Email(
+          to: correo3.trim(),
+          cc: "$correo1,$correo2",
+          subject: "Anulación de su Solicitud de Devolución #${objeto.numSdv}",
+          body:
+              "Estimado usuario, <br/><br/>Hemos revisado cuidadosamente su solicitud y hemos detectado un problema que impide procesarla en este momento.<br/>Este problema puede estar relacionado con [$error].<br/>Lamentamos cualquier inconveniente que esto pueda causarle y agradecemos su comprensión en este asunto. Esperamos poder resolver esta situación satisfactoriamente para usted.<br/><br/> Saludos,<br/>COJAPAN C.LTDA.",
+          attachment: []));
+    }
+
+    return x;
   }
 }

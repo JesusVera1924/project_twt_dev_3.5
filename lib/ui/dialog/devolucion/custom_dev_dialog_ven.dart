@@ -35,7 +35,7 @@ Future<bool> showDialogDevDialogVen(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black26, width: 2)),
-                width: 320,
+                width: 330,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

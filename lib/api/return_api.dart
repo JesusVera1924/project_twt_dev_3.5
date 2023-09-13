@@ -26,8 +26,8 @@ import 'package:devolucion_modulo/models/transport.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 
 class ReturnApi {
-  //static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
-  static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
+  static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
+  //static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
   //static String baseUrl = "http://192.168.100.4:8081/desarrollosolicitud";
 
   //Listado de motivos
@@ -172,9 +172,9 @@ class ReturnApi {
   }
 
   Future<List<Ig0063Response>> listDetailIg0063(
-      String numero, String tipo) async {
+      String numero, String fac, String tipo) async {
     var url = Uri.parse(
-        "$baseUrl/getdevolucionlist2?empresa=01&numero=$numero&clase=$tipo");
+        "$baseUrl/getdevolucionlist2?empresa=01&numero=$numero&factura=$fac&clase=$tipo");
 
     /* print(url.toString()); */
 
@@ -738,6 +738,7 @@ class ReturnApi {
       bod.add(element.toMap());
     }
     var data = json.encode(bod);
+    print(data);
     final resquet = await http
         .post(Uri.parse("$baseUrl/saveDevolucion3"), body: data, headers: {
       "Content-type": "application/json;charset=UTF-8",
@@ -1110,9 +1111,11 @@ class ReturnApi {
 
   /* Actualizar bodega con un origen de datos */
 
-  Future<String> updateEstatusIg0063(String nummov, String codigo) async {
+  Future<String> updateEstatusIg0063(
+      String nummov, String codigo, String factura) async {
     String resul = "";
-    var url = Uri.parse("$baseUrl/updateCierre?nummov=$nummov&codref=$codigo");
+    var url = Uri.parse(
+        "$baseUrl/updateCierre?nummov=$nummov&codref=$codigo&factura=$factura");
     /* print(url.toString()); */
     try {
       http.Response respuesta = await http.get(url);
@@ -1255,9 +1258,9 @@ class ReturnApi {
 
   Future<String> generarLoteNC(
       String codEmp, String codPto, String fechaI, String fechaF) async {
-    String dato = "";
+    String dato = ""; //
     var url = Uri.parse(
-        "http://192.168.3.57:8080/ebs_wms/bodega/createReturnTasks?cod_emp=$codEmp&cod_pto=$codPto&fechaI=$fechaI&fechaF=$fechaF");
+        "http://181.39.96.138:8080/_ebs_wms/bodega/createReturnTasks?cod_emp=$codEmp&cod_pto=$codPto&fechaI=$fechaI&fechaF=$fechaF");
 
     try {
       http.Response respuesta = await http.get(url);
@@ -1273,5 +1276,55 @@ class ReturnApi {
       throw ('error el en GET: $e');
     }
     return dato;
+  }
+
+  Future<String> anularNC(
+      String codMov, String numMov, String usuario, String clase) async {
+    var url = Uri.parse(
+        "$baseUrl/annulmentProcess?codMov=$codMov&numMov=$numMov&usuario=$usuario&clase=$clase");
+
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        return utf8.decode(respuesta.bodyBytes);
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+  }
+
+  Future sendEmailDev(Email email) async {
+    var url = Uri.parse("$baseUrl/sendEmailU");
+
+    var data = email.toJson();
+    final resquet = await http.post(url, body: data, headers: {
+      "Content-type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true"
+    });
+
+    if (resquet.statusCode != 200) {
+      throw Exception('Error de formulario,: ${resquet.statusCode}');
+    } else {
+      print(resquet.body);
+    }
+  }
+
+  Future<String> checkClientFactura(
+      String empresa, String codRef, String numMov) async {
+    var url = Uri.parse(
+        "$baseUrl/vldcliente2?empresa=$empresa&cod_ref=$codRef&num_mov=$numMov");
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        return respuesta.body.toString();
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
   }
 }

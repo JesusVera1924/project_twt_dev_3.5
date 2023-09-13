@@ -1,5 +1,5 @@
+import 'package:devolucion_modulo/models/ig0063.dart';
 import 'package:flutter/material.dart';
-import 'package:devolucion_modulo/models/modifyModel/detail_vendedor.dart';
 import 'package:devolucion_modulo/provider/vendedor_provider.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -17,15 +17,16 @@ class ListVendedorViewGridSource extends DataGridSource {
   /// Building DataGridRows
   void buildDataGridRows() {
     _dataGridRows =
-        vendedorProvider.listVendedor.map<DataGridRow>((DetailVendedor e) {
+        vendedorProvider.listSolicitudes.map<DataGridRow>((Ig0063 e) {
       return DataGridRow(cells: <DataGridCell>[
+        DataGridCell<String>(columnName: '1-factura', value: e.numMov),
+        DataGridCell<String>(columnName: '2-cliente', value: e.codRef),
+        DataGridCell<String>(columnName: '3-codigo', value: e.codPro),
         DataGridCell<String>(
-            columnName: 'Cliente', value: "${e.codClie}-${e.nombCli}"),
-        DataGridCell<String>(
-            columnName: 'vendedor',
-            value: "${e.codVen.toUpperCase()}-${e.nombVen}"),
-        DataGridCell<String>(columnName: 'items', value: "${e.cantidad}"),
-        DataGridCell<String>(columnName: 'Acciones', value: e.codigo),
+            columnName: '4-producto', value: e.obsSdv.split("::")[2]),
+        DataGridCell<String>(columnName: '5-cantidad', value: "${e.canB92}"),
+        DataGridCell<String>(columnName: '6-tipo', value: e.clsMdm),
+        DataGridCell<String>(columnName: '7-acciones', value: e.codPro),
       ]);
     }).toList();
   }
@@ -40,23 +41,23 @@ class ListVendedorViewGridSource extends DataGridSource {
       Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.centerLeft,
-        child: Tooltip(
-          message: row.getCells()[0].value.toString(),
-          child: Text(row.getCells()[0].value.toString(),
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2),
+        child: Text(
+          row.getCells()[0].value.toString(),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
         ),
       ),
       Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.centerLeft,
-        child: Tooltip(
-          message: row.getCells()[1].value.toString(),
-          child: Text(row.getCells()[1].value.toString(),
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2),
+        child: Text(
+          row.getCells()[1].value.toString(),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
         ),
       ),
       Container(
@@ -67,6 +68,40 @@ class ListVendedorViewGridSource extends DataGridSource {
           textAlign: TextAlign.start,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          row.getCells()[3].value.toString(),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          row.getCells()[4].value.toString(),
+          textAlign: TextAlign.right,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          row.getCells()[5].value.toString() == "D" ? "Devolución" : "Garantía",
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
         ),
       ),
       Container(
@@ -84,7 +119,8 @@ class ListVendedorViewGridSource extends DataGridSource {
                     Colors.red);
                 if (opt) {
                   vendedorProvider
-                      .clearItem(row.getCells()[3].value.toString());
+                      .clearItem(row.getCells()[6].value.toString());
+                  notifyDataSourceListeners();
                 }
               },
               child:

@@ -72,7 +72,9 @@ class Follow3DTS extends DataGridSource {
         InkWell(
             onTap: () async {
               await provider.getListItemsDetail(
-                  row.getCells()[0].value.toString(), "V");
+                  row.getCells()[0].value.toString(),
+                  "V",
+                  row.getCells()[5].value.toString());
               await showDialogDetailItem(
                   context,
                   "Registro #${row.getCells()[0].value}\nCliente: ${row.getCells()[6].value}",
@@ -114,7 +116,9 @@ class Follow3DTS extends DataGridSource {
         InkWell(
             onTap: () async {
               await provider.getListItemsDetail(
-                  row.getCells()[0].value.toString(), "V");
+                  row.getCells()[0].value.toString(),
+                  "V",
+                  row.getCells()[5].value.toString());
               await showDialogDetailItem(
                   context,
                   "Registro #${row.getCells()[0].value}\nCliente: ${row.getCells()[6].value}",

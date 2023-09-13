@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 
-Future<bool> customDialog2(BuildContext context, String title, String body,
+Future<String> customDialog9(BuildContext context, String title, String body,
     IconData iconData, Color color) async {
-  bool resp = false;
+  String resp = "";
   await showDialog(
       barrierDismissible: false,
       context: context,
@@ -32,12 +32,12 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  resp = true;
+                  resp = "N";
                   Navigator.of(context).pop();
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Aceptar', style: CustomLabels.h4),
+                  child: Text('NO LLEGO', style: CustomLabels.h4),
                 )),
             TextButton(
                 style: ButtonStyle(backgroundColor:
@@ -49,12 +49,29 @@ Future<bool> customDialog2(BuildContext context, String title, String body,
                   return Colors.transparent;
                 })),
                 onPressed: () {
-                  resp = false;
+                  resp = "R";
                   Navigator.of(context).pop();
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Cancelar', style: CustomLabels.h4),
+                  child: Text('REPETIDO', style: CustomLabels.h4),
+                )),
+            TextButton(
+                style: ButtonStyle(backgroundColor:
+                    MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return Colors.redAccent.withOpacity(0.08);
+                  }
+                  return Colors.transparent;
+                })),
+                onPressed: () {
+                  resp = "C";
+                  Navigator.of(context).pop();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('CANCELAR', style: CustomLabels.h4),
                 )),
           ],
         );
