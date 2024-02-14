@@ -58,9 +58,7 @@ Future<String> customDialogFech(BuildContext context, String title, String regx,
                           controller: desde,
                           onChanged: (value) {}),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                     SizedBox(
                       width: 120,
                       child: InputBod(

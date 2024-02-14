@@ -5,6 +5,7 @@ import 'package:devolucion_modulo/models/email.dart';
 import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
+import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:devolucion_modulo/services/local_storage.dart';
 import 'package:devolucion_modulo/ui/cards/other_details2.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog.dart';
@@ -20,6 +21,7 @@ class ItemsIg0063 extends ChangeNotifier {
   List<Ig0063Response> itemsCliente = [];
   List<Ig0063Response> tempItemsClient = [];
   List<DetailBodega> listBodega = [];
+  List<Yk0001> listVCallCenter = [];
 
   final returnApi = ReturnApi();
 
@@ -62,10 +64,34 @@ class ItemsIg0063 extends ChangeNotifier {
   }
 
   getListItemsVendedor() async {
-    this.itemsCliente = [];
-    final resp = await returnApi.listIg0063Vendedor(UtilView.usuario.ctaUsr);
+    itemsCliente = [];
+    callValueConst();
+    if (permisos.substring(14) == "V") {
+      listVCallCenter =
+          await returnApi.querylistCallCenter("01", tokenUser!.ctaUsr);
+    }
+    final resp = await returnApi.listIg0063Vendedor(listVCallCenter.isNotEmpty
+        ? obtenerNombres(listVCallCenter)
+        : UtilView.usuario.ctaUsr);
+
     this.itemsCliente = [...resp];
+
     notifyListeners();
+  }
+
+  String obtenerNombres(List<Yk0001> lista) {
+    String nombresConcatenados = "";
+    for (Yk0001 objeto in lista) {
+      nombresConcatenados += "'${objeto.omision}',";
+    }
+    nombresConcatenados =
+        nombresConcatenados.substring(0, nombresConcatenados.length - 1);
+    return nombresConcatenados;
+  }
+
+  saveComentario(Ig0063Response objeto) async {
+    final resp = await returnApi.updateComentarioIg0063(objeto);
+    UtilView.messageAccess(resp == "1" ? "OK-COMENTARIO" : "ERROR");
   }
 
   Future<List<Alterno>> getAlternos(String producto) async {
@@ -120,15 +146,15 @@ class ItemsIg0063 extends ChangeNotifier {
         ),
       );
 
-  Future<bool> cerrarList() async {
+  Future<bool> cerrarList(String usuario, Ig0063Response e) async {
     String uid = "";
     bool resp = false;
     if (verificarRevision()) {
-      for (DetailBodega e in listBodega) {
-        await returnApi.updateEstatusIg0063(
-            e.item.numSdv, e.item.codRef, e.item.numMov);
-        uid = e.item.numSdv;
-      }
+      await returnApi.updateEstatusIg0063(
+          e.numSdv, e.codRef, e.numMov, e.clsSdv, usuario);
+      uid = e.numSdv;
+      //for (DetailBodega e in listBodega) {
+      //}
       itemsCliente.removeWhere((element) => element.numSdv == uid);
       //CreateFilePdf().pdf5(listBodega);
       notifyListeners();
@@ -172,8 +198,9 @@ class ItemsIg0063 extends ChangeNotifier {
     }
   }
 
-  void updateBodega(String uid, String bod1, String value, String bod2) async {
-    await returnApi.updateBodega(uid, bod1, value, bod2);
+  Future<String> updateBodega(
+      String uid, String bod1, String value, String bod2) async {
+    return await returnApi.updateBodega(uid, bod1, value, bod2);
   }
 
   void postIg0063Update(Ig0063Response item) async {
@@ -216,8 +243,12 @@ class ItemsIg0063 extends ChangeNotifier {
   }
 
   Future<String> anularProceso(Ig0063Response objeto, String error) async {
-    String x = await returnApi.anularNC("NC", objeto.numSdv,
-        "ANULADO POR $error - USER: ${tokenUser!.ctaUsr}", objeto.clsSdv);
+    String x = await returnApi.anularNC(
+        "NC",
+        objeto.numSdv.trim(),
+        "ANULADO POR $error - USER: ${tokenUser!.ctaUsr}",
+        objeto.clsSdv,
+        objeto.numMov.trim());
 
     if (x != "") {
       String correo1 = await returnApi.getCorreoUsuario("01", objeto.codRef);

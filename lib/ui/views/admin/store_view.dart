@@ -210,6 +210,7 @@ class _StoreViewState extends State<StoreView> {
                       headerRowHeight: 35,
                       rowHeight: 35,
                       allowFiltering: true,
+                      selectionMode: SelectionMode.single,
                       source: Follow2DTS(context, provider),
                       columns: _buildDataGridForSize(context))),
             ),
@@ -227,10 +228,13 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
     list = [
       GridColumn(
         columnName: '1-solicitud',
-        allowFiltering: false,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
         columnWidthMode: ColumnWidthMode.fitByColumnName,
         label: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
           child: Text('SOLICITUD',
@@ -309,9 +313,12 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
       GridColumn(
         columnName: '1-solicitud',
         columnWidthMode: ColumnWidthMode.fitByColumnName,
-        allowFiltering: false,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
         label: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
           child: Text('SOLICITUD',

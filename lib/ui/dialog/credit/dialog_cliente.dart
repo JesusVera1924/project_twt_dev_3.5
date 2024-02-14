@@ -217,8 +217,9 @@ Future dialogCliente(
                                 icon: Icons.email_outlined,
                                 validator: (String value) {
                                   if (value.length >= 1) {
-                                    if (!EmailValidator.validate(value))
+                                    if (!EmailValidator.validate(value)) {
                                       return 'Email no válido';
+                                    }
                                   }
                                   return null;
                                 },

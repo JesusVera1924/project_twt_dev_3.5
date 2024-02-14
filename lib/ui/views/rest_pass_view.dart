@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
@@ -63,8 +65,9 @@ class ResetPassView extends StatelessWidget {
                               onChanged: (value) =>
                                   registerFormProvider.password = value,
                               validator: (value) {
-                                if (value == null || value.isEmpty)
+                                if (value == null || value.isEmpty) {
                                   return 'Ingrese su contraseña';
+                                }
                                 if (value.length < 6) {
                                   return 'La contraseña debe de ser de 6 caracteres';
                                 }

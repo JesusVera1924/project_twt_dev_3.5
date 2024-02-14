@@ -72,7 +72,7 @@ class MenuHandlers {
       if (authProvider.authStatus == AuthStatus.authenticated) {
         return const NoAccesPageView();
       } else {
-        return MenuView();
+        return const MenuView();
       }
     },
   );
@@ -137,7 +137,8 @@ class MenuHandlers {
       Provider.of<SideMenuProvider>(context, listen: false)
           .setCurrentPageUrl(Flurorouter.storeRoute);
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        if (authProvider.cliente!.rolUsr == "A") {
+        if (authProvider.cliente!.rolUsr == "A" ||
+            authProvider.cliente!.rolUsr == "M") {
           return const StoreView();
         } else {
           return const NoAccesPageView();
@@ -153,7 +154,8 @@ class MenuHandlers {
       Provider.of<SideMenuProvider>(context, listen: false)
           .setCurrentPageUrl(Flurorouter.alamacenRoute);
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        if (authProvider.cliente!.rolUsr == "A") {
+        if (authProvider.cliente!.rolUsr == "A" ||
+            authProvider.cliente!.rolUsr == "M") {
           return const AlmacenView();
         } else {
           return const NoAccesPageView();

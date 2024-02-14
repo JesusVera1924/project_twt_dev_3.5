@@ -1,12 +1,15 @@
+import 'package:devolucion_modulo/inputs/custom_inputs.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:devolucion_modulo/util/screen_size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Future<bool> customDialog7(BuildContext context, String title,
     Ig0063Response objeto, ItemsIg0063 provider) async {
   bool resp = false;
+  final txtComent = TextEditingController(text: objeto.obsMrm);
   bool _isHover = false;
   final _width = ScreenQueries.instance.width(context);
 
@@ -147,7 +150,44 @@ Future<bool> customDialog7(BuildContext context, String title,
                               ],
                             )),
                       ],
-                    )
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: _width * 0.2 + 70,
+                          child: TextFormField(
+                              controller: txtComent,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'(^[a-zA-Z 0-9.-]*$)')),
+                                LengthLimitingTextInputFormatter(200),
+                              ],
+                              maxLines: 2,
+                              style: const TextStyle(fontSize: 12),
+                              decoration: CustomInputs.dialogInputDecoration(
+                                  hint: "Ingresar Comentario...")),
+                        ),
+                        SizedBox(
+                          width: 20,
+                          child: Tooltip(
+                              message: "Guardar comentario",
+                              child: InkWell(
+                                onTap: () async {
+                                  objeto.obsMrm = txtComent.text;
+                                  await provider.saveComentario(objeto);
+                                },
+                                child: const Icon(
+                                  Icons.save_as_rounded,
+                                  color: Colors.blueGrey,
+                                  size: 32,
+                                ),
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             );

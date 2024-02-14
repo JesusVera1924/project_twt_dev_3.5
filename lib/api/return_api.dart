@@ -26,13 +26,13 @@ import 'package:devolucion_modulo/models/transport.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 
 class ReturnApi {
-  static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.100.4:8081/desarrollosolicitud";
+  //static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
+  static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
+  //static String baseUrl = "http://192.168.100.4:8084/desarrollosolicitud";
 
   //Listado de motivos
-  Future<List<Motivo>> querylistMotivos(String codigo) async {
-    var url = Uri.parse("$baseUrl/getopciones?codigo=$codigo");
+  Future<List<Motivo>> querylistMotivos(String codigo, String estado) async {
+    var url = Uri.parse("$baseUrl/getopciones?codigo=$codigo&estado=$estado");
 
     try {
       final respuesta = await http.get(url);
@@ -587,25 +587,6 @@ class ReturnApi {
   }
 
   /* Recuperacion de archivo */
-  Future<String> downloadBase64(String data) async {
-    String dato = "";
-    var url = Uri.parse("$baseUrl/downloaddoc?data=$data");
-    try {
-      http.Response respuesta = await http.get(url);
-      if (respuesta.statusCode == 200) {
-        dato = utf8.decode(respuesta.bodyBytes) == "false"
-            ? ""
-            : utf8.decode(respuesta.bodyBytes);
-      } else {
-        throw Exception('Excepcion ${respuesta.statusCode}');
-      }
-    } catch (e) {
-      throw ('error el en GET: $e');
-    }
-    return dato;
-  }
-
-  /* Recuperacion de archivo */
   Future<String> downloadBase64Info(String data) async {
     String dato = "";
     var url = Uri.parse("$baseUrl/downloaddoc2?data=$data");
@@ -738,7 +719,7 @@ class ReturnApi {
       bod.add(element.toMap());
     }
     var data = json.encode(bod);
-    print(data);
+    //print(data);
     final resquet = await http
         .post(Uri.parse("$baseUrl/saveDevolucion3"), body: data, headers: {
       "Content-type": "application/json;charset=UTF-8",
@@ -1111,11 +1092,29 @@ class ReturnApi {
 
   /* Actualizar bodega con un origen de datos */
 
-  Future<String> updateEstatusIg0063(
-      String nummov, String codigo, String factura) async {
+  Future<String> updateEstatusIg0063(String nummov, String codigo,
+      String factura, String tp, String user) async {
     String resul = "";
     var url = Uri.parse(
-        "$baseUrl/updateCierre?nummov=$nummov&codref=$codigo&factura=$factura");
+        "$baseUrl/updateCierre?nummov=$nummov&codref=$codigo&factura=$factura&tp=$tp&usuario=$user");
+    /* print(url.toString()); */
+    try {
+      http.Response respuesta = await http.get(url);
+      if (respuesta.statusCode == 200) {
+        resul = utf8.decode(respuesta.bodyBytes);
+      } else {
+        throw Exception('Excepcion ${respuesta.statusCode}');
+      }
+    } catch (e) {
+      throw ('error el en GET: $e');
+    }
+    return resul;
+  }
+
+  Future<String> updateComentarioIg0063(Ig0063Response objeto) async {
+    String resul = "";
+    var url = Uri.parse(
+        "$baseUrl/updateComentario?numsdv=${objeto.numSdv}&nummov=${objeto.numMov}&codpro=${objeto.codPro}&obsmrm=${objeto.obsMrm}");
     /* print(url.toString()); */
     try {
       http.Response respuesta = await http.get(url);
@@ -1218,8 +1217,10 @@ class ReturnApi {
 
   Future<String> verificarCantidad(String numMov, String codPro) async {
     String dato = "";
+    String newPro = Uri.encodeComponent(codPro);
+
     var url =
-        Uri.parse("$baseUrl/verificarFactura?numMov=$numMov&codPro=$codPro");
+        Uri.parse("$baseUrl/verificarFactura?numMov=$numMov&codPro=$newPro");
     print(url);
     try {
       http.Response respuesta = await http.get(url);
@@ -1258,9 +1259,9 @@ class ReturnApi {
 
   Future<String> generarLoteNC(
       String codEmp, String codPto, String fechaI, String fechaF) async {
-    String dato = ""; //
+    String dato = ""; //181.39.96.138
     var url = Uri.parse(
-        "http://181.39.96.138:8080/_ebs_wms/bodega/createReturnTasks?cod_emp=$codEmp&cod_pto=$codPto&fechaI=$fechaI&fechaF=$fechaF");
+        "http://192.168.3.54:8080/ebs_wms/bodega/createReturnTasks?cod_emp=$codEmp&cod_pto=$codPto&fechaI=$fechaI&fechaF=$fechaF");
 
     try {
       http.Response respuesta = await http.get(url);
@@ -1278,10 +1279,10 @@ class ReturnApi {
     return dato;
   }
 
-  Future<String> anularNC(
-      String codMov, String numMov, String usuario, String clase) async {
+  Future<String> anularNC(String codMov, String numMov, String usuario,
+      String clase, String factura) async {
     var url = Uri.parse(
-        "$baseUrl/annulmentProcess?codMov=$codMov&numMov=$numMov&usuario=$usuario&clase=$clase");
+        "$baseUrl/annulmentProcess?codMov=$codMov&numMov=$numMov&usuario=$usuario&clase=$clase&factura=$factura");
 
     try {
       http.Response respuesta = await http.get(url);

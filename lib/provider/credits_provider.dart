@@ -9,9 +9,9 @@ import 'package:devolucion_modulo/models/motivo.dart';
 class CreditsProvider extends ChangeNotifier {
   List<Mg0031> listTemp = [];
   List<Mg0031> listTemp2 = [];
-  CreditApi _creditApi = CreditApi();
+  final CreditApi _creditApi = CreditApi();
   List<Motivo> listFormPago = [];
-  ReturnApi _conexionApi = ReturnApi();
+  final ReturnApi _conexionApi = ReturnApi();
   List<Mg0030> listCiud = [];
   List<Mg0030> listProv = [];
   List<Cliente> listVendedor = [];
@@ -24,7 +24,7 @@ class CreditsProvider extends ChangeNotifier {
   getData() async {
     listTemp = await _creditApi.queryListCredit();
     listTemp2 = listTemp;
-    listFormPago = await _conexionApi.querylistMotivos("03");
+    listFormPago = await _conexionApi.querylistMotivos("03", "");
     notifyListeners();
   }
 
@@ -272,8 +272,8 @@ class CreditsProvider extends ChangeNotifier {
   }
 
   update(Mg0031 obj) {
-    obj.fecAdm = obj.fecAdm + "T19:30:45.177+00:00";
-    obj.fecSdc = obj.fecSdc + "T19:30:45.177+00:00";
+    obj.fecAdm = "${obj.fecAdm}T19:30:45.177+00:00";
+    obj.fecSdc = "${obj.fecSdc}T19:30:45.177+00:00";
     _creditApi.updateCredit(obj);
   }
 

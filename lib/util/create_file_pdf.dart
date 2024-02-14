@@ -351,7 +351,7 @@ class CreateFilePdf {
         element.obsSdv == "" ? "" : element.obsSdv.split("::")[1],
         element.numMov,
         element.clsMdm == "D" ? "Devolución" : "Garantía",
-        element.stsSdv == "P" ? "Notificación" : "Procesado"
+        element.stsSdv == "G" ? "Notificación" : "Procesado"
       ]);
     }
   }

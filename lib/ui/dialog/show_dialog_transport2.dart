@@ -279,8 +279,8 @@ String formatFecha(String tx) {
   } else {
     if (tx.length == 10) {
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
-      DateTime dateTime = formatter.parse(
-          tx.split("/")[2] + "-" + tx.split("/")[1] + "-" + tx.split("/")[0]);
+      DateTime dateTime = formatter
+          .parse("${tx.split("/")[2]}-${tx.split("/")[1]}-${tx.split("/")[0]}");
       return "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
     } else {
       return "0000-00-00";

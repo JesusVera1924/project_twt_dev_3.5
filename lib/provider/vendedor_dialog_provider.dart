@@ -100,7 +100,7 @@ class VendedorDialogProvider extends ChangeNotifier {
 
     if (listaDetailTemp.length != listaDetail.length) {
       if (isTodo) {
-        listaDetailTemp.forEach((element) {
+        for (var element in listaDetailTemp) {
           element.controller.text = "";
           element.tipo = "";
           element.setInfoAdicional = "";
@@ -108,7 +108,7 @@ class VendedorDialogProvider extends ChangeNotifier {
           element.setMotivo = "";
           element.estado = Colors.blue;
           element.informacion = "";
-        });
+        }
         listaDetailTemp.clear();
       }
       isTodo = false;
@@ -118,19 +118,18 @@ class VendedorDialogProvider extends ChangeNotifier {
   gestor(Detail e) {
     onSelectedRow(!listaDetailTemp.contains(e), e);
     if (isTodo) {
-      listaDetailTemp.forEach((element) {
+      for (var element in listaDetailTemp) {
         element.tipo = "";
         element.setInfoAdicional = "";
         element.codMotivo = "00";
         element.setMotivo = "";
         element.estado = Colors.blue;
         element.informacion = "";
-      });
+      }
     }
 
     if (listaDetailTemp.contains(e)) {
-      infoProducto =
-          e.item.nomPro + "::" + e.item.mrcPro + "::" + e.item.grpPro;
+      infoProducto = "${e.item.nomPro}::${e.item.mrcPro}::${e.item.grpPro}";
       pass = "1";
       codigoTemp = e.item.codPro;
 

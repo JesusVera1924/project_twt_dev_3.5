@@ -68,14 +68,14 @@ class _CreditViewState extends State<CreditView> {
     if (result != null) {
       PlatformFile file = result.files.first;
       if (file.extension == "pdf") {
-        provider.listDocument.forEach((element) {
+        for (var element in provider.listDocument) {
           if (element.sufijo == sufijo) {
             element.name = file.name;
             element.arrayBs64 = base64.encode(file.bytes!.toList());
             element.estado = true;
             element.requerido = "";
           }
-        });
+        }
       } else {
         NotificationsService.showSnackbar(
             'Advertencia/ solo documento de tipo (.pdf)');
@@ -117,27 +117,26 @@ class _CreditViewState extends State<CreditView> {
           ? Container(
               alignment: Alignment.center,
               height: 300,
-              child: CircularProgressIndicator(
-                color: Colors.red,
-              ),
+              child: const CircularProgressIndicator(color: Colors.red),
             )
           : ListView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               children: [
                 Form(
                   key: creditProvider.formkey,
                   child: ResponsiveGridRow(children: [
                     ResponsiveGridCol(
                       child: Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: 20, left: 20, right: 10, bottom: 5),
                         child: Card(
                           child: Container(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Row(
                               children: [
-                                CustomLabelsForm(text: 'Solicitud de Credito'),
-                                Spacer(),
+                                const CustomLabelsForm(
+                                    text: 'Solicitud de Credito'),
+                                const Spacer(),
                                 CustomIconBtn(
                                     onPressed: () {
                                       NavigationService.replaceTo(
@@ -154,15 +153,15 @@ class _CreditViewState extends State<CreditView> {
                     ),
                     ResponsiveGridCol(
                       child: Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: 5, left: 20, right: 10, bottom: 10),
                         child: Card(
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CustomLabelsForm(
+                                const CustomLabelsForm(
                                   text: 'Datos del cliente',
                                   size: 22,
                                 ),
@@ -188,7 +187,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         flex: 2,
                                         child: InputForm(
@@ -202,7 +201,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         flex: 2,
                                         child: InputForm(
@@ -248,7 +247,7 @@ class _CreditViewState extends State<CreditView> {
                                                     item.nomOcg,
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w400),
@@ -262,7 +261,7 @@ class _CreditViewState extends State<CreditView> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: DropdownButtonFormField<String>(
                                           value: creditProvider.selectProv,
@@ -282,7 +281,7 @@ class _CreditViewState extends State<CreditView> {
                                                     item.nomOcg,
                                                     overflow:
                                                         TextOverflow.ellipsis,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w400),
@@ -296,7 +295,7 @@ class _CreditViewState extends State<CreditView> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Telefono negocio (opcional)',
@@ -309,7 +308,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Celular negocio',
@@ -342,8 +341,9 @@ class _CreditViewState extends State<CreditView> {
                                             icon: Icons.email_outlined,
                                             validator: (value) {
                                               if (!EmailValidator.validate(
-                                                  value ?? ''))
+                                                  value ?? '')) {
                                                 return 'Email no válido';
+                                              }
 
                                               return null;
                                             },
@@ -353,7 +353,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Otro Correo (opcional)',
@@ -362,8 +362,9 @@ class _CreditViewState extends State<CreditView> {
                                             validator: (String value) {
                                               if (value.length >= 1) {
                                                 if (!EmailValidator.validate(
-                                                    value))
+                                                    value)) {
                                                   return 'Email no válido';
+                                                }
                                               }
                                               return null;
                                             },
@@ -384,25 +385,24 @@ class _CreditViewState extends State<CreditView> {
                     ),
                     ResponsiveGridCol(
                       child: Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: 5, left: 20, right: 10, bottom: 10),
                         child: Card(
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CustomLabelsForm(
-                                  text:
-                                      'Información del representante o propietario',
-                                  size: 22,
-                                ),
+                                const CustomLabelsForm(
+                                    text:
+                                        'Información del representante o propietario',
+                                    size: 22),
                                 Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       right: 10, left: 10, bottom: 10),
                                   child: Row(
                                     children: [
-                                      CustomLabelsForm(
+                                      const CustomLabelsForm(
                                         text: 'Tipo de Negocio: ',
                                         size: 18,
                                         fontWeight: FontWeight.w400,
@@ -454,7 +454,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           flex: 2,
                                           child: InputForm(
@@ -463,11 +463,13 @@ class _CreditViewState extends State<CreditView> {
                                               icon:
                                                   Icons.perm_identity_outlined,
                                               validator: (value) {
-                                                if (value.length == 0)
+                                                if (value.length == 0) {
                                                   return "Obligatorio";
-                                                if (value.length == 10)
+                                                }
+                                                if (value.length == 10) {
                                                   return inspectorValue
                                                       .checkCedula(value);
+                                                }
 
                                                 return null;
                                               },
@@ -477,7 +479,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           flex: 2,
                                           child: InputForm(
@@ -486,8 +488,9 @@ class _CreditViewState extends State<CreditView> {
                                               icon: Icons.email_outlined,
                                               validator: (value) {
                                                 if (!EmailValidator.validate(
-                                                    value ?? ''))
+                                                    value ?? '')) {
                                                   return 'Email no válido';
+                                                }
 
                                                 return null;
                                               },
@@ -497,7 +500,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           child: InputForm(
                                               hint: 'Ciudad',
@@ -541,7 +544,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Telefono domicilio',
@@ -559,7 +562,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Telefono trabajo',
@@ -577,7 +580,7 @@ class _CreditViewState extends State<CreditView> {
                                             onEditingComplete: () {},
                                             onChanged: (value) {}),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Expanded(
                                         child: InputForm(
                                             hint: 'Celular',
@@ -621,7 +624,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           child: InputForm(
                                               hint:
@@ -640,7 +643,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           child: InputForm(
                                               hint: 'Monto de Ingresos',
@@ -659,7 +662,7 @@ class _CreditViewState extends State<CreditView> {
                                               onEditingComplete: () {},
                                               onChanged: (value) {}),
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           child: InputForm(
                                               hint: 'Monto de Gastos',
@@ -687,7 +690,7 @@ class _CreditViewState extends State<CreditView> {
                                   child: Row(
                                     children: [
                                       Container(
-                                        constraints: BoxConstraints(
+                                        constraints: const BoxConstraints(
                                             maxWidth: 300, minWidth: 100),
                                         child: DropdownButtonFormField<String>(
                                           value: creditProvider.selectCivil,
@@ -697,8 +700,9 @@ class _CreditViewState extends State<CreditView> {
                                                   value!;
                                             });
 
-                                            if (value == "Casado")
+                                            if (value == "Casado") {
                                               myFocusNode.requestFocus();
+                                            }
                                           },
                                           items:
                                               UtilView.radiusCivil.map((item) {
@@ -709,7 +713,7 @@ class _CreditViewState extends State<CreditView> {
                                                       Alignment.centerLeft,
                                                   child: Text(
                                                     item,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w400),
@@ -725,7 +729,7 @@ class _CreditViewState extends State<CreditView> {
                                       ),
                                       if (creditProvider.selectCivil ==
                                           'Casado')
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                       if (creditProvider.selectCivil ==
                                           'Casado')
                                         Expanded(
@@ -738,9 +742,10 @@ class _CreditViewState extends State<CreditView> {
                                               node: myFocusNode,
                                               validator: (value) {
                                                 if (value.length >= 1) {
-                                                  if (value.length == 10)
+                                                  if (value.length == 10) {
                                                     return inspectorValue
                                                         .checkCedula(value);
+                                                  }
                                                 }
                                                 return null;
                                               },
@@ -752,7 +757,7 @@ class _CreditViewState extends State<CreditView> {
                                         ),
                                       if (creditProvider.selectCivil ==
                                           'Casado')
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                       if (creditProvider.selectCivil ==
                                           'Casado')
                                         Expanded(
@@ -777,7 +782,7 @@ class _CreditViewState extends State<CreditView> {
                                       horizontal: 10, vertical: 5),
                                   child: Row(
                                     children: [
-                                      CustomLabelsForm(
+                                      const CustomLabelsForm(
                                         text: 'Local Comercial: ',
                                         fontWeight: FontWeight.w400,
                                         size: 18,
@@ -812,15 +817,15 @@ class _CreditViewState extends State<CreditView> {
                     if (creditProvider.selectSolicitud == 'Crédito')
                       ResponsiveGridCol(
                         child: Container(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               top: 5, left: 20, right: 10, bottom: 10),
                           child: Card(
                             child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CustomLabelsForm(
+                                  const CustomLabelsForm(
                                     text: 'Referencias Bancarias ',
                                     size: 22,
                                   ),
@@ -831,7 +836,7 @@ class _CreditViewState extends State<CreditView> {
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                  const NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.vertical,
                                               itemCount: cardBan.length,
                                               itemBuilder: (context, index) =>
@@ -841,8 +846,8 @@ class _CreditViewState extends State<CreditView> {
                                   CustomFormButton(
                                       onPressed: () => addData(),
                                       text: 'Agregar +'),
-                                  Divider(thickness: 1),
-                                  CustomLabelsForm(
+                                  const Divider(thickness: 1),
+                                  const CustomLabelsForm(
                                     text: 'Referencias Familiares ',
                                     size: 22,
                                   ),
@@ -863,8 +868,8 @@ class _CreditViewState extends State<CreditView> {
                                   CustomFormButton(
                                       onPressed: () => addData1(),
                                       text: 'Agregar +'),
-                                  Divider(thickness: 1),
-                                  CustomLabelsForm(
+                                  const Divider(thickness: 1),
+                                  const CustomLabelsForm(
                                     text: 'Referencias Personales ',
                                     size: 22,
                                   ),
@@ -875,7 +880,7 @@ class _CreditViewState extends State<CreditView> {
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                  const NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.vertical,
                                               itemCount: cardPersonal.length,
                                               itemBuilder: (context, index) =>
@@ -885,8 +890,8 @@ class _CreditViewState extends State<CreditView> {
                                   CustomFormButton(
                                       onPressed: () => addData2(),
                                       text: 'Agregar +'),
-                                  Divider(thickness: 1),
-                                  CustomLabelsForm(
+                                  const Divider(thickness: 1),
+                                  const CustomLabelsForm(
                                     text: 'Referencia Patrimonio ',
                                     size: 22,
                                   ),
@@ -897,7 +902,7 @@ class _CreditViewState extends State<CreditView> {
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                  const NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.vertical,
                                               itemCount: cardPropiedad.length,
                                               itemBuilder: (context, index) =>
@@ -907,8 +912,8 @@ class _CreditViewState extends State<CreditView> {
                                   CustomFormButton(
                                       onPressed: () => addData3(),
                                       text: 'Agregar +'),
-                                  Divider(thickness: 1),
-                                  CustomLabelsForm(
+                                  const Divider(thickness: 1),
+                                  const CustomLabelsForm(
                                     text: 'Referencias Comerciales ',
                                     size: 22,
                                   ),
@@ -919,7 +924,7 @@ class _CreditViewState extends State<CreditView> {
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics:
-                                                  NeverScrollableScrollPhysics(),
+                                                  const NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.vertical,
                                               itemCount: cardComercial.length,
                                               itemBuilder: (context, index) =>
@@ -929,7 +934,7 @@ class _CreditViewState extends State<CreditView> {
                                   CustomFormButton(
                                       onPressed: () => addData4(),
                                       text: 'Agregar +'),
-                                  Divider(thickness: 1),
+                                  const Divider(thickness: 1),
                                 ],
                               ),
                             ),
@@ -938,16 +943,16 @@ class _CreditViewState extends State<CreditView> {
                       ),
                     ResponsiveGridCol(
                       child: Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: 5, left: 20, right: 10, bottom: 10),
                         child: Card(
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Align(
+                                const Align(
                                   alignment: Alignment.center,
                                   child: CustomLabelsForm(
                                     text: 'Documentación',
@@ -1004,10 +1009,12 @@ class _CreditViewState extends State<CreditView> {
                                                         child: Text(
                                                             _fieldValue
                                                                 .requerido,
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.blue,
-                                                                fontSize: 12)),
+                                                            style:
+                                                                const TextStyle(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    fontSize:
+                                                                        12)),
                                                       ),
                                                     Padding(
                                                       padding: const EdgeInsets
@@ -1053,7 +1060,7 @@ class _CreditViewState extends State<CreditView> {
                                           )
                                       ],
                                     )),
-                                Divider(
+                                const Divider(
                                   thickness: 1,
                                 ),
                                 Padding(

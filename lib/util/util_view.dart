@@ -315,4 +315,10 @@ class UtilView {
       webBgColor: "orange",
     );
   }
+
+  static Future launchUrl(_url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 }

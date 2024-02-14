@@ -12,13 +12,13 @@ Future<String> customDialog4(BuildContext context, List<Cliente> ticket) async {
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             title: Text(
               'Seleccione un codigo de referencia',
               style: CustomLabels.h6,
             ),
-            content: Container(
+            content: SizedBox(
               width: 60,
               height: 80,
               child: ListView.builder(
@@ -39,11 +39,11 @@ Future<String> customDialog4(BuildContext context, List<Cliente> ticket) async {
                                 onExit: (event) =>
                                     setState(() => isHover = false),
                                 child: Text(
-                                  '${ticket[i].codRef}',
+                                  ticket[i].codRef,
                                   style: CustomLabels.h8,
                                 ),
                               ),
-                              Divider(thickness: 1)
+                              const Divider(thickness: 1)
                             ],
                           )),
                     );
@@ -54,8 +54,9 @@ Future<String> customDialog4(BuildContext context, List<Cliente> ticket) async {
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.greenAccent;
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {

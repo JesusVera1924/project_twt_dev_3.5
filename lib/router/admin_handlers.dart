@@ -19,7 +19,7 @@ class AdminHandlers {
       if (authProvider.authStatus == AuthStatus.notAuthenticated) {
         return const LoginView();
       } else {
-        return MenuView();
+        return const MenuView();
       }
     },
   );
@@ -46,7 +46,7 @@ class AdminHandlers {
     final authProvider = Provider.of<AuthProvider>(context!);
 
     if (authProvider.authStatus == AuthStatus.notAuthenticated) {
-      return ResetPassView();
+      return const ResetPassView();
     } else {
       return const LoginView();
     }

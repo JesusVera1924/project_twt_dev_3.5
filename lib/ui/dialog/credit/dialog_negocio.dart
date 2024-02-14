@@ -26,7 +26,7 @@ Future dialogNegocio(
   final _cGas = TextEditingController(text: "${obj.gasMes}");
   final _cNicC = TextEditingController(text: obj.nicCyg);
   final _cNomC = TextEditingController(text: obj.nomCyg);
-  final formkey = new GlobalKey<FormState>();
+  final formkey = GlobalKey<FormState>();
 
   await showDialog(
       barrierDismissible: false,
@@ -34,12 +34,10 @@ Future dialogNegocio(
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
-              'Datos del Negocio',
-            ),
-            content: Container(
+            title: const Text('Datos del Negocio'),
+            content: SizedBox(
               width: 1000,
               child: Form(
                 key: formkey,
@@ -57,11 +55,13 @@ Future dialogNegocio(
                                     enable: true,
                                     icon: Icons.perm_identity_outlined,
                                     validator: (value) {
-                                      if (value.length == 0)
+                                      if (value.length == 0) {
                                         return "Obligatorio";
-                                      if (value.length == 10)
+                                      }
+                                      if (value.length == 10) {
                                         return inspectorValue
                                             .checkCedula(value);
+                                      }
 
                                       return null;
                                     },
@@ -70,7 +70,7 @@ Future dialogNegocio(
                                     length: 10,
                                     onEditingComplete: () {},
                                     onChanged: (value) {})),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               flex: 2,
                               child: InputForm(
@@ -89,7 +89,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               flex: 2,
                               child: InputForm(
@@ -97,8 +97,9 @@ Future dialogNegocio(
                                   enable: true,
                                   icon: Icons.email_outlined,
                                   validator: (value) {
-                                    if (!EmailValidator.validate(value ?? ''))
+                                    if (!EmailValidator.validate(value ?? '')) {
                                       return 'Email no válido';
+                                    }
 
                                     return null;
                                   },
@@ -108,7 +109,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               child: InputForm(
                                   hint: 'Ciudad',
@@ -151,7 +152,7 @@ Future dialogNegocio(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Telefono domicilio',
@@ -169,7 +170,7 @@ Future dialogNegocio(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Telefono trabajo',
@@ -187,7 +188,7 @@ Future dialogNegocio(
                                 onEditingComplete: () {},
                                 onChanged: (value) {}),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: InputForm(
                                 hint: 'Celular',
@@ -230,7 +231,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               child: InputForm(
                                   hint: 'Plazo Solicitado (Plazo en Dias)',
@@ -248,7 +249,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               child: InputForm(
                                   hint: 'Monto de Ingresos',
@@ -266,7 +267,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Expanded(
                               child: InputForm(
                                   hint: 'Monto de Gastos',
@@ -292,8 +293,8 @@ Future dialogNegocio(
                       child: Row(
                         children: [
                           Container(
-                            constraints:
-                                BoxConstraints(maxWidth: 300, minWidth: 100),
+                            constraints: const BoxConstraints(
+                                maxWidth: 300, minWidth: 100),
                             child: DropdownButtonFormField<String>(
                               value: estadoCivil,
                               onChanged: (value) {
@@ -309,7 +310,7 @@ Future dialogNegocio(
                                       child: Text(
                                         item,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400),
                                       )),
@@ -320,7 +321,7 @@ Future dialogNegocio(
                               ),
                             ),
                           ),
-                          if (estadoCivil == 'Casado') SizedBox(width: 5),
+                          if (estadoCivil == 'Casado') const SizedBox(width: 5),
                           if (estadoCivil == 'Casado')
                             Expanded(
                               child: InputForm(
@@ -329,9 +330,10 @@ Future dialogNegocio(
                                   icon: Icons.perm_identity_outlined,
                                   validator: (value) {
                                     if (value.length >= 1) {
-                                      if (value.length == 10)
+                                      if (value.length == 10) {
                                         return inspectorValue
                                             .checkCedula(value);
+                                      }
                                     }
                                     return null;
                                   },
@@ -341,7 +343,7 @@ Future dialogNegocio(
                                   onEditingComplete: () {},
                                   onChanged: (value) {}),
                             ),
-                          if (estadoCivil == 'Casado') SizedBox(width: 5),
+                          if (estadoCivil == 'Casado') const SizedBox(width: 5),
                           if (estadoCivil == 'Casado')
                             Expanded(
                               child: InputForm(
@@ -367,8 +369,9 @@ Future dialogNegocio(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -393,16 +396,17 @@ Future dialogNegocio(
                       Navigator.of(context).pop();
                     }
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Guardar'),
                   )),
               TextButton(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x1A24F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x1A24F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -422,8 +426,8 @@ Future dialogNegocio(
                     _cNomC.clear();
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Cancelar'),
                   )),
             ],

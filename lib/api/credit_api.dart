@@ -5,9 +5,9 @@ import 'package:devolucion_modulo/models/mg0030.dart';
 import 'package:devolucion_modulo/models/mg0031.dart';
 
 class CreditApi {
-  static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
-  //static String baseUrl = "http://192.168.100.4:8081/desarrollosolicitud";
+  //static String baseUrl = "http://181.39.96.138:8081/desarrollosolicitud";
+  static String baseUrl = "http://192.168.3.56:8084/desarrollosolicitud";
+  //static String baseUrl = "http://192.168.100.4:8084/desarrollosolicitud";
 
   Future<Mg0031> queryId(String identificacion) async {
     Mg0031 dato;
@@ -272,8 +272,7 @@ class CreditApi {
 
   Future<String> downloadBase64(String data) async {
     String dato = "";
-    var url = Uri.parse(
-        "$baseUrl/downloaddoc?data=/u/TwTmicrolight/apptwo/cojapan/clientes/$data");
+    var url = Uri.parse("$baseUrl/downloaddoc?data=$data");
     try {
       http.Response respuesta = await http.get(url);
       if (respuesta.statusCode == 200) {

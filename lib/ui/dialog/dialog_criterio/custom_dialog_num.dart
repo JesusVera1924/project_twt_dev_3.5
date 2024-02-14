@@ -10,7 +10,7 @@ Future<String> customDialogNum(BuildContext context, String title, String regx,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: Row(
             children: [
@@ -47,8 +47,9 @@ Future<String> customDialogNum(BuildContext context, String title, String regx,
                 style: ButtonStyle(backgroundColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered))
+                  if (states.contains(MaterialState.hovered)) {
                     return Colors.greenAccent;
+                  }
                   return Colors.transparent;
                 })),
                 onPressed: () {

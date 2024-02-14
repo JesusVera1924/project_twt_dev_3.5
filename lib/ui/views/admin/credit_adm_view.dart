@@ -135,7 +135,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                   Provider.of<CreditsProvider>(context, listen: false)
                       .getFiltro("P");
                 },
-                color: Color(0xD9E14E47),
+                color: const Color(0xD9E14E47),
                 msj: 'Solicitud pendientes',
                 icon: Icons.local_parking_rounded),
             CustomIconBtn(
@@ -143,7 +143,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                   Provider.of<CreditsProvider>(context, listen: false)
                       .getFiltro("A");
                 },
-                color: Color(0xD955BB96),
+                color: const Color(0xD955BB96),
                 msj: 'Solicitud procesadas',
                 icon: Icons.add_task),
             CustomIconBtn(
@@ -151,7 +151,7 @@ class _CreditAdmViewState extends State<CreditAdmView> {
                   Provider.of<CreditsProvider>(context, listen: false)
                       .getFill();
                 },
-                color: Color(0xD94B8BA9),
+                color: const Color(0xD94B8BA9),
                 msj: 'Todas las solicitudes',
                 icon: Icons.assignment),
             CustomIconBtn(

@@ -108,11 +108,6 @@ class VendedorProvider extends ChangeNotifier {
     permisos = LocalStorage.prefs.getString('permiss')!;
   }
 
-  Future getFillMotivo() async {
-    final resp = await _returnApi.querylistMotivos("10");
-    listMotivos = resp;
-  }
-
   Future<List<Invoice>> getFillInvoice(
       String tipo, String tp, String numero) async {
     final resp = await _returnApi.querylistInvoice(tipo, tp, numero);
@@ -123,8 +118,10 @@ class VendedorProvider extends ChangeNotifier {
     factura = await _returnApi.queryInvoice(tipo, tp, numero);
   }
 
-  Future clearItem(String code) async {
-    listSolicitudes.removeWhere((element) => element.codPro == code);
+  Future clearItem(String factura, String producto) async {
+    listSolicitudes.removeWhere(
+        (element) => element.numMov == factura && element.codPro == producto);
+    notifyListeners();
   }
 
   Future<List<DetailProductResponse>> getFillDetail(
@@ -157,7 +154,7 @@ class VendedorProvider extends ChangeNotifier {
     bool resp = false;
 
     if (listSolicitudes.isNotEmpty) {
-      resp = listSolicitudes.any((e) => e.numMov == facture);
+      resp = listSolicitudes.any((e) => e.numMov.contains(facture));
     }
 
     return resp;
@@ -215,18 +212,13 @@ class VendedorProvider extends ChangeNotifier {
 
   Future<String> generarProcesso() async {
     String ticket = await _returnApi.postListIg0063(listSolicitudes);
-    await convertKarmov(ticket);
     for (var element in listArchivos) {
       if (element.tipo == "Garantía") {
-        _returnApi.uploadDocument(
+        await _returnApi.uploadDocument(
             element.archivo, "InfTec-$ticket-${element.item.codPro}");
       }
     }
-    listSolicitudes.clear();
-    listArchivos.clear();
-    numMov.text = "";
-    codCli.text = "";
-    nombCli.text = "";
+    await convertKarmov(ticket);
     return ticket;
   }
 
@@ -371,7 +363,6 @@ class VendedorProvider extends ChangeNotifier {
         await callEventInt();
       }
     }
-
     notifyListeners();
   }
 
@@ -384,7 +375,7 @@ class VendedorProvider extends ChangeNotifier {
   }
 
   Future callEventInt() async {
-    listMotivos = await _returnApi.querylistMotivos("10");
+    listMotivos = await _returnApi.querylistMotivos("10", "1");
     listSeries = await _returnApi.querylistSeries();
     if (listMotivos.isNotEmpty) {
       listMotivos.add(Motivo(
@@ -412,7 +403,7 @@ class VendedorProvider extends ChangeNotifier {
             codMov: "NC",
             numMov: tic,
             fecMov: DateTime.now(),
-            cx1Mov: "",
+            cx1Mov: element.codMov,
             nx1Mov: "",
             fx1Mov: "",
             cx2Mov: element.codMov,
@@ -446,7 +437,7 @@ class VendedorProvider extends ChangeNotifier {
             odsMov: "",
             adaMov: "",
             cdaMov: 0,
-            sdaMov: "",
+            sdaMov: element.clsMdm,
             odaMov: element.codVen,
             bodMov: "01",
             auxilia: element.ucrSdv,
@@ -476,7 +467,14 @@ class VendedorProvider extends ChangeNotifier {
 
       correo2 = await _returnApi.getCorreoUsuario("01", codCli.text);
 
-      CreateFilePdf().pdf4(listTemp, factura!.nomRef, "$correo1,$correo2", tic);
+      await CreateFilePdf()
+          .pdf4(listSolicitudes, factura!.nomRef, "$correo1,$correo2", tic);
+
+      listSolicitudes.clear();
+      listArchivos.clear();
+      numMov.text = "";
+      codCli.text = "";
+      nombCli.text = "";
     } catch (e) {
       print(e);
     }

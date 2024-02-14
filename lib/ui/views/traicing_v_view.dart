@@ -73,6 +73,10 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
       GridColumn(
         columnName: '1-solicitud',
         allowFiltering: false,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
         columnWidthMode: ColumnWidthMode.fitByColumnName,
         label: Container(
           padding: const EdgeInsets.all(8.0),
@@ -125,7 +129,7 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
         ),
       ),
       GridColumn(
-        columnName: '9-estado',
+        columnName: '10-estado',
         allowFiltering: false,
         columnWidthMode: ColumnWidthMode.fitByColumnName,
         label: Container(
@@ -148,18 +152,37 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),
+      GridColumn(
+        columnName: '12-ncredito',
+        columnWidthMode: ColumnWidthMode.fitByColumnName,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            filterMode: FilterMode.checkboxFilter,
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('N°CREDITO',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
     ];
   } else {
     list = [
       GridColumn(
         columnName: '1-solicitud',
-        columnWidthMode: ColumnWidthMode.fitByColumnName,
-        allowFiltering: false,
+        width: 110,
+        filterPopupMenuOptions: const FilterPopupMenuOptions(
+            canShowSortingOptions: false,
+            showColumnName: false,
+            canShowClearFilterOption: false),
         label: Container(
           padding: const EdgeInsets.all(8.0),
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
-          child: Text('SOLICITUD',
+          child: Text('NUMERO',
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),
@@ -175,6 +198,18 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
           child: Text('F.EMISION',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
+      GridColumn(
+        columnName: '3-pv',
+        columnWidthMode: ColumnWidthMode.fitByColumnName,
+        allowFiltering: false,
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('VEN',
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),
@@ -249,6 +284,18 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
       GridColumn(
         columnName: '10-estado',
         columnWidthMode: ColumnWidthMode.fitByColumnName,
+        allowFiltering: false,
+        label: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: Responsive.isDesktop(context) ? 100 : 80,
+          alignment: Alignment.center,
+          child: Text('ESTADO',
+              style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
+        ),
+      ),
+      GridColumn(
+        columnName: '12-ncredito',
+        columnWidthMode: ColumnWidthMode.fitByColumnName,
         filterPopupMenuOptions: const FilterPopupMenuOptions(
             filterMode: FilterMode.checkboxFilter,
             canShowSortingOptions: false,
@@ -258,7 +305,7 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
           padding: const EdgeInsets.all(8.0),
           //width: Responsive.isDesktop(context) ? 100 : 80,
           alignment: Alignment.center,
-          child: Text('ESTADO',
+          child: Text('N°CREDITO',
               style: CustomLabels.h11, overflow: TextOverflow.ellipsis),
         ),
       ),

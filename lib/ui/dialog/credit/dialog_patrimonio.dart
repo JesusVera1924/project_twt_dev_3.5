@@ -32,12 +32,10 @@ Future dialogPatrimonio(
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
-              'Patrimonio',
-            ),
-            content: Container(
+            title: const Text('Patrimonio'),
+            content: SizedBox(
               width: 1000,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -61,7 +59,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -77,7 +75,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Valor',
@@ -92,7 +90,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             value: selectOp1,
@@ -110,7 +108,7 @@ Future dialogPatrimonio(
                                     child: Text(
                                       item,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400),
                                     )),
@@ -124,7 +122,7 @@ Future dialogPatrimonio(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -144,7 +142,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -160,7 +158,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Valor',
@@ -175,7 +173,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             value: selectOp2,
@@ -193,7 +191,7 @@ Future dialogPatrimonio(
                                     child: Text(
                                       item,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400),
                                     )),
@@ -207,7 +205,7 @@ Future dialogPatrimonio(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -227,7 +225,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -243,7 +241,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Valor',
@@ -258,7 +256,7 @@ Future dialogPatrimonio(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             value: selectOp3,
@@ -276,7 +274,7 @@ Future dialogPatrimonio(
                                     child: Text(
                                       item,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400),
                                     )),
@@ -299,7 +297,7 @@ Future dialogPatrimonio(
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
                     if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                      return const Color(0x4024F181);
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -318,16 +316,17 @@ Future dialogPatrimonio(
                     provider.savePatrimonio(obj);
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Guardar'),
                   )),
               TextButton(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x1A24F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x1A24F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -344,8 +343,8 @@ Future dialogPatrimonio(
                     _rd3V.clear();
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Cancelar'),
                   )),
             ],

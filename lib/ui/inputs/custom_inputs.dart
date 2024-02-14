@@ -16,8 +16,8 @@ class CustomInputs {
           icon,
           color: Colors.grey,
         ),
-        hintStyle: TextStyle(color: Colors.grey),
-        labelStyle: TextStyle(color: Colors.grey));
+        hintStyle: const TextStyle(color: Colors.grey),
+        labelStyle: const TextStyle(color: Colors.grey));
   }
 
   static InputDecoration boxInputDecoration2({
@@ -57,18 +57,18 @@ class CustomInputs {
 
   static InputDecoration cantInputDecoration({required String hint}) {
     return InputDecoration(
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.green.withOpacity(0.4)),
         ),
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
-        labelStyle: TextStyle(color: Colors.grey, fontSize: 14));
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+        labelStyle: const TextStyle(color: Colors.grey, fontSize: 14));
   }
 
   static InputDecoration searchInputDecoration(
@@ -81,8 +81,8 @@ class CustomInputs {
           icon,
           color: Colors.grey,
         ),
-        labelStyle: TextStyle(color: Colors.grey),
-        hintStyle: TextStyle(color: Colors.grey));
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey));
   }
 
   static InputDecoration formInputDecoration(
@@ -90,27 +90,27 @@ class CustomInputs {
     return InputDecoration(
         filled: true,
         isDense: true,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide.none),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide.none),
         hintText: hint,
         prefixIcon: Padding(
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
           child: Icon(icon, size: 20, color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           // borderSide: BorderSide(color: kTitleTextColor),
         ),
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(color: Color(0xFFEE376E))),
-        contentPadding: EdgeInsets.all(5),
-        labelStyle: TextStyle(color: Colors.grey),
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 14));
+        contentPadding: const EdgeInsets.all(5),
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14));
   }
 
   static InputDecoration formInputDecoration2(
@@ -119,27 +119,27 @@ class CustomInputs {
         filled: true,
         isDense: true,
         labelText: hint,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide.none),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide.none),
         hintText: hint,
         prefixIcon: Padding(
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
           child: Icon(icon, size: 20, color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           // borderSide: BorderSide(color: kTitleTextColor),
         ),
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(color: Color(0xFFEE376E))),
-        contentPadding: EdgeInsets.all(5),
-        labelStyle: TextStyle(color: Colors.grey),
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 14));
+        contentPadding: const EdgeInsets.all(5),
+        labelStyle: const TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14));
   }
 
   static InputDecoration dialogInputDecoration({required String hint}) {

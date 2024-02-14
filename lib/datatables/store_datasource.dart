@@ -18,6 +18,7 @@ class StoreDataSource extends DataGridSource {
   final ItemsIg0063 provider;
   TextEditingController controller = TextEditingController();
   List<DataGridRow> _dataGridRows = [];
+  String validacion = "";
 
   StoreDataSource(this.context, this.provider) {
     buildDataGridRows();
@@ -88,9 +89,9 @@ class StoreDataSource extends DataGridSource {
                           double.parse(value) <= e.item.canB92) {
                         e.item.canB93 = double.parse(value);
 
-                        print("Variables para el calculo");
+                        /*        print("Variables para el calculo");
                         print(value);
-                        print(e.item.canB92);
+                        print(e.item.canB92); */
 
                         if ((double.parse(value) - e.item.canB92) == 0) {
                           if (e.controller93.text == "") e.diseable93 = false;
@@ -128,6 +129,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check93,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller93.text == "") return;
                   var val = 0;
@@ -140,36 +142,49 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal93);
 
                       e.item.canB92 = e.item.canB92 - val;
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "93", "+", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "93", "$val", "92");
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "93");
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "93", "+", e.item.canB92);
 
-                      provider.postIg0063Update(e.item);
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
+
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal93) -
                           int.parse(e.controller93.text);
 
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "93", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "93", "$val", "92");
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "93");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "93", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable94 = true;
@@ -186,6 +201,7 @@ class StoreDataSource extends DataGridSource {
                   //setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -249,6 +265,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check94,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller94.text == "") return;
                   var val = 0;
@@ -262,30 +279,41 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal94);
 
                       e.item.canB92 = e.item.canB92 - val;
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "94");
 
-                      provider.registroKardex(
-                          e.item, "$val", "94", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "94", "$val", "92");
+                        provider.registroKardex(
+                            e.item, "$val", "94", "+", e.item.canB92);
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal94) -
                           int.parse(e.controller94.text);
 
                       e.item.canB92 = e.item.canB92 + val;
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "94", "$val", "92");
 
-                      provider.registroKardex(
-                          e.item, "$val", "94", "-", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "94", "-", e.item.canB92);
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "94");
-
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -303,6 +331,7 @@ class StoreDataSource extends DataGridSource {
 
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -365,6 +394,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check95,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller95.text == "") return;
                   var val = 0;
@@ -378,36 +408,47 @@ class StoreDataSource extends DataGridSource {
 
                       e.item.canB92 = e.item.canB92 - val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "95", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "95");
 
-                      provider.updateBodega(e.item.codPro, "95", "$val", "92");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "95", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal95) -
                           int.parse(e.controller95.text);
 
                       e.item.canB92 = e.item.canB92 + val;
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "95", "$val", "92");
 
-                      provider.registroKardex(
-                          e.item, "$val", "95", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "95", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "95");
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
-
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -424,6 +465,7 @@ class StoreDataSource extends DataGridSource {
                   // setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -488,11 +530,11 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check96,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller96.text == "") {
                     return;
                   }
-
                   var val = 0;
                   e.check96 = value ?? false;
                   if (e.check96) {
@@ -503,39 +545,50 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal96);
 
                       e.item.canB92 = e.item.canB92 - val;
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "96");
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
 
-                      provider.registroKardex(
-                          e.item, "$val", "96", "+", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "96", "+", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "96", "$val", "92");
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
-
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal96) -
                           int.parse(e.controller96.text);
 
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "96", "-", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "96", "$val", "92");
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "96", "-", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "96");
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -552,6 +605,7 @@ class StoreDataSource extends DataGridSource {
                   //setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -611,9 +665,9 @@ class StoreDataSource extends DataGridSource {
                           double.parse(value) <= e.item.canB92) {
                         e.item.canB93 = double.parse(value);
 
-                        print("Variables para el calculo");
+                        /*  print("Variables para el calculo");
                         print(value);
-                        print(e.item.canB92);
+                        print(e.item.canB92); */
 
                         if ((double.parse(value) - e.item.canB92) == 0) {
                           if (e.controller93.text == "") e.diseable93 = false;
@@ -651,6 +705,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check93,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller93.text == "") return;
                   var val = 0;
@@ -663,35 +718,48 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal93);
 
                       e.item.canB92 = e.item.canB92 - val;
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "93", "+", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "93", "$val", "92");
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "93");
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "93", "+", e.item.canB92);
 
-                      provider.postIg0063Update(e.item);
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
+
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal93) -
                           int.parse(e.controller93.text);
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "93", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "93", "$val", "92");
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "93");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "93", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable94 = true;
@@ -708,6 +776,7 @@ class StoreDataSource extends DataGridSource {
                   //setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -771,6 +840,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check94,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller94.text == "") return;
                   var val = 0;
@@ -784,29 +854,42 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal94);
 
                       e.item.canB92 = e.item.canB92 - val;
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
 
-                      provider.registroKardex(
-                          e.item, "$val", "94", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "94");
 
-                      provider.updateBodega(e.item.codPro, "94", "$val", "92");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
 
-                      provider.postIg0063Update(e.item);
+                        provider.registroKardex(
+                            e.item, "$val", "94", "+", e.item.canB92);
+
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal94) -
                           int.parse(e.controller94.text);
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "94", "-", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "94", "$val", "92");
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "94", "-", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "94");
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -824,6 +907,7 @@ class StoreDataSource extends DataGridSource {
 
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -887,6 +971,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check95,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller95.text == "") return;
                   var val = 0;
@@ -899,36 +984,48 @@ class StoreDataSource extends DataGridSource {
                           int.parse(e.tempVal95);
 
                       e.item.canB92 = e.item.canB92 - val;
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "95", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "95");
 
-                      provider.updateBodega(e.item.codPro, "95", "$val", "92");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "95", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal95) -
                           int.parse(e.controller95.text);
 
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "95", "-", e.item.canB92);
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "95", "$val", "92");
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "95");
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "95", "-", e.item.canB92);
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -945,6 +1042,7 @@ class StoreDataSource extends DataGridSource {
                   // setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),
@@ -1009,6 +1107,7 @@ class StoreDataSource extends DataGridSource {
             Checkbox(
                 value: row.getCells()[3].value.check96,
                 onChanged: (value) async {
+                  UtilView.buildShowDialog(context);
                   var e = row.getCells()[3].value;
                   if (e.controller96.text == "") {
                     return;
@@ -1025,38 +1124,50 @@ class StoreDataSource extends DataGridSource {
 
                       e.item.canB92 = e.item.canB92 - val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "-", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "92", "$val", "96");
 
-                      provider.registroKardex(
-                          e.item, "$val", "96", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "92", "-", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "96", "$val", "92");
+                        provider.registroKardex(
+                            e.item, "$val", "96", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
                     } else {
                       val = int.parse(e.tempVal96) -
                           int.parse(e.controller96.text);
 
                       e.item.canB92 = e.item.canB92 + val;
 
-                      provider.registroKardex(
-                          e.item, "$val", "96", "-", e.item.canB92);
+                      validacion = await provider.updateBodega(
+                          e.item.codPro, "96", "$val", "92");
 
-                      provider.registroKardex(
-                          e.item, "$val", "92", "+", e.item.canB92);
+                      if (validacion == "1") {
+                        provider.registroKardex(
+                            e.item, "$val", "96", "-", e.item.canB92);
 
-                      provider.updateBodega(e.item.codPro, "92", "$val", "96");
+                        provider.registroKardex(
+                            e.item, "$val", "92", "+", e.item.canB92);
 
-                      e.item.obsMrm = controller.text != ""
-                          ? e.item.obsMrm + "::" + controller.text
-                          : "";
+                        e.item.obsMrm = controller.text != ""
+                            ? e.item.obsMrm + "::" + controller.text
+                            : "";
 
-                      provider.postIg0063Update(e.item);
+                        provider.postIg0063Update(e.item);
+                      } else {
+                        UtilView.messageDanger(validacion);
+                        Navigator.pop(context);
+                      }
 
                       if (e.item.canB91 >= e.item.canB92) {
                         e.diseable93 = true;
@@ -1073,6 +1184,7 @@ class StoreDataSource extends DataGridSource {
                   //setState(() {});
                   provider.proceso1(e);
                   notifyDataSourceListeners();
+                  Navigator.pop(context);
                 })
           ],
         ),

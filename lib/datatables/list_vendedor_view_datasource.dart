@@ -109,7 +109,7 @@ class ListVendedorViewGridSource extends DataGridSource {
         alignment: Alignment.centerLeft,
         child: Align(
             alignment: Alignment.center,
-            child: GestureDetector(
+            child: InkWell(
               onTap: () async {
                 final opt = await customDialog2(
                     context,
@@ -118,9 +118,8 @@ class ListVendedorViewGridSource extends DataGridSource {
                     Icons.delete_outlined,
                     Colors.red);
                 if (opt) {
-                  vendedorProvider
-                      .clearItem(row.getCells()[6].value.toString());
-                  notifyDataSourceListeners();
+                  vendedorProvider.clearItem(row.getCells()[0].value.toString(),
+                      row.getCells()[2].value.toString());
                 }
               },
               child:

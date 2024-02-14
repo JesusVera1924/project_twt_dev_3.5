@@ -171,11 +171,11 @@ class CreditProvider extends ChangeNotifier {
     gasMes.text = "";
     oiaMes.text = "";
 
-    listDocument.forEach((element) {
+    for (var element in listDocument) {
       element.arrayBs64 = "";
       element.name = "";
       element.estado = false;
-    });
+    }
 
     selectDocumento = 'Cedula';
     selectSolicitud = 'Contado';

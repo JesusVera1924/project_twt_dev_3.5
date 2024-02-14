@@ -1,20 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:devolucion_modulo/datatables/store_datasource.dart';
+import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
+import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog5.dart';
 import 'package:devolucion_modulo/util/responsive.dart';
 import 'package:flutter/material.dart';
-
-import 'package:devolucion_modulo/api/return_api.dart';
-import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
-import 'package:devolucion_modulo/models/kardex.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
 import 'package:devolucion_modulo/ui/buttons/custom_form_button.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-Future showDialogStore(
-    BuildContext context, ItemsIg0063 provider, String titulo) async {
+Future showDialogStore(BuildContext context, ItemsIg0063 provider,
+    String titulo, String titleDialog, Ig0063Response obj) async {
   await showDialog(
       context: context,
       barrierDismissible: false,
@@ -29,8 +27,13 @@ Future showDialogStore(
               actions: [
                 CustomFormButton(
                   onPressed: () async {
-                    if (await provider.cerrarList()) {
-                      Navigator.pop(context);
+                    bool x = await customDialog5(context,
+                        "Terminar proceso de verificación\n$titleDialog");
+                    if (x) {
+                      if (await provider.cerrarList(
+                          provider.tokenUser!.codUsr, obj)) {
+                        Navigator.pop(context);
+                      }
                     }
                   },
                   color: Colors.green,
@@ -309,7 +312,7 @@ List<GridColumn> _buildDataGridForSize(BuildContext context) {
 
   return list;
 }
-
+/* 
 void registroKardex(
     Ig0063Response e, String cantidad, String bodega, String signo) {
   ReturnApi returnapi = ReturnApi();
@@ -340,3 +343,4 @@ void registroKardex(
       somMov: signo,
       stsMov: "1"));
 }
+ */

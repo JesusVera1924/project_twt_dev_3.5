@@ -33,12 +33,10 @@ Future dialogFamiliar(
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
-              'Personas a Contactar',
-            ),
-            content: Container(
+            title: const Text('Personas a Contactar'),
+            content: SizedBox(
               width: 1000,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -61,7 +59,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cargo',
@@ -76,7 +74,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -91,7 +89,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Extencion',
@@ -106,7 +104,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -115,8 +113,9 @@ Future dialogFamiliar(
                               icon: Icons.email_outlined,
                               validator: (value) {
                                 if (value.length >= 1) {
-                                  if (!EmailValidator.validate(value))
+                                  if (!EmailValidator.validate(value)) {
                                     return 'Email no válido';
+                                  }
                                 }
                                 return null;
                               },
@@ -129,7 +128,7 @@ Future dialogFamiliar(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -148,7 +147,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cargo',
@@ -163,7 +162,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -178,7 +177,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Extencion',
@@ -193,7 +192,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -202,8 +201,9 @@ Future dialogFamiliar(
                               icon: Icons.email_outlined,
                               validator: (value) {
                                 if (value.length >= 1) {
-                                  if (!EmailValidator.validate(value))
+                                  if (!EmailValidator.validate(value)) {
                                     return 'Email no válido';
+                                  }
                                 }
                                 return null;
                               },
@@ -216,7 +216,7 @@ Future dialogFamiliar(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -235,7 +235,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cargo',
@@ -250,7 +250,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -265,7 +265,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Extencion',
@@ -280,7 +280,7 @@ Future dialogFamiliar(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           flex: 2,
                           child: InputForm(
@@ -289,8 +289,9 @@ Future dialogFamiliar(
                               icon: Icons.email_outlined,
                               validator: (value) {
                                 if (value.length >= 1) {
-                                  if (!EmailValidator.validate(value))
+                                  if (!EmailValidator.validate(value)) {
                                     return 'Email no válido';
+                                  }
                                 }
                                 return null;
                               },
@@ -311,8 +312,9 @@ Future dialogFamiliar(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -337,16 +339,17 @@ Future dialogFamiliar(
                     provider.saveContacto(obj);
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Guardar'),
                   )),
               TextButton(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x1A24F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x1A24F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -370,8 +373,8 @@ Future dialogFamiliar(
 
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Cancelar'),
                   )),
             ],

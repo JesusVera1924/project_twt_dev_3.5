@@ -82,7 +82,7 @@ class RegisterView extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               decoration: CustomInputs.loginInputDecoration(
                                   hint: 'Ingrese su nombre usuario',
                                   label: 'Nombre de usuario',

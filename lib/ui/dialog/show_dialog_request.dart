@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
@@ -73,14 +75,14 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
 
                 if (listaTemp.length != lista.length) {
                   if (isTodo) {
-                    listaTemp.forEach((element) {
+                    for (var element in listaTemp) {
                       element.tipo = "";
                       element.setInfoAdicional = "";
                       element.codMotivo = "00";
                       element.setMotivo = "";
                       element.estado = Colors.blue;
                       element.informacion = "";
-                    });
+                    }
                   }
                   isTodo = false;
                 }
@@ -93,13 +95,13 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
 
               if (result != null) {
                 PlatformFile file = result.files.first;
-                listaTemp.forEach((element) {
+                for (var element in listaTemp) {
                   if (element.item.codPro == codigoTemp) {
                     element.archivo = base64.encode(file.bytes!.toList());
                     returnProvider.setNombre = file.name;
                     imgPdf = "1";
                   }
-                });
+                }
               }
             }
 
@@ -116,29 +118,28 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
             }
 
             return AlertDialog(
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Detalle de Items'.toUpperCase()),
-                  listaTemp.length == lista.length
-                      ? CustomFormButton(
-                          onPressed: () {
-                            pass = "1";
-                            isTodo = true;
-                            infoProducto =
-                                "Actualización general para todo los productos de la factura, adicional no puede incluir motivos de garantía solo motivos de devolución";
-                            _valTipo = "Devolución";
+                  if (listaTemp.length == lista.length)
+                    CustomFormButton(
+                        onPressed: () {
+                          pass = "1";
+                          isTodo = true;
+                          infoProducto =
+                              "Actualización general para todo los productos de la factura, adicional no puede incluir motivos de garantía solo motivos de devolución";
+                          _valTipo = "Devolución";
 
-                            //
-                            setState(() {});
-                          },
-                          text: 'Devolución total')
-                      : Text('')
+                          //
+                          setState(() {});
+                        },
+                        text: 'Devolución total')
                 ],
               ),
-              content: Container(
+              content: SizedBox(
                 height: 400,
                 child: Row(
                   children: [
@@ -156,7 +157,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                       child: Text(
                                         'Codigo'.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -168,7 +169,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                       child: Text(
                                         'Producto'.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -180,7 +181,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                       child: Text(
                                         'Cantidad'.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -192,7 +193,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                       child: Text(
                                         'Devolver'.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -204,7 +205,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                       child: Text(
                                         'Motivo'.toUpperCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -235,11 +236,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                   child: SizedBox(
                                                     width: 250,
                                                     child: Text(
-                                                      e.item.nomPro +
-                                                          "::" +
-                                                          e.item.mrcPro +
-                                                          "::" +
-                                                          e.item.grpPro,
+                                                      "${e.item.nomPro}::${e.item.mrcPro}::${e.item.grpPro}",
                                                       maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
@@ -284,8 +281,8 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                               child: GestureDetector(
                                                 onTap: () {
                                                   if (isTodo) {
-                                                    listaTemp
-                                                        .forEach((element) {
+                                                    for (var element
+                                                        in listaTemp) {
                                                       element.tipo = "";
                                                       element.setInfoAdicional =
                                                           "";
@@ -294,16 +291,12 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                       element.estado =
                                                           Colors.blue;
                                                       element.informacion = "";
-                                                    });
+                                                    }
                                                   }
 
                                                   if (listaTemp.contains(e)) {
                                                     infoProducto =
-                                                        e.item.nomPro +
-                                                            "::" +
-                                                            e.item.mrcPro +
-                                                            "::" +
-                                                            e.item.grpPro;
+                                                        "${e.item.nomPro}::${e.item.mrcPro}::${e.item.grpPro}";
                                                     pass = "1";
                                                     codigoTemp = e.item.codPro;
                                                     if (e.codMotivo != "00" &&
@@ -349,7 +342,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                     ),
                     (pass == "1")
                         ? Container(
-                            margin: EdgeInsets.only(left: 0.8),
+                            margin: const EdgeInsets.only(left: 0.8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
@@ -377,11 +370,9 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                     ),
                                   ),
                                 ),
-                                Divider(
-                                  thickness: 1,
-                                ),
+                                const Divider(thickness: 1),
                                 listaTemp.length == lista.length
-                                    ? Text("")
+                                    ? const Text("")
                                     : Container(
                                         alignment: Alignment.center,
                                         child: RadioGroup<String>.builder(
@@ -397,77 +388,93 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                 RadioButtonBuilder(item)),
                                       ),
                                 (_valTipo == "Devolución")
-                                    ? Container(
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8),
-                                              child:
-                                                  DropdownButtonHideUnderline(
-                                                      child: DropdownButton(
-                                                isExpanded: true,
-                                                isDense: true,
-                                                icon: Icon(
-                                                  Icons.keyboard_arrow_down,
-                                                  color: Colors.black,
-                                                ),
-                                                value: _selectCombo,
-                                                items: listMotivos.map((item) {
-                                                  return DropdownMenuItem(
-                                                    value: item.codCmg,
-                                                    child: Align(
-                                                        alignment: Alignment
-                                                            .centerLeft,
-                                                        child: Container(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
-                                                          child: Text(
-                                                              item.nomCmg,
-                                                              maxLines: 2,
-                                                              style: CustomLabels
-                                                                  .h4
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          12)),
-                                                        )),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (selectedItem) {
-                                                  setState(() {
-                                                    _selectCombo =
-                                                        selectedItem.toString();
-                                                    obj =
-                                                        listMotivos.singleWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .codCmg ==
-                                                                _selectCombo);
-                                                  });
-                                                },
-                                              )),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 8, horizontal: 6),
-                                              child: InputForm(
-                                                  hint: 'Info.Adicional',
-                                                  icon: Icons.assignment,
-                                                  validator: (value) {},
-                                                  controller: controllerD,
-                                                  regx: r'(^[a-zA-Z0-9 ]*$)',
-                                                  length: 200,
-                                                  onChanged: (value) {},
-                                                  onEditingComplete: () {}),
-                                            ),
-                                            CustomFormButton(
-                                                onPressed: () {
-                                                  if (_selectCombo != "00") {
-                                                    if (isTodo) {
-                                                      listaTemp
-                                                          .forEach((element) {
+                                    ? Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            child: DropdownButtonHideUnderline(
+                                                child: DropdownButton(
+                                              isExpanded: true,
+                                              isDense: true,
+                                              icon: const Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color: Colors.black,
+                                              ),
+                                              value: _selectCombo,
+                                              items: listMotivos.map((item) {
+                                                return DropdownMenuItem(
+                                                  value: item.codCmg,
+                                                  child: Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Text(item.nomCmg,
+                                                            maxLines: 2,
+                                                            style: CustomLabels
+                                                                .h4
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        12)),
+                                                      )),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedItem) {
+                                                setState(() {
+                                                  _selectCombo =
+                                                      selectedItem.toString();
+                                                  obj = listMotivos.singleWhere(
+                                                      (element) =>
+                                                          element.codCmg ==
+                                                          _selectCombo);
+                                                });
+                                              },
+                                            )),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 8, horizontal: 6),
+                                            child: InputForm(
+                                                hint: 'Info.Adicional',
+                                                icon: Icons.assignment,
+                                                validator: (value) {},
+                                                controller: controllerD,
+                                                regx: r'(^[a-zA-Z0-9 ]*$)',
+                                                length: 200,
+                                                onChanged: (value) {},
+                                                onEditingComplete: () {}),
+                                          ),
+                                          CustomFormButton(
+                                              onPressed: () {
+                                                if (_selectCombo != "00") {
+                                                  if (isTodo) {
+                                                    for (var element
+                                                        in listaTemp) {
+                                                      element.tipo = _valTipo;
+                                                      element.setInfoAdicional =
+                                                          controllerD.text
+                                                              .toUpperCase();
+                                                      element.codMotivo =
+                                                          obj.codCmg;
+                                                      element.setMotivo =
+                                                          obj.nomCmg;
+                                                      element.estado =
+                                                          Colors.green;
+                                                      element.informacion =
+                                                          "${element.item.nomPro}::${element.item.mrcPro}::${element.item.grpPro}";
+                                                    }
+
+                                                    for (var element in lista) {
+                                                      element.bloqueo = false;
+                                                    }
+                                                  } else {
+                                                    for (var element
+                                                        in listaTemp) {
+                                                      if (element.item.codPro ==
+                                                          codigoTemp) {
                                                         element.tipo = _valTipo;
                                                         element.setInfoAdicional =
                                                             controllerD.text
@@ -479,124 +486,88 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                                         element.estado =
                                                             Colors.green;
                                                         element.informacion =
-                                                            element.item
-                                                                    .nomPro +
-                                                                "::" +
-                                                                element.item
-                                                                    .mrcPro +
-                                                                "::" +
-                                                                element.item
-                                                                    .grpPro;
-                                                      });
-
-                                                      lista.forEach((element) {
-                                                        element.bloqueo = false;
-                                                      });
-                                                    } else {
-                                                      listaTemp
-                                                          .forEach((element) {
-                                                        if (element
-                                                                .item.codPro ==
-                                                            codigoTemp) {
-                                                          element.tipo =
-                                                              _valTipo;
-                                                          element.setInfoAdicional =
-                                                              controllerD.text
-                                                                  .toUpperCase();
-                                                          element.codMotivo =
-                                                              obj.codCmg;
-                                                          element.setMotivo =
-                                                              obj.nomCmg;
-                                                          element.estado =
-                                                              Colors.green;
-                                                          element.informacion =
-                                                              infoProducto;
-                                                        }
-                                                      });
-                                                    }
-
-                                                    limpiar();
-                                                    setState(() {});
-                                                  } else {
-                                                    customDialog1(context,
-                                                        'Seleccione el tipo de razón a devolver');
-                                                  }
-                                                },
-                                                color: Colors.red,
-                                                text: btnD),
-                                          ],
-                                        ),
-                                      )
-                                    : Container(
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 8, horizontal: 6),
-                                              child: InputForm(
-                                                  hint: 'Info.Adicional',
-                                                  icon: Icons.assignment,
-                                                  validator: (value) {},
-                                                  controller: controllerG,
-                                                  regx: r'(^[a-zA-Z 0-9]*$)',
-                                                  length: 200,
-                                                  onChanged: (value) {},
-                                                  onEditingComplete: () {}),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8),
-                                              child: Text(
-                                                returnProvider.getNombre,
-                                                style: CustomLabels.h7,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: CustomFormButton(
-                                                  onPressed: () async {
-                                                    _openFileExplorer();
-                                                  },
-                                                  color: Colors.blueGrey,
-                                                  text: 'Subir Documento '),
-                                            ),
-                                            CustomFormButton(
-                                                onPressed: () {
-                                                  if (imgPdf == "1") {
-                                                    listaTemp
-                                                        .forEach((element) {
-                                                      if (element.item.codPro ==
-                                                          codigoTemp) {
-                                                        element.informacion =
                                                             infoProducto;
-                                                        element.estado =
-                                                            Colors.green;
-                                                        element.tipo = _valTipo;
-                                                        element.setInfoAdicional =
-                                                            controllerG.text
-                                                                .toUpperCase();
                                                       }
-                                                    });
-                                                    limpiar();
-                                                    setState(() {});
-                                                  } else {
-                                                    customDialog1(
-                                                      context,
-                                                      'Error cargar el pdf en el ítem correspondiente',
-                                                    );
+                                                    }
                                                   }
+
+                                                  limpiar();
+                                                  setState(() {});
+                                                } else {
+                                                  customDialog1(context,
+                                                      'Seleccione el tipo de razón a devolver');
+                                                }
+                                              },
+                                              color: Colors.red,
+                                              text: btnD),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 8, horizontal: 6),
+                                            child: InputForm(
+                                                hint: 'Info.Adicional',
+                                                icon: Icons.assignment,
+                                                validator: (value) {},
+                                                controller: controllerG,
+                                                regx: r'(^[a-zA-Z 0-9]*$)',
+                                                length: 200,
+                                                onChanged: (value) {},
+                                                onEditingComplete: () {}),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8),
+                                            child: Text(
+                                              returnProvider.getNombre,
+                                              style: CustomLabels.h7,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: CustomFormButton(
+                                                onPressed: () async {
+                                                  _openFileExplorer();
                                                 },
-                                                color: Colors.red,
-                                                text: btnG)
-                                          ],
-                                        ),
+                                                color: Colors.blueGrey,
+                                                text: 'Subir Documento '),
+                                          ),
+                                          CustomFormButton(
+                                              onPressed: () {
+                                                if (imgPdf == "1") {
+                                                  for (var element
+                                                      in listaTemp) {
+                                                    if (element.item.codPro ==
+                                                        codigoTemp) {
+                                                      element.informacion =
+                                                          infoProducto;
+                                                      element.estado =
+                                                          Colors.green;
+                                                      element.tipo = _valTipo;
+                                                      element.setInfoAdicional =
+                                                          controllerG.text
+                                                              .toUpperCase();
+                                                    }
+                                                  }
+                                                  limpiar();
+                                                  setState(() {});
+                                                } else {
+                                                  customDialog1(
+                                                    context,
+                                                    'Error cargar el pdf en el ítem correspondiente',
+                                                  );
+                                                }
+                                              },
+                                              color: Colors.red,
+                                              text: btnG)
+                                        ],
                                       ),
                               ],
                             ),
                           )
-                        : Text(''),
+                        : const Text(''),
                   ],
                 ),
               ),
@@ -607,16 +578,16 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                       String ticket = validation.lastvalueNumber(
                           await returnApi.lastValue(), 9);
                       bool passWhile = true;
-                      listaTemp.forEach((element) {
+                      for (var element in listaTemp) {
                         if (element.tipo == "Devolución" &&
                             element.codMotivo == "00") contError++;
                         if (element.tipo == "Garantía" && element.archivo == "")
                           contError++;
                         if (element.tipo == "Garantía") isTipo = false;
-                      });
+                      }
 
                       if (contError == 0) {
-                        listaTemp.forEach((e) {
+                        for (var e in listaTemp) {
                           Ig0062 obj = Ig0062(
                               codEmp: "01",
                               numSdv: ticket,
@@ -662,7 +633,7 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                               fapSdv: "",
                               stsSdv: "p");
                           returnProvider.listTemp.add(obj);
-                        });
+                        }
 
                         do {
                           final response = await showDialogViewItems(context,
@@ -681,16 +652,16 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
                                   await showDialogTransport(context, "C");
                               if (op == "1") {
                                 //envio de informacion
-                                returnProvider.listTemp.forEach((element) {
+                                for (var element in returnProvider.listTemp) {
                                   returnApi.postFormReturn(element);
-                                });
+                                }
 
-                                listaTemp.forEach((element) {
+                                for (var element in listaTemp) {
                                   if (element.tipo == "Garantía") {
                                     returnApi.uploadDocument(element.archivo,
                                         "InfTec-$ticket-${element.item.codPro}.pdf");
                                   }
-                                });
+                                }
                                 passWhile = false;
                                 resp = "1";
                                 listaTemp = [];
@@ -708,16 +679,16 @@ Future<String> showDialogRequest(BuildContext context, List<Detail> lista,
 
                               if (decison) {
                                 //envio de enformacion
-                                returnProvider.listTemp.forEach((element) {
+                                for (var element in returnProvider.listTemp) {
                                   returnApi.postFormReturn(element);
-                                });
+                                }
 
-                                listaTemp.forEach((element) {
+                                for (var element in listaTemp) {
                                   if (element.tipo == "Garantía") {
                                     returnApi.uploadDocument(element.archivo,
                                         "InfTec-$ticket-${element.item.codPro}.pdf");
                                   }
-                                });
+                                }
                                 passWhile = false;
                                 listaTemp = [];
                                 resp = "1";

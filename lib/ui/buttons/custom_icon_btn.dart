@@ -27,14 +27,9 @@ class CustomIconBtn extends StatelessWidget {
             overlayColor: MaterialStateProperty.all(color.withOpacity(0.9)),
           ),
           onPressed: () => onPressed(),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Icon(icon, color: Colors.black),
-              ),
-            ],
-          )),
+          child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Icon(icon, color: Colors.black, size: 21))),
     );
   }
 }

@@ -39,7 +39,7 @@ class InputBod extends StatelessWidget {
         LengthLimitingTextInputFormatter(length),
         //if (formatt) DateInputFormatter()
       ],
-      style: TextStyle(fontSize: 14),
+      style: const TextStyle(fontSize: 14),
       decoration: CustomInputs.dialogInputDecoration(hint: hint),
     );
   }

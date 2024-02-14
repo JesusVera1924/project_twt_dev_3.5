@@ -10,8 +10,8 @@ Future customDialog3(BuildContext context, Ig0062 item) async {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            title: Text('Información'),
-            content: Text('Actualizar estado'),
+            title: const Text('Información'),
+            content: const Text('Actualizar estado'),
             actions: [
               CustomFormButton(
                   color: Colors.green,

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/models/inner/detailProductResponse.dart';
 import 'package:devolucion_modulo/router/router.dart';
@@ -51,7 +53,7 @@ class _RequestViewState extends State<RequestView> {
   }
 
   void llenar() async {
-    listMotivos = await conexionApi.querylistMotivos("10");
+    listMotivos = await conexionApi.querylistMotivos("10", "");
     listSeries = await conexionApi.querylistSeries();
     listMotivos.add(
         Motivo(cICmg: '00', codCmg: '00', nomCmg: 'SELECCIONAR', numMes: 0));

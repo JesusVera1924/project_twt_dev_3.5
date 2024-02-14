@@ -55,12 +55,10 @@ Future dialogComercial(
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: Text(
-              'Referencias Comerciales',
-            ),
-            content: Container(
+            title: const Text('Referencias Comerciales'),
+            content: SizedBox(
               width: 1000,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -83,7 +81,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Empresa',
@@ -98,7 +96,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Ciudad',
@@ -113,7 +111,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -128,7 +126,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Forma de Pago',
@@ -164,7 +162,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de credito',
@@ -179,7 +177,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cupo de Credito',
@@ -194,7 +192,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de cupo',
@@ -209,7 +207,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Monto de Compras',
@@ -224,7 +222,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de compras',
@@ -242,7 +240,7 @@ Future dialogComercial(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -261,7 +259,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Empresa',
@@ -276,7 +274,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Ciudad',
@@ -291,7 +289,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -306,7 +304,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Forma de Pago',
@@ -342,7 +340,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de credito',
@@ -357,7 +355,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cupo de Credito',
@@ -372,7 +370,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de cupo',
@@ -387,7 +385,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Monto de Compras',
@@ -402,7 +400,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de compras',
@@ -439,7 +437,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Empresa',
@@ -454,7 +452,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Ciudad',
@@ -469,7 +467,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Telefono',
@@ -484,7 +482,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Forma de Pago',
@@ -520,7 +518,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de credito',
@@ -535,7 +533,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Cupo de Credito',
@@ -550,7 +548,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de cupo',
@@ -565,7 +563,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Monto de Compras',
@@ -580,7 +578,7 @@ Future dialogComercial(
                               onEditingComplete: () {},
                               onChanged: (value) {}),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: InputForm(
                               hint: 'Plazo de compras',
@@ -606,8 +604,9 @@ Future dialogComercial(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -658,16 +657,17 @@ Future dialogComercial(
 
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Guardar'),
                   )),
               TextButton(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x1A24F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x1A24F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {
@@ -709,8 +709,8 @@ Future dialogComercial(
 
                     Navigator.of(context).pop();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Cancelar'),
                   )),
             ],

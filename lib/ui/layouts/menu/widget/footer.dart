@@ -1,9 +1,9 @@
+import 'package:devolucion_modulo/util/util_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:devolucion_modulo/provider/auth_provider.dart';
 import 'package:devolucion_modulo/services/navigation_services.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   const Footer({Key? key}) : super(key: key);
@@ -12,9 +12,6 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<AuthProvider>(context);
     const _url = 'https://www.cojapan.com';
-    void _launchURL() async => await canLaunch(_url)
-        ? await launch(_url)
-        : throw 'Could not launch $_url';
 
     return Container(
       height: 45,
@@ -37,7 +34,7 @@ class Footer extends StatelessWidget {
                 children: <Widget>[
                   InkWell(
                     onTap: () => {},
-                    child: const Text('TwT 2.0.2',
+                    child: const Text('TwT 2.2.1',
                         style: TextStyle(color: Colors.blue, fontSize: 12)),
                   ),
                   const Text(' | ',
@@ -50,7 +47,7 @@ class Footer extends StatelessWidget {
                   const Text(' | ',
                       style: TextStyle(fontSize: 12, color: Color(0xCC232d37))),
                   InkWell(
-                    onTap: () => _launchURL(),
+                    onTap: () => UtilView.launchUrl(_url),
                     child: const Text('Cojapan',
                         style: TextStyle(color: Colors.blue, fontSize: 12)),
                   ),
@@ -62,7 +59,7 @@ class Footer extends StatelessWidget {
               ),
               Container(
                   padding: const EdgeInsets.only(top: 5),
-                  child: const Text('Copyright © 2021 - 2023',
+                  child: const Text('Copyright © 2021 - 2024',
                       style: TextStyle(
                           color: Color(0xCC232d37),
                           fontSize: 12,
@@ -70,16 +67,12 @@ class Footer extends StatelessWidget {
             ],
           ),
           InkWell(
-            onTap: () {
-              Provider.of<AuthProvider>(context, listen: false).logout();
-            },
+            onTap: () =>
+                Provider.of<AuthProvider>(context, listen: false).logout(),
             child: Row(
               children: [
-                const Icon(
-                  Icons.exit_to_app_rounded,
-                  size: 30,
-                  color: Color(0xD9b22222),
-                ),
+                const Icon(Icons.exit_to_app_rounded,
+                    size: 30, color: Color(0xD9b22222)),
                 Text(
                   'Cerrar Sesión',
                   style: GoogleFonts.montserratAlternates(

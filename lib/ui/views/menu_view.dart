@@ -1,3 +1,4 @@
+import 'package:devolucion_modulo/util/util_view.dart';
 import 'package:flutter/material.dart';
 import 'package:devolucion_modulo/api/return_api.dart';
 import 'package:devolucion_modulo/models/permisos.dart';
@@ -36,11 +37,6 @@ class _MenuViewState extends State<MenuView> {
   Widget build(BuildContext context) {
     final sideMenuProvider = Provider.of<BannerMenuProvider>(context);
     final api = ReturnApi();
-    /* final mg0031Provider = Provider.of<Mg0031Provider>(context); */
-
-    void _launchURL(_url) async => await canLaunch(_url)
-        ? await launch(_url)
-        : throw 'No se pudo iniciar $_url';
 
     return Container(
       color: Colors.black26,
@@ -72,7 +68,7 @@ class _MenuViewState extends State<MenuView> {
                                   color: Color(int.parse(_fieldValue.clxPry)),
                                   fontWeight: FontWeight.bold,
                                   onPressed: () =>
-                                      _launchURL(_fieldValue.rtxPry),
+                                      UtilView.launchUrl(_fieldValue.rtxPry),
                                   icon: getIndexIcon(_fieldValue.idxPry))
                               : CustomCard(
                                   text: _fieldValue.nomPry,

@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:devolucion_modulo/datatables/list_vendedor_view.dart';
+import 'package:devolucion_modulo/datatables/list_vendedor_view_datasource.dart';
 import 'package:devolucion_modulo/inputs/custom_inputs.dart';
 import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:devolucion_modulo/ui/dialog/mensajes/custom_dialog2.dart';

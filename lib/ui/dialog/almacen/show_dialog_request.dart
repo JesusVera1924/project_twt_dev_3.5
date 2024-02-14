@@ -100,7 +100,7 @@ Future<String> showDialogRequestA(
                         for (var e in provider.listaTemp) {
                           Ig0063 ig0063 = Ig0063(
                               codEmp: "01",
-                              clsSdv: "A",
+                              clsSdv: provider.tokenUser.rolUsr,
                               codVen: provider.factura!.codVen,
                               numSdv: ticket,
                               fecSdv: formatter.format(now),

@@ -23,7 +23,7 @@ class Follow3DTS extends DataGridSource {
       return DataGridRow(cells: <DataGridCell>[
         DataGridCell<String>(columnName: '1-solicitud', value: team.numSdv),
         DataGridCell<String>(columnName: '2-fechaemision', value: team.fecSdv),
-        DataGridCell<String>(columnName: '3-clase', value: team.clsSdv),
+        DataGridCell<String>(columnName: '3-vendedor', value: team.codVen),
         DataGridCell<String>(columnName: '4-pv', value: team.codPto),
         DataGridCell<String>(columnName: '5-tp', value: team.codMov),
         DataGridCell<String>(columnName: '6-documento', value: team.numMov),
@@ -32,6 +32,8 @@ class Follow3DTS extends DataGridSource {
         DataGridCell<String>(columnName: '9-items', value: "${team.contar}"),
         DataGridCell<String>(columnName: '10-estado', value: team.stsSdv),
         DataGridCell<Ig0063Response>(columnName: '11-detalle', value: team),
+        DataGridCell<String>(
+            columnName: '12-ncredito', value: team.numNex.trim()),
       ]);
     }).toList();
   }
@@ -81,6 +83,10 @@ class Follow3DTS extends DataGridSource {
                   provider.tempItemsClient);
             },
             child: const Icon(Icons.assignment)),
+        Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            child: Text(row.getCells()[10].value.toString())),
       ];
     } else {
       list = [
@@ -92,6 +98,10 @@ class Follow3DTS extends DataGridSource {
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
             child: Text(row.getCells()[1].value.toString())),
+        Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            child: Text(row.getCells()[2].value.toString().toUpperCase())),
         Container(
             padding: const EdgeInsets.all(8.0),
             alignment: Alignment.center,
@@ -113,6 +123,18 @@ class Follow3DTS extends DataGridSource {
             alignment: Alignment.center,
             child: Text(row.getCells()[7].value.toString())),
         UtilView.checkStatu(row.getCells()[8].value.toString()),
+        Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            child: Text(
+              row.getCells()[9].value.swsSdv == "X"
+                  ? "RECHAZADO"
+                  : row.getCells()[10].value.toString(),
+              style: TextStyle(
+                  color: row.getCells()[9].value.swsSdv == "X"
+                      ? Colors.red
+                      : Colors.black),
+            )),
         InkWell(
             onTap: () async {
               await provider.getListItemsDetail(

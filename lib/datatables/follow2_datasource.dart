@@ -131,7 +131,7 @@ class Follow2DTS extends DataGridSource {
       list = [
         Container(
             padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
+            alignment: Alignment.centerLeft,
             child: Text(row.getCells()[0].value.toString())),
         Container(
             padding: const EdgeInsets.all(8.0),
@@ -232,8 +232,12 @@ class Follow2DTS extends DataGridSource {
         provider.listBodega.add(obj);
       }
       Navigator.of(context).pop();
-      await showDialogStore(context, provider,
-          'Detalle Items: #${row.getCells()[10].value.numSdv}\nFecha: ${UtilView.convertDateToString()} - Vendedor: ${row.getCells()[10].value.codVen}\nFactura: ${row.getCells()[10].value.numMov}');
+      await showDialogStore(
+          context,
+          provider,
+          'Detalle Numero: #${row.getCells()[10].value.numSdv}\nFecha: ${UtilView.convertDateToString()} - Vendedor: ${row.getCells()[10].value.codVen}\nFactura: ${row.getCells()[10].value.numMov}',
+          'Solicitud: #${row.getCells()[10].value.numSdv}\nFactura: ${row.getCells()[10].value.numMov}',
+          row.getCells()[10].value);
     } else {
       Navigator.of(context).pop();
     }

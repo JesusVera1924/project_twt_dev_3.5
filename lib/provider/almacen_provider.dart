@@ -71,7 +71,7 @@ class AlmacenProvider extends ChangeNotifier {
       Usuario.fromMap(jsonDecode(LocalStorage.prefs.getString('usuario')!));
 
   void inizializacion() async {
-    listMotivos = await _returnApi.querylistMotivos("10");
+    listMotivos = await _returnApi.querylistMotivos("10", "");
     listSeries = await _returnApi.querylistSeries();
     if (listMotivos.isNotEmpty) {
       listMotivos.add(Motivo(
