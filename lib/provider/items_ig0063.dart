@@ -4,6 +4,7 @@ import 'package:devolucion_modulo/models/alterno.dart';
 import 'package:devolucion_modulo/models/email.dart';
 import 'package:devolucion_modulo/models/menuItem.dart';
 import 'package:devolucion_modulo/models/modifyModel/detail_bodega.dart';
+import 'package:devolucion_modulo/models/motivo.dart';
 import 'package:devolucion_modulo/models/usuario.dart';
 import 'package:devolucion_modulo/models/yk0001.dart';
 import 'package:devolucion_modulo/services/local_storage.dart';
@@ -22,6 +23,7 @@ class ItemsIg0063 extends ChangeNotifier {
   List<Ig0063Response> tempItemsClient = [];
   List<DetailBodega> listBodega = [];
   List<Yk0001> listVCallCenter = [];
+  List<Motivo> listMotivos = [];
 
   final returnApi = ReturnApi();
 
@@ -33,6 +35,7 @@ class ItemsIg0063 extends ChangeNotifier {
 
   Usuario? tokenUser;
   String permisos = "";
+  //String selectComboMotivo = "00";
 
   List<MenuItem> menuResponseItems = const [
     MenuItem(uid: "1", text: "Detalle", icon: Icons.assignment_rounded),
@@ -41,8 +44,18 @@ class ItemsIg0063 extends ChangeNotifier {
     MenuItem(uid: "4", text: "Anular", icon: Icons.block_outlined)
   ];
 
+  void inizializacion() async {
+    listMotivos = await returnApi.querylistMotivos("10", "");
+    listMotivos.add(Motivo(
+        cICmg: "00",
+        codCmg: "00",
+        nomCmg: "OBSERVACIÓN PERSONALIZADA",
+        numMes: 0));
+  }
+
   getListItems() async {
     callValueConst();
+    inizializacion();
     this.itemsCliente = [];
     final resp = await returnApi.listIg0063(UtilView.usuario.ctaUsr);
     this.itemsCliente = [...resp];
@@ -89,8 +102,8 @@ class ItemsIg0063 extends ChangeNotifier {
     return nombresConcatenados;
   }
 
-  saveComentario(Ig0063Response objeto) async {
-    final resp = await returnApi.updateComentarioIg0063(objeto);
+  saveComentario(String codigo, Ig0063Response objeto) async {
+    final resp = await returnApi.updateComentarioIg0063(codigo, objeto);
     UtilView.messageAccess(resp == "1" ? "OK-COMENTARIO" : "ERROR");
   }
 

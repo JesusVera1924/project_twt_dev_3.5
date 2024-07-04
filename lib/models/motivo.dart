@@ -30,4 +30,12 @@ class Motivo {
         "nom_cmg": nomCmg,
         "num_mes": numMes,
       };
+
+  @override
+  String toString() {
+    return nomCmg;
+  }
+
+  @override
+  int get hashCode => super.hashCode;
 }

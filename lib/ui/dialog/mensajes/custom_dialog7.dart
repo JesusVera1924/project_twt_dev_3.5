@@ -1,5 +1,6 @@
 import 'package:devolucion_modulo/inputs/custom_inputs.dart';
 import 'package:devolucion_modulo/models/inner/ig0063Response.dart';
+import 'package:devolucion_modulo/models/motivo.dart';
 import 'package:devolucion_modulo/provider/items_ig0063.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:devolucion_modulo/util/screen_size.dart';
@@ -12,6 +13,8 @@ Future<bool> customDialog7(BuildContext context, String title,
   final txtComent = TextEditingController(text: objeto.obsMrm);
   bool _isHover = false;
   final _width = ScreenQueries.instance.width(context);
+
+  Motivo obj = provider.listMotivos.first;
 
   await showDialog(
       barrierDismissible: true,
@@ -94,7 +97,7 @@ Future<bool> customDialog7(BuildContext context, String title,
                                     color: Colors.grey,
                                     fontSize: 12),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -155,39 +158,98 @@ Future<bool> customDialog7(BuildContext context, String title,
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        SizedBox(
-                          width: _width * 0.2 + 70,
-                          child: TextFormField(
-                              controller: txtComent,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'(^[a-zA-Z 0-9.-]*$)')),
-                                LengthLimitingTextInputFormatter(200),
-                              ],
-                              maxLines: 2,
-                              style: const TextStyle(fontSize: 12),
-                              decoration: CustomInputs.dialogInputDecoration(
-                                  hint: "Ingresar Comentario...")),
-                        ),
-                        SizedBox(
-                          width: 20,
-                          child: Tooltip(
-                              message: "Guardar comentario",
+                        if (obj.codCmg != "00")
+                          const SizedBox(
+                            width: 90,
+                            child: Text("MOTIVO DEV:",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                          ),
+                        obj.codCmg == "00"
+                            ? SizedBox(
+                                width: _width * 0.2 + 70,
+                                child: TextFormField(
+                                    controller: txtComent,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'(^[a-zA-Z 0-9.-]*$)')),
+                                      LengthLimitingTextInputFormatter(200),
+                                    ],
+                                    maxLines: 2,
+                                    style: const TextStyle(fontSize: 12),
+                                    decoration:
+                                        CustomInputs.dialogInputDecoration(
+                                            hint: "Ingresar Comentario...")),
+                              )
+                            : SizedBox(
+                                width: _width * 0.2,
+                                child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<Motivo>(
+                                  isExpanded: true,
+                                  isDense: true,
+                                  icon: const Icon(Icons.keyboard_arrow_down,
+                                      color: Colors.black),
+                                  value: obj,
+                                  items: provider.listMotivos.map((item) {
+                                    return DropdownMenuItem(
+                                      value: item,
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Container(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Text(item.nomCmg,
+                                                maxLines: 2,
+                                                style: CustomLabels.h4
+                                                    .copyWith(fontSize: 12)),
+                                          )),
+                                    );
+                                  }).toList(),
+                                  onChanged: (selectedItem) {
+                                    setState(() {
+                                      obj = selectedItem as Motivo;
+                                    });
+                                  },
+                                )),
+                              ),
+                        if (obj.codCmg == "00")
+                          SizedBox(
+                              width: 20,
                               child: InkWell(
-                                onTap: () async {
-                                  objeto.obsMrm = txtComent.text;
-                                  await provider.saveComentario(objeto);
+                                onTap: () {
+                                  setState(() {
+                                    obj = provider.listMotivos.first;
+                                  });
                                 },
-                                child: const Icon(
-                                  Icons.save_as_rounded,
-                                  color: Colors.blueGrey,
-                                  size: 32,
-                                ),
-                              )),
-                        )
+                                child: const Icon(Icons.highlight_remove_sharp,
+                                    color: Colors.red, size: 25),
+                              ))
                       ],
                     ),
                   ),
+                  TextButton(
+                      style: ButtonStyle(backgroundColor:
+                          MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return const Color(0x4024F181);
+                        }
+                        return Colors.transparent;
+                      })),
+                      onPressed: () async {
+                        objeto.obsMrm = obj.codCmg == "00"
+                            ? txtComent.text
+                            : obj.nomCmg.trim();
+                        await provider.saveComentario(obj.codCmg, objeto);
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Guardar',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
                 ],
               ),
             );

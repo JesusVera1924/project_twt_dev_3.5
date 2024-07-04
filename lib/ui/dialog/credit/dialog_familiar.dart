@@ -103,7 +103,7 @@ Future dialogFamilias(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -170,7 +170,7 @@ Future dialogFamilias(
                       ],
                     ),
                   ),
-                  Divider(thickness: 1),
+                  const Divider(thickness: 1),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
@@ -245,8 +245,9 @@ Future dialogFamilias(
                   style: ButtonStyle(backgroundColor:
                       MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
-                      return Color(0x4024F181);
+                    if (states.contains(MaterialState.hovered)) {
+                      return const Color(0x4024F181);
+                    }
                     return Colors.transparent;
                   })),
                   onPressed: () {

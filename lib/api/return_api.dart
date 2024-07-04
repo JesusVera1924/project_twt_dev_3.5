@@ -1111,10 +1111,11 @@ class ReturnApi {
     return resul;
   }
 
-  Future<String> updateComentarioIg0063(Ig0063Response objeto) async {
+  Future<String> updateComentarioIg0063(
+      String codigo, Ig0063Response objeto) async {
     String resul = "";
     var url = Uri.parse(
-        "$baseUrl/updateComentario?numsdv=${objeto.numSdv}&nummov=${objeto.numMov}&codpro=${objeto.codPro}&obsmrm=${objeto.obsMrm}");
+        "$baseUrl/updateComentario?codigo=${codigo}numsdv=${objeto.numSdv}&nummov=${objeto.numMov}&codpro=${objeto.codPro}&obsmrm=${objeto.obsMrm}");
     /* print(url.toString()); */
     try {
       http.Response respuesta = await http.get(url);

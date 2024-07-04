@@ -292,12 +292,12 @@ class CreditsProvider extends ChangeNotifier {
     listTelefono.add(obj.tltPer);
     listTelefono.add(obj.mv1Per);
  */
-    listCorreo.forEach((element) {
-      if (element.length != 0) {
+    for (var element in listCorreo) {
+      if (element.isNotEmpty) {
         _creditApi.postCorreo(obj.codRef, element, "$x", "C");
         x++;
       }
-    });
+    }
 /*     listTelefono.forEach((element) {
       if (element.length >= 10 && element != "0000000000") {
         _creditApi.postCorreo(obj.codRef, element, "$y", "T");

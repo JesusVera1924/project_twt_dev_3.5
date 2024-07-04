@@ -36,6 +36,6 @@ class Archivo {
 
   @override
   String toString() {
-    return name + " -- " + sufijo;
+    return "$name -- $sufijo";
   }
 }

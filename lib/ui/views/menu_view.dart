@@ -10,7 +10,6 @@ import 'package:devolucion_modulo/services/navigation_services.dart';
 import 'package:devolucion_modulo/ui/cards/custom_card.dart';
 import 'package:devolucion_modulo/ui/labels/custom_labels.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({super.key});
